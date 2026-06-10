@@ -6,6 +6,11 @@ export interface AiClientConfig {
   model: string;
 }
 
+export interface AiStreamChunk {
+  reasoningDelta?: string;
+  contentDelta?: string;
+}
+
 function buildPrompt(question: Question): string {
   const typeName =
     question.type === "tf"
@@ -39,7 +44,7 @@ function buildPrompt(question: Question): string {
 export async function streamAiExplanation(
   question: Question,
   config: AiClientConfig,
-  onChunk: (delta: string) => void,
+  onChunk: (chunk: AiStreamChunk) => void,
   signal?: AbortSignal
 ): Promise<void> {
   if (!config.baseUrl || !config.apiKey || !config.model) {
@@ -100,9 +105,20 @@ export async function streamAiExplanation(
       if (data === "[DONE]") return;
       try {
         const obj = JSON.parse(data);
-        const delta = obj.choices?.[0]?.delta?.content;
-        if (typeof delta === "string" && delta.length > 0) {
-          onChunk(delta);
+        const delta = obj.choices?.[0]?.delta ?? {};
+        const reasoningDelta =
+          delta.reasoning_content ?? delta.reasoning ?? delta.thinking;
+        const contentDelta = delta.content;
+
+        if (
+          typeof reasoningDelta === "string" &&
+          reasoningDelta.length > 0
+        ) {
+          onChunk({ reasoningDelta });
+        }
+
+        if (typeof contentDelta === "string" && contentDelta.length > 0) {
+          onChunk({ contentDelta });
         }
       } catch {
         // ignore malformed

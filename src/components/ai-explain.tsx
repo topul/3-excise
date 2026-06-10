@@ -2,18 +2,71 @@
 
 import { useEffect, useRef, useState, useMemo } from "react";
 import Link from "next/link";
-import { marked } from "marked";
 import { useStudyStore } from "@/lib/store";
 import { streamAiExplanation } from "@/lib/ai";
 import type { Question } from "@/lib/types";
 
-marked.setOptions({
-  breaks: true,
-  gfm: true,
-});
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function sanitizeHref(value: string) {
+  try {
+    const url = new URL(value);
+    if (url.protocol === "http:" || url.protocol === "https:" || url.protocol === "mailto:") {
+      return url.toString();
+    }
+  } catch {
+    return "#";
+  }
+  return "#";
+}
+
+function renderInlineMarkdown(value: string) {
+  return escapeHtml(value)
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/__(.+?)__/g, "<strong>$1</strong>")
+    .replace(/`(.+?)`/g, "<code>$1</code>")
+    .replace(/\*(.+?)\*/g, "<em>$1</em>")
+    .replace(/_(.+?)_/g, "<em>$1</em>")
+    .replace(
+      /\[(.+?)\]\((.+?)\)/g,
+      (_, label: string, href: string) =>
+        `<a href="${sanitizeHref(href)}" target="_blank" rel="noreferrer">${label}</a>`
+    );
+}
 
 function MarkdownContent({ content }: { content: string }) {
-  const html = useMemo(() => marked.parse(content) as string, [content]);
+  const html = useMemo(() => {
+    const blocks = content
+      .replace(/\r\n/g, "\n")
+      .split(/\n{2,}/)
+      .map((block) => {
+        const trimmed = block.trim();
+        if (!trimmed) return "";
+
+        if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
+          const items = trimmed
+            .split("\n")
+            .map((line) => line.replace(/^[-*]\s+/, "").trim())
+            .filter(Boolean)
+            .map((item) => `<li>${renderInlineMarkdown(item)}</li>`)
+            .join("");
+          return `<ul>${items}</ul>`;
+        }
+
+        return `<p>${renderInlineMarkdown(trimmed).replace(/\n/g, "<br />")}</p>`;
+      })
+      .filter(Boolean)
+      .join("");
+
+    return blocks || `<p>${renderInlineMarkdown(content).replace(/\n/g, "<br />")}</p>`;
+  }, [content]);
   return (
     <div
       className="markdown-body"
@@ -22,23 +75,36 @@ function MarkdownContent({ content }: { content: string }) {
   );
 }
 
+function normalizeExplanation(
+  value: string | { reasoning: string; answer: string } | undefined
+) {
+  if (!value) return { reasoning: "", answer: "" };
+  if (typeof value === "string") return { reasoning: "", answer: value };
+  return value;
+}
+
 export function AiExplain({ question }: { question: Question }) {
   const aiConfig = useStudyStore((s) => s.aiConfig);
   const aiExplanations = useStudyStore((s) => s.aiExplanations);
   const setAiExplanation = useStudyStore((s) => s.setAiExplanation);
   const clearAiExplanation = useStudyStore((s) => s.clearAiExplanation);
 
-  const cached = aiExplanations[question.id] || "";
-  const [open, setOpen] = useState(false);
+  const cached = normalizeExplanation(aiExplanations[question.id]);
+  const [expanded, setExpanded] = useState(false);
+  const [reasoningExpanded, setReasoningExpanded] = useState(false);
   const [streaming, setStreaming] = useState(false);
-  const [text, setText] = useState(cached);
+  const [reasoning, setReasoning] = useState(cached.reasoning);
+  const [text, setText] = useState(cached.answer);
   const [error, setError] = useState("");
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
-    setText(aiExplanations[question.id] || "");
+    const next = normalizeExplanation(aiExplanations[question.id]);
+    setReasoning(next.reasoning);
+    setText(next.answer);
     setError("");
-    setOpen(!!aiExplanations[question.id]);
+    setExpanded(Boolean(next.reasoning || next.answer));
+    setReasoningExpanded(false);
   }, [question.id, aiExplanations]);
 
   const isConfigured =
@@ -46,24 +112,37 @@ export function AiExplain({ question }: { question: Question }) {
 
   const run = async () => {
     if (!isConfigured) return;
-    setOpen(true);
+    setExpanded(true);
+    setReasoningExpanded(true);
     setStreaming(true);
     setError("");
+    setReasoning("");
     setText("");
     const ac = new AbortController();
     abortRef.current = ac;
-    let acc = "";
+    let reasoningAcc = "";
+    let answerAcc = "";
     try {
       await streamAiExplanation(
         question,
         aiConfig,
-        (delta) => {
-          acc += delta;
-          setText(acc);
+        ({ reasoningDelta, contentDelta }) => {
+          if (reasoningDelta) {
+            reasoningAcc += reasoningDelta;
+            setReasoning(reasoningAcc);
+          }
+          if (contentDelta) {
+            answerAcc += contentDelta;
+            setText(answerAcc);
+          }
         },
         ac.signal
       );
-      setAiExplanation(question.id, acc);
+      setAiExplanation(question.id, {
+        reasoning: reasoningAcc,
+        answer: answerAcc,
+      });
+      setReasoningExpanded(false);
     } catch (err) {
       if ((err as Error).name !== "AbortError") {
         setError(err instanceof Error ? err.message : String(err));
@@ -82,6 +161,8 @@ export function AiExplain({ question }: { question: Question }) {
     clearAiExplanation(question.id);
     run();
   };
+
+  const hasResult = Boolean(reasoning || text || error || streaming);
 
   if (!isConfigured) {
     return (
@@ -108,7 +189,7 @@ export function AiExplain({ question }: { question: Question }) {
 
   return (
     <div className="mt-4">
-      {!open ? (
+      {!hasResult ? (
         <button
           onClick={run}
           className="w-full md:w-auto px-5 py-2.5 bg-gradient-to-r from-violet-600 to-blue-600 text-white rounded-lg font-medium text-sm hover:opacity-90 transition flex items-center justify-center gap-2"
@@ -139,7 +220,7 @@ export function AiExplain({ question }: { question: Question }) {
                 </button>
               ) : (
                 <>
-                  {text && (
+                  {(reasoning || text) && (
                     <button
                       onClick={regenerate}
                       className="px-2.5 py-1 text-xs text-slate-600 border border-slate-200 rounded-md hover:bg-white"
@@ -148,40 +229,67 @@ export function AiExplain({ question }: { question: Question }) {
                     </button>
                   )}
                   <button
-                    onClick={() => setOpen(false)}
+                    onClick={() => setExpanded((v) => !v)}
                     className="px-2.5 py-1 text-xs text-slate-500 hover:bg-white rounded-md"
                   >
-                    收起
+                    {expanded ? "收起" : "展开"}
                   </button>
                 </>
               )}
             </div>
           </div>
-          <div className="p-4">
-            {error ? (
-              <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg p-3">
-                <p className="font-medium mb-1">请求失败</p>
-                <p className="text-xs break-words">{error}</p>
-                <button
-                  onClick={run}
-                  className="mt-2 text-xs underline text-red-600"
-                >
-                  重试
-                </button>
-              </div>
-            ) : text ? (
-              <div className="text-sm text-slate-700 leading-relaxed">
-                <MarkdownContent content={text} />
-                {streaming && (
-                  <span className="inline-block w-2 h-4 align-middle bg-violet-500 ml-0.5 animate-pulse" />
-                )}
-              </div>
-            ) : (
-              <div className="text-sm text-slate-400 italic">
-                等待 AI 响应...
-              </div>
-            )}
-          </div>
+          {expanded && (
+            <div className="p-4">
+              {error ? (
+                <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg p-3">
+                  <p className="font-medium mb-1">请求失败</p>
+                  <p className="text-xs break-words">{error}</p>
+                  <button
+                    onClick={run}
+                    className="mt-2 text-xs underline text-red-600"
+                  >
+                    重试
+                  </button>
+                </div>
+              ) : reasoning || text ? (
+                <div className="space-y-4 text-sm text-slate-700 leading-relaxed">
+                  {reasoning && (
+                    <section className="rounded-lg border border-amber-200 bg-amber-50/70 p-3">
+                      <button
+                        type="button"
+                        onClick={() => setReasoningExpanded((v) => !v)}
+                        className="flex w-full items-center justify-between gap-3 text-left"
+                      >
+                        <span className="text-xs font-semibold uppercase tracking-wide text-amber-700">
+                          深度思考
+                        </span>
+                        <span className="text-xs text-amber-700">
+                          {reasoningExpanded ? "收起" : "展开"}
+                        </span>
+                      </button>
+                      {reasoningExpanded && (
+                        <div className="mt-2">
+                          <MarkdownContent content={reasoning} />
+                        </div>
+                      )}
+                    </section>
+                  )}
+                  {text && (
+                    <section>
+                      <MarkdownContent content={text} />
+                      {streaming && (
+                        <span className="inline-block w-2 h-4 align-middle bg-violet-500 ml-0.5 animate-pulse" />
+                      )}
+                    </section>
+                  )}
+                </div>
+              ) : (
+                <div className="text-sm text-slate-400 italic">
+                  等待 AI 响应...
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>

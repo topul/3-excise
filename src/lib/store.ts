@@ -52,6 +52,11 @@ interface AiConfig {
   model: string;
 }
 
+interface AiExplanation {
+  reasoning: string;
+  answer: string;
+}
+
 interface StudyStore {
   // Question stats (persisted)
   stats: Record<number, QuestionStat>;
@@ -60,8 +65,8 @@ interface StudyStore {
   // AI config (persisted)
   aiConfig: AiConfig;
 
-  // AI explanations cache (persisted): questionId -> explanation
-  aiExplanations: Record<number, string>;
+  // AI explanations cache (persisted): questionId -> explanation blocks
+  aiExplanations: Record<number, string | AiExplanation>;
 
   // Current session (transient, also persisted for resume)
   session: SessionState | null;
@@ -85,7 +90,15 @@ interface StudyStore {
   toggleBookmark: (id: number) => void;
   resetProgress: () => void;
   setAiConfig: (config: Partial<AiConfig>) => void;
-  setAiExplanation: (questionId: number, text: string) => void;
+  setAiExplanation: (
+    questionId: number,
+    text:
+      | string
+      | {
+          reasoning: string;
+          answer: string;
+        }
+  ) => void;
   clearAiExplanation: (questionId: number) => void;
 }
 
@@ -362,8 +375,12 @@ export const useStudyStore = create<StudyStore>()(
       },
 
       setAiExplanation: (questionId, text) => {
+        const value =
+          typeof text === "string"
+            ? { reasoning: "", answer: text }
+            : text;
         set({
-          aiExplanations: { ...get().aiExplanations, [questionId]: text },
+          aiExplanations: { ...get().aiExplanations, [questionId]: value },
         });
       },
 
