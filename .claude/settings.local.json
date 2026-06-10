@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --use-npm)",
+      "Bash(mkdir -p _backup)",
+      "Bash(mv \"人工智能训练师高级理论考试.html\" _backup/)",
+      "Bash(ls -la .uploads)",
+      "Bash(mv .uploads _backup/)"
+    ]
+  }
+}
