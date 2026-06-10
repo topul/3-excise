@@ -44,11 +44,11 @@ export default function ReviewPage() {
   ).length;
 
   return (
-    <div className="p-8 max-w-5xl mx-auto">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900">错题本</h1>
-          <p className="text-slate-500 mt-1">
+    <div className="p-4 md:p-8 max-w-5xl mx-auto">
+      <div className="flex items-center justify-between mb-4 md:mb-6 gap-2">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-xl md:text-2xl font-bold text-slate-900">错题本</h1>
+          <p className="text-sm text-slate-500 mt-1">
             共 {totalWrong} 道错题待复习
           </p>
         </div>
@@ -57,7 +57,7 @@ export default function ReviewPage() {
             onClick={() =>
               startSession({ mode: "practice", practiceMode: "wrong-redo" })
             }
-            className="px-5 py-2.5 bg-red-600 text-white rounded-lg font-medium text-sm hover:bg-red-700 transition"
+            className="shrink-0 px-3 md:px-5 py-2 md:py-2.5 bg-red-600 text-white rounded-lg font-medium text-sm hover:bg-red-700 transition"
           >
             错题重练
           </button>

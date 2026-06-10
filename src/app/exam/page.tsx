@@ -28,32 +28,32 @@ export default function ExamPage() {
   const answeredCount = Object.keys(session.answered).length;
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h1 className="text-lg font-semibold text-slate-800">模拟考试</h1>
-          <p className="text-sm text-slate-500">
+    <div className="p-4 md:p-6 max-w-6xl mx-auto">
+      <div className="flex items-center justify-between mb-3 md:mb-4 gap-2">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-base md:text-lg font-semibold text-slate-800">模拟考试</h1>
+          <p className="text-xs md:text-sm text-slate-500">
             已答 {answeredCount}/{session.orderedIds.length} · 第{" "}
             {session.currentIdx + 1} 题
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 shrink-0">
           <button
             onClick={finishSession}
-            className="px-4 py-2 text-sm font-medium bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+            className="px-3 md:px-4 py-2 text-sm font-medium bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
           >
             交卷
           </button>
           <button
             onClick={clearSession}
-            className="px-4 py-2 text-sm text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50 transition"
+            className="px-3 md:px-4 py-2 text-sm text-slate-500 border border-slate-200 rounded-lg hover:bg-slate-50 transition"
           >
             放弃
           </button>
         </div>
       </div>
 
-      <div className="w-full h-2 bg-slate-200 rounded-full mb-6 overflow-hidden">
+      <div className="w-full h-2 bg-slate-200 rounded-full mb-4 md:mb-6 overflow-hidden">
         <div
           className="h-full bg-green-500 rounded-full transition-all duration-300"
           style={{
@@ -68,7 +68,7 @@ export default function ExamPage() {
         <Card className="h-fit">
           <CardContent className="p-4">
             <p className="text-sm font-medium text-slate-700 mb-3">答题卡</p>
-            <div className="grid grid-cols-5 gap-2 max-h-[400px] overflow-y-auto">
+            <div className="grid grid-cols-8 lg:grid-cols-5 gap-2 max-h-[400px] overflow-y-auto">
               {session.orderedIds.map((id, idx) => {
                 const isActive = idx === session.currentIdx;
                 const isAnswered = session.answered[id];
@@ -97,9 +97,9 @@ export default function ExamPage() {
 
 function ExamSetup({ onStart }: { onStart: (mode: "sequential" | "random") => void }) {
   return (
-    <div className="p-8 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-slate-900 mb-2">模拟考试</h1>
-      <p className="text-slate-500 mb-8">全 {questions.length} 题整卷测评，交卷后查看成绩</p>
+    <div className="p-4 md:p-8 max-w-2xl mx-auto">
+      <h1 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">模拟考试</h1>
+      <p className="text-sm md:text-base text-slate-500 mb-6 md:mb-8">全 {questions.length} 题整卷测评，交卷后查看成绩</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <button
@@ -149,8 +149,8 @@ function ExamResult() {
   const passed = score >= 60;
 
   return (
-    <div className="p-8 max-w-2xl mx-auto text-center">
-      <h1 className="text-2xl font-bold text-slate-900 mb-8">考试结果</h1>
+    <div className="p-4 md:p-8 max-w-2xl mx-auto text-center">
+      <h1 className="text-xl md:text-2xl font-bold text-slate-900 mb-6 md:mb-8">考试结果</h1>
 
       <div
         className={cn(

@@ -48,20 +48,20 @@ export default function Dashboard() {
   });
 
   return (
-    <div className="p-8 max-w-6xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-slate-900">学习仪表盘</h1>
+    <div className="p-4 md:p-8 max-w-6xl mx-auto">
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-xl md:text-2xl font-bold text-slate-900">学习仪表盘</h1>
         <p className="text-slate-500 mt-1">
           人工智能训练师高级理论考试 - 200题 / 8大知识域
         </p>
       </div>
 
       {/* Overview stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-blue-600">{attempted}</div>
-            <p className="text-sm text-slate-500 mt-1">已练习题目</p>
+          <CardContent className="pt-5 md:pt-6">
+            <div className="text-2xl md:text-3xl font-bold text-blue-600">{attempted}</div>
+            <p className="text-xs md:text-sm text-slate-500 mt-1">已练习题目</p>
             <Progress
               value={(attempted / totalQuestions) * 100}
               className="mt-3 h-2"
@@ -69,25 +69,25 @@ export default function Dashboard() {
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-green-600">
+          <CardContent className="pt-5 md:pt-6">
+            <div className="text-2xl md:text-3xl font-bold text-green-600">
               {totalCorrectRate}%
             </div>
-            <p className="text-sm text-slate-500 mt-1">最近正确率</p>
+            <p className="text-xs md:text-sm text-slate-500 mt-1">最近正确率</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-red-500">{totalWrong}</div>
-            <p className="text-sm text-slate-500 mt-1">待复习错题</p>
+          <CardContent className="pt-5 md:pt-6">
+            <div className="text-2xl md:text-3xl font-bold text-red-500">{totalWrong}</div>
+            <p className="text-xs md:text-sm text-slate-500 mt-1">待复习错题</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-slate-700">
+          <CardContent className="pt-5 md:pt-6">
+            <div className="text-2xl md:text-3xl font-bold text-slate-700">
               {totalQuestions}
             </div>
-            <p className="text-sm text-slate-500 mt-1">题库总量</p>
+            <p className="text-xs md:text-sm text-slate-500 mt-1">题库总量</p>
           </CardContent>
         </Card>
       </div>
@@ -125,8 +125,8 @@ export default function Dashboard() {
       </div>
 
       {/* Category grid */}
-      <h2 className="text-lg font-semibold text-slate-800 mb-4">知识域进度</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <h2 className="text-base md:text-lg font-semibold text-slate-800 mb-4">知识域进度</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
         {categoryStats.map((cat) => (
           <Link key={cat.id} href={`/practice?category=${cat.id}`}>
             <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">

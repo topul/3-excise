@@ -46,11 +46,11 @@ export default function StatsPage() {
   const recentSessions = [...sessions].reverse().slice(0, 7);
 
   return (
-    <div className="p-8 max-w-5xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900">学习统计</h1>
-          <p className="text-slate-500 mt-1">
+    <div className="p-4 md:p-8 max-w-5xl mx-auto">
+      <div className="flex items-center justify-between mb-6 md:mb-8 gap-2">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-xl md:text-2xl font-bold text-slate-900">学习统计</h1>
+          <p className="text-xs md:text-sm text-slate-500 mt-1">
             总答题 {totalAttempts} 次 · 覆盖 {totalAttempted}/{questions.length}{" "}
             题
           </p>
@@ -61,45 +61,45 @@ export default function StatsPage() {
               resetProgress();
             }
           }}
-          className="px-4 py-2 text-sm text-red-500 border border-red-200 rounded-lg hover:bg-red-50 transition"
+          className="shrink-0 px-3 md:px-4 py-2 text-sm text-red-500 border border-red-200 rounded-lg hover:bg-red-50 transition"
         >
           重置进度
         </button>
       </div>
 
       {/* Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-blue-600">
+          <CardContent className="pt-5 md:pt-6">
+            <div className="text-2xl md:text-3xl font-bold text-blue-600">
               {totalAttempted}
             </div>
-            <p className="text-sm text-slate-500 mt-1">已练习题目</p>
+            <p className="text-xs md:text-sm text-slate-500 mt-1">已练习题目</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-green-600">
+          <CardContent className="pt-5 md:pt-6">
+            <div className="text-2xl md:text-3xl font-bold text-green-600">
               {totalAttempted > 0
                 ? Math.round((totalCorrect / totalAttempted) * 100)
                 : 0}
               %
             </div>
-            <p className="text-sm text-slate-500 mt-1">正确率</p>
+            <p className="text-xs md:text-sm text-slate-500 mt-1">正确率</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-amber-600">
+          <CardContent className="pt-5 md:pt-6">
+            <div className="text-2xl md:text-3xl font-bold text-amber-600">
               {totalAttempts}
             </div>
-            <p className="text-sm text-slate-500 mt-1">总答题次数</p>
+            <p className="text-xs md:text-sm text-slate-500 mt-1">总答题次数</p>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-red-500">{totalWrong}</div>
-            <p className="text-sm text-slate-500 mt-1">待复习错题</p>
+          <CardContent className="pt-5 md:pt-6">
+            <div className="text-2xl md:text-3xl font-bold text-red-500">{totalWrong}</div>
+            <p className="text-xs md:text-sm text-slate-500 mt-1">待复习错题</p>
           </CardContent>
         </Card>
       </div>
@@ -172,8 +172,8 @@ export default function StatsPage() {
             最近学习记录
           </h2>
           <Card>
-            <CardContent className="p-0">
-              <table className="w-full text-sm">
+            <CardContent className="p-0 overflow-x-auto">
+              <table className="w-full text-sm min-w-[400px]">
                 <thead>
                   <tr className="border-b border-slate-100">
                     <th className="text-left p-3 font-medium text-slate-500">

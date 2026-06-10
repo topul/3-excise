@@ -38,9 +38,9 @@ export function QuestionCard({ question }: { question: Question }) {
 
   return (
     <Card className="shadow-sm">
-      <CardContent className="p-6">
+      <CardContent className="p-4 md:p-6">
         {/* Meta row */}
-        <div className="flex items-center gap-2 mb-4 flex-wrap">
+        <div className="flex items-center gap-2 mb-3 md:mb-4 flex-wrap">
           <Badge variant="secondary" className={typeColors[question.type]}>
             {typeLabels[question.type]}
           </Badge>
@@ -51,8 +51,6 @@ export function QuestionCard({ question }: { question: Question }) {
           )}
           <span className="text-xs text-slate-400 ml-auto">
             Q{question.id}
-            {stat.attempts > 0 &&
-              ` · 练过${stat.attempts}次 · 错${stat.wrongs}次`}
           </span>
           <button
             onClick={() => toggleBookmark(question.id)}
@@ -62,9 +60,14 @@ export function QuestionCard({ question }: { question: Question }) {
             {stat.bookmarked ? "⭐" : "☆"}
           </button>
         </div>
+        {stat.attempts > 0 && (
+          <div className="text-xs text-slate-400 mb-2 md:mb-3">
+            练过{stat.attempts}次 · 错{stat.wrongs}次
+          </div>
+        )}
 
         {/* Question text */}
-        <p className="text-lg font-medium text-slate-900 leading-relaxed mb-6">
+        <p className="text-base md:text-lg font-medium text-slate-900 leading-relaxed mb-5 md:mb-6">
           {question.text}
         </p>
 
@@ -170,7 +173,7 @@ function TrueFalseOptions({
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 gap-3 md:gap-4">
       {options.map((opt) => {
         const isSelected = userAnswer === opt.value;
         const isCorrectAnswer = question.answer === opt.value;
@@ -183,7 +186,7 @@ function TrueFalseOptions({
             onClick={() => !answered && onSelect(opt.value)}
             disabled={answered}
             className={cn(
-              "p-5 rounded-xl border-2 text-center transition-all font-semibold",
+              "p-4 md:p-5 rounded-xl border-2 text-center transition-all font-semibold",
               !answered && !isSelected && "border-slate-200 hover:border-blue-300 bg-white",
               !answered && isSelected && "border-blue-500 bg-blue-50",
               showCorrect && "border-green-500 bg-green-50 text-green-700",
@@ -191,7 +194,7 @@ function TrueFalseOptions({
               answered && !showCorrect && !showWrong && "border-slate-200 bg-slate-50 opacity-60"
             )}
           >
-            <span className="text-2xl block mb-1">{opt.icon}</span>
+            <span className="text-xl md:text-2xl block mb-1">{opt.icon}</span>
             <span className="text-sm">{opt.label}</span>
           </button>
         );
