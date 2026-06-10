@@ -1,12 +1,26 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import Link from "next/link";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { marked } from "marked";
 import { useStudyStore } from "@/lib/store";
 import { streamAiExplanation } from "@/lib/ai";
 import type { Question } from "@/lib/types";
+
+marked.setOptions({
+  breaks: true,
+  gfm: true,
+});
+
+function MarkdownContent({ content }: { content: string }) {
+  const html = useMemo(() => marked.parse(content) as string, [content]);
+  return (
+    <div
+      className="markdown-body"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}
 
 export function AiExplain({ question }: { question: Question }) {
   const aiConfig = useStudyStore((s) => s.aiConfig);
@@ -156,10 +170,8 @@ export function AiExplain({ question }: { question: Question }) {
                 </button>
               </div>
             ) : text ? (
-              <div className="text-sm text-slate-700 leading-relaxed markdown-body">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {text}
-                </ReactMarkdown>
+              <div className="text-sm text-slate-700 leading-relaxed">
+                <MarkdownContent content={text} />
                 {streaming && (
                   <span className="inline-block w-2 h-4 align-middle bg-violet-500 ml-0.5 animate-pulse" />
                 )}
