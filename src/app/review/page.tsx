@@ -5,6 +5,7 @@ import { useStudyStore, questions } from "@/lib/store";
 import { categories, categoryMap } from "@/data/categories";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { AiExplain } from "@/components/ai-explain";
 import { cn } from "@/lib/utils";
 
 export default function ReviewPage() {
@@ -207,6 +208,10 @@ export default function ReviewPage() {
                         >
                           ✓ 已理解，移出错题池
                         </button>
+                      </div>
+
+                      <div onClick={(e) => e.stopPropagation()}>
+                        <AiExplain question={q} />
                       </div>
                     </div>
                   )}

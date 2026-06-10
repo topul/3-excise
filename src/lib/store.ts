@@ -46,10 +46,22 @@ interface SessionState {
   finished: boolean;
 }
 
+interface AiConfig {
+  baseUrl: string;
+  apiKey: string;
+  model: string;
+}
+
 interface StudyStore {
   // Question stats (persisted)
   stats: Record<number, QuestionStat>;
   sessions: StudySession[];
+
+  // AI config (persisted)
+  aiConfig: AiConfig;
+
+  // AI explanations cache (persisted): questionId -> explanation
+  aiExplanations: Record<number, string>;
 
   // Current session (transient, also persisted for resume)
   session: SessionState | null;
@@ -72,6 +84,9 @@ interface StudyStore {
   markUnderstood: (id: number) => void;
   toggleBookmark: (id: number) => void;
   resetProgress: () => void;
+  setAiConfig: (config: Partial<AiConfig>) => void;
+  setAiExplanation: (questionId: number, text: string) => void;
+  clearAiExplanation: (questionId: number) => void;
 }
 
 function buildQuestionOrder(
@@ -134,6 +149,12 @@ export const useStudyStore = create<StudyStore>()(
       stats: {},
       sessions: [],
       session: null,
+      aiConfig: {
+        baseUrl: "",
+        apiKey: "",
+        model: "",
+      },
+      aiExplanations: {},
 
       getStat: (id: number) => {
         return get().stats[id] || defaultStat();
@@ -334,6 +355,22 @@ export const useStudyStore = create<StudyStore>()(
 
       resetProgress: () => {
         set({ stats: {}, sessions: [], session: null });
+      },
+
+      setAiConfig: (config) => {
+        set({ aiConfig: { ...get().aiConfig, ...config } });
+      },
+
+      setAiExplanation: (questionId, text) => {
+        set({
+          aiExplanations: { ...get().aiExplanations, [questionId]: text },
+        });
+      },
+
+      clearAiExplanation: (questionId) => {
+        const next = { ...get().aiExplanations };
+        delete next[questionId];
+        set({ aiExplanations: next });
       },
     }),
     {

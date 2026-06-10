@@ -4,6 +4,7 @@ import { useStudyStore } from "@/lib/store";
 import { categoryMap } from "@/data/categories";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { AiExplain } from "@/components/ai-explain";
 import { cn } from "@/lib/utils";
 import type { Question } from "@/lib/types";
 
@@ -130,6 +131,9 @@ export function QuestionCard({ question }: { question: Question }) {
             </p>
           </div>
         )}
+
+        {/* AI explanation (only after answered) */}
+        {answered && <AiExplain question={question} />}
 
         {/* Navigation */}
         <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-100">
