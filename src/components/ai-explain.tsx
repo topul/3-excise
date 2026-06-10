@@ -1,23 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { useStudyStore } from "@/lib/store";
 import { streamAiExplanation } from "@/lib/ai";
 import type { Question } from "@/lib/types";
 
-function escapeHtml(value: string) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
 function sanitizeHref(value: string) {
   try {
-    const url = new URL(value);
+    const url = new URL(value, window.location.origin);
     if (url.protocol === "http:" || url.protocol === "https:" || url.protocol === "mailto:") {
       return url.toString();
     }
@@ -27,51 +20,27 @@ function sanitizeHref(value: string) {
   return "#";
 }
 
-function renderInlineMarkdown(value: string) {
-  return escapeHtml(value)
-    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-    .replace(/__(.+?)__/g, "<strong>$1</strong>")
-    .replace(/`(.+?)`/g, "<code>$1</code>")
-    .replace(/\*(.+?)\*/g, "<em>$1</em>")
-    .replace(/_(.+?)_/g, "<em>$1</em>")
-    .replace(
-      /\[(.+?)\]\((.+?)\)/g,
-      (_, label: string, href: string) =>
-        `<a href="${sanitizeHref(href)}" target="_blank" rel="noreferrer">${label}</a>`
-    );
-}
-
 function MarkdownContent({ content }: { content: string }) {
-  const html = useMemo(() => {
-    const blocks = content
-      .replace(/\r\n/g, "\n")
-      .split(/\n{2,}/)
-      .map((block) => {
-        const trimmed = block.trim();
-        if (!trimmed) return "";
-
-        if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
-          const items = trimmed
-            .split("\n")
-            .map((line) => line.replace(/^[-*]\s+/, "").trim())
-            .filter(Boolean)
-            .map((item) => `<li>${renderInlineMarkdown(item)}</li>`)
-            .join("");
-          return `<ul>${items}</ul>`;
-        }
-
-        return `<p>${renderInlineMarkdown(trimmed).replace(/\n/g, "<br />")}</p>`;
-      })
-      .filter(Boolean)
-      .join("");
-
-    return blocks || `<p>${renderInlineMarkdown(content).replace(/\n/g, "<br />")}</p>`;
-  }, [content]);
   return (
-    <div
-      className="markdown-body"
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    <div className="markdown-body">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{
+          a: ({ href, children, ...props }) => (
+            <a
+              {...props}
+              href={sanitizeHref(href || "")}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {children}
+            </a>
+          ),
+        }}
+      >
+        {content}
+      </ReactMarkdown>
+    </div>
   );
 }
 
