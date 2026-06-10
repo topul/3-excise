@@ -1,0 +1,263 @@
+"use client";
+
+import { useStudyStore } from "@/lib/store";
+import { categoryMap } from "@/data/categories";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import type { Question } from "@/lib/types";
+
+const typeLabels = {
+  tf: "判断题",
+  single: "单选题",
+  multi: "多选题",
+};
+
+const typeColors = {
+  tf: "bg-blue-100 text-blue-700",
+  single: "bg-amber-100 text-amber-700",
+  multi: "bg-purple-100 text-purple-700",
+};
+
+export function QuestionCard({ question }: { question: Question }) {
+  const session = useStudyStore((s) => s.session);
+  const selectAnswer = useStudyStore((s) => s.selectAnswer);
+  const submitMulti = useStudyStore((s) => s.submitMulti);
+  const goNext = useStudyStore((s) => s.goNext);
+  const goPrev = useStudyStore((s) => s.goPrev);
+  const toggleBookmark = useStudyStore((s) => s.toggleBookmark);
+  const getStat = useStudyStore((s) => s.getStat);
+
+  if (!session) return null;
+
+  const answered = session.answered[question.id];
+  const userAnswer = session.answers[question.id] || "";
+  const isCorrect = answered && userAnswer === question.answer;
+  const stat = getStat(question.id);
+  const cat = categoryMap[question.category];
+
+  return (
+    <Card className="shadow-sm">
+      <CardContent className="p-6">
+        {/* Meta row */}
+        <div className="flex items-center gap-2 mb-4 flex-wrap">
+          <Badge variant="secondary" className={typeColors[question.type]}>
+            {typeLabels[question.type]}
+          </Badge>
+          {cat && (
+            <Badge variant="outline" className="text-xs">
+              {cat.icon} {cat.name}
+            </Badge>
+          )}
+          <span className="text-xs text-slate-400 ml-auto">
+            Q{question.id}
+            {stat.attempts > 0 &&
+              ` · 练过${stat.attempts}次 · 错${stat.wrongs}次`}
+          </span>
+          <button
+            onClick={() => toggleBookmark(question.id)}
+            className="text-lg hover:scale-110 transition-transform"
+            title={stat.bookmarked ? "取消收藏" : "收藏"}
+          >
+            {stat.bookmarked ? "⭐" : "☆"}
+          </button>
+        </div>
+
+        {/* Question text */}
+        <p className="text-lg font-medium text-slate-900 leading-relaxed mb-6">
+          {question.text}
+        </p>
+
+        {/* Options */}
+        {question.type === "tf" ? (
+          <TrueFalseOptions
+            question={question}
+            userAnswer={userAnswer}
+            answered={answered}
+            onSelect={(ans) => selectAnswer(question.id, ans)}
+          />
+        ) : (
+          <ChoiceOptions
+            question={question}
+            userAnswer={userAnswer}
+            answered={answered}
+            onSelect={(ans) => selectAnswer(question.id, ans)}
+          />
+        )}
+
+        {/* Multi submit */}
+        {question.type === "multi" && !answered && userAnswer.length > 0 && (
+          <button
+            onClick={() => submitMulti(question.id)}
+            className="mt-4 px-5 py-2.5 bg-blue-600 text-white rounded-lg font-medium text-sm hover:bg-blue-700 transition"
+          >
+            提交答案
+          </button>
+        )}
+
+        {/* Feedback */}
+        {answered && (
+          <div
+            className={cn(
+              "mt-6 p-4 rounded-xl border",
+              isCorrect
+                ? "bg-green-50 border-green-200"
+                : "bg-red-50 border-red-200"
+            )}
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-lg">{isCorrect ? "✅" : "❌"}</span>
+              <span
+                className={cn(
+                  "font-semibold text-sm",
+                  isCorrect ? "text-green-700" : "text-red-700"
+                )}
+              >
+                {isCorrect ? "回答正确！" : "回答错误"}
+              </span>
+            </div>
+            {!isCorrect && (
+              <p className="text-sm text-red-700 mb-1">
+                正确答案：
+                <span className="font-bold">{question.answer}</span>
+              </p>
+            )}
+            <p className="text-sm text-slate-600 mt-2">
+              {question.explanation}
+            </p>
+          </div>
+        )}
+
+        {/* Navigation */}
+        <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-100">
+          <button
+            onClick={goPrev}
+            disabled={session.currentIdx === 0}
+            className="px-4 py-2 text-sm font-medium text-slate-600 border border-slate-200 rounded-lg hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition"
+          >
+            上一题
+          </button>
+          <span className="text-sm text-slate-400">
+            {session.currentIdx + 1} / {session.orderedIds.length}
+          </span>
+          <button
+            onClick={goNext}
+            disabled={session.currentIdx === session.orderedIds.length - 1}
+            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition"
+          >
+            下一题
+          </button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function TrueFalseOptions({
+  question,
+  userAnswer,
+  answered,
+  onSelect,
+}: {
+  question: Question;
+  userAnswer: string;
+  answered: boolean;
+  onSelect: (ans: string) => void;
+}) {
+  const options = [
+    { value: "√", label: "正确", icon: "✓" },
+    { value: "×", label: "错误", icon: "✗" },
+  ];
+
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      {options.map((opt) => {
+        const isSelected = userAnswer === opt.value;
+        const isCorrectAnswer = question.answer === opt.value;
+        const showCorrect = answered && isCorrectAnswer;
+        const showWrong = answered && isSelected && !isCorrectAnswer;
+
+        return (
+          <button
+            key={opt.value}
+            onClick={() => !answered && onSelect(opt.value)}
+            disabled={answered}
+            className={cn(
+              "p-5 rounded-xl border-2 text-center transition-all font-semibold",
+              !answered && !isSelected && "border-slate-200 hover:border-blue-300 bg-white",
+              !answered && isSelected && "border-blue-500 bg-blue-50",
+              showCorrect && "border-green-500 bg-green-50 text-green-700",
+              showWrong && "border-red-500 bg-red-50 text-red-700",
+              answered && !showCorrect && !showWrong && "border-slate-200 bg-slate-50 opacity-60"
+            )}
+          >
+            <span className="text-2xl block mb-1">{opt.icon}</span>
+            <span className="text-sm">{opt.label}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function ChoiceOptions({
+  question,
+  userAnswer,
+  answered,
+  onSelect,
+}: {
+  question: Question;
+  userAnswer: string;
+  answered: boolean;
+  onSelect: (ans: string) => void;
+}) {
+  return (
+    <div className="space-y-3">
+      {question.options.map((opt) => {
+        const isSelected = userAnswer.includes(opt.label);
+        const isCorrectAnswer = question.answer.includes(opt.label);
+        const showCorrect = answered && isCorrectAnswer;
+        const showWrong = answered && isSelected && !isCorrectAnswer;
+
+        return (
+          <button
+            key={opt.label}
+            onClick={() => !answered && onSelect(opt.label)}
+            disabled={answered}
+            className={cn(
+              "w-full flex items-start gap-3 p-4 rounded-xl border-2 text-left transition-all",
+              !answered && !isSelected && "border-slate-200 hover:border-blue-300 bg-white",
+              !answered && isSelected && "border-blue-500 bg-blue-50",
+              showCorrect && "border-green-500 bg-green-50",
+              showWrong && "border-red-500 bg-red-50",
+              answered && !showCorrect && !showWrong && "border-slate-200 bg-slate-50 opacity-60"
+            )}
+          >
+            <span
+              className={cn(
+                "w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0",
+                !answered && !isSelected && "bg-slate-100 text-slate-500",
+                !answered && isSelected && "bg-blue-500 text-white",
+                showCorrect && "bg-green-500 text-white",
+                showWrong && "bg-red-500 text-white",
+                answered && !showCorrect && !showWrong && "bg-slate-100 text-slate-400"
+              )}
+            >
+              {question.type === "multi" ? (isSelected ? "✓" : "") : opt.label}
+            </span>
+            <span
+              className={cn(
+                "text-sm leading-relaxed pt-1",
+                showCorrect && "text-green-700 font-medium",
+                showWrong && "text-red-700",
+                !answered && "text-slate-700"
+              )}
+            >
+              {opt.text}
+            </span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}

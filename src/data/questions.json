@@ -1,0 +1,4190 @@
+[
+  {
+    "id": 1,
+    "type": "tf",
+    "text": "pip命令也支持扩展名为.whl的文件直接安装Python扩展库（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 2,
+    "type": "tf",
+    "text": "只有 Python 扩展库才需要导入以后才能使用其中的对象，Python 标准库不需要导入即 可使用其中的所有对象和方法（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 3,
+    "type": "tf",
+    "text": "在Python中0xad是合法的十六进制数字表示形式（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 4,
+    "type": "tf",
+    "text": "3+4j 是合法Python数字类型（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 5,
+    "type": "tf",
+    "text": "在Python中0oa1是合法的八进制数字表示形式（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 6,
+    "type": "tf",
+    "text": "Python使用缩进来体现代码之间的逻辑关系（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 7,
+    "type": "tf",
+    "text": "Python代码的注释只有一种方式，那就是使用#符号（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 8,
+    "type": "tf",
+    "text": "调用函数时，在实参前面加一个型号*表示序列解包（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 9,
+    "type": "tf",
+    "text": "安装Linux系统需要收取一定费用（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "linux",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 10,
+    "type": "tf",
+    "text": "放在一对三引号之间的内容将被认为是注释（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 11,
+    "type": "tf",
+    "text": "Python支持使用字典的“键”作为下标来访问字典中的值（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 12,
+    "type": "tf",
+    "text": "列表可以作为字典的“键”（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 13,
+    "type": "tf",
+    "text": "元组可以作为字典的“键”（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 14,
+    "type": "tf",
+    "text": "字典的“键”必须是不可变的（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 15,
+    "type": "tf",
+    "text": "添加账户 user1,为其指定附加组 g1，并设置 2021-10-04 账户到期可以使用 useradd -G g1 -e 2021-10-04 user1（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "linux",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 16,
+    "type": "tf",
+    "text": "添加账户user2，为其指定id号为1000可以使用useradd -u 1000 user2（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "linux",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 17,
+    "type": "tf",
+    "text": "查看user2的uid和gid可以使用cat user2（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "linux",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 18,
+    "type": "tf",
+    "text": "查看当前工作目录可以使用命令ls（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "linux",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 19,
+    "type": "tf",
+    "text": "创建一个/test 文件夹，并且在“test”文件夹下创建一个名为“a”的子文件夹可以 用mkdir -p /test/a（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "linux",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 20,
+    "type": "tf",
+    "text": "想要删除掉/tmp下所有内容可以使用rm -rf /tmp/*（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "linux",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 21,
+    "type": "tf",
+    "text": "grep是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印 出来（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "linux",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 22,
+    "type": "tf",
+    "text": "已知 A 和 B 是两个集合，并且表达式 A<B 的值为 False，那么表达式 A>B 的值一定为 True（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "linux",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 23,
+    "type": "tf",
+    "text": "列表对象的append()方法属于原地操作，用于在列表尾部追加一个元素（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 24,
+    "type": "tf",
+    "text": "对于列表而言，在尾部追加元素比在中间位置插入元素速度更快一些，尤其是对于包 含大量元素的列表（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 25,
+    "type": "tf",
+    "text": "假设有非空列表 x，那么 x.append(3)、x = x+[3]与 x.insert(0,3)在执行时间上基 本没有太大区别（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 26,
+    "type": "tf",
+    "text": "使用 Python 列表的方法 insert()为列表插入元素时会改变列表中插入位置之后元素 的索引（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 27,
+    "type": "tf",
+    "text": "假设x为列表对象，那么x.pop()和x.pop(-1)的作用是一样的（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 28,
+    "type": "tf",
+    "text": "使用 del 命令或者列表对象的 remove()方法删除列表中元素时会影响列表中部分元素 的索引（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 29,
+    "type": "tf",
+    "text": "带有 else 子句的循环如果因为执行了 break 语句而退出的话，则会执行 else 子句中 的代码（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "linux",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 30,
+    "type": "tf",
+    "text": "对于带有else子句的循环语句，如果是因为循环条件表达式不成立而自然结束循环， 则执行else子句中的代码（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "linux",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 31,
+    "type": "tf",
+    "text": "已知列表 x = [1, 2, 3]，那么执行语句 x = 3 之后，变量x的地址不变（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 32,
+    "type": "tf",
+    "text": "在UTF-8编码中一个汉字需要占用3个字节（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 33,
+    "type": "tf",
+    "text": "在GBK和CP936编码中一个汉字需要2个字节（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 34,
+    "type": "tf",
+    "text": "如 果 仅 仅 是 用 于 控 制 循 环 次 数 ， 那 么 使 用 for i in range(20) 和 for i in range(20, 40)的作用是等价的（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 35,
+    "type": "tf",
+    "text": "使用列表对象的 remove()方法可以删除列表中首次出现的指定元素，如果列中不存在 要删除的指定元素则抛出异常（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 36,
+    "type": "tf",
+    "text": "元组是不可变的，不支持列表对象的 inset()、remove()等方法，也不支持 del 命令 删除其中的元素，但可以使用del命令删除整个元组对象（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 37,
+    "type": "tf",
+    "text": "默认不带参数情况下，``ln``命令创建的是软链接，加参数``-s``的``ln``命令创建 的是硬连接（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "linux",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 38,
+    "type": "tf",
+    "text": "智能客服系统的优点是解放人力、响应快、多渠道接入（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "ai",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 39,
+    "type": "tf",
+    "text": "Python集合中的元素可以是列表（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 40,
+    "type": "tf",
+    "text": "Python字典中的“键”可以是列表（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 41,
+    "type": "tf",
+    "text": "Python字典中的“键”可以是元组（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 42,
+    "type": "tf",
+    "text": "Python列表中所有元素必须为相同类型的数据（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 43,
+    "type": "tf",
+    "text": "Python列表、元组、字符串都属于有序序列（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 44,
+    "type": "tf",
+    "text": "在Python 3.x中语句 print(*[1,2,3]) 不能正确执行（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 45,
+    "type": "tf",
+    "text": "Linux内核诞生于1991年，由芬兰学生Linus Torvalds发起（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "linux",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 46,
+    "type": "tf",
+    "text": "Python字典和集合属于无序序列（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 47,
+    "type": "tf",
+    "text": "在循环中continue语句的作用是跳出当前循环（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 48,
+    "type": "tf",
+    "text": "在编写多层循环时，为了提高运行效率，应尽量减少内循环中不必要的计算（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 49,
+    "type": "tf",
+    "text": "Python字典中的“键”不允许重复（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 50,
+    "type": "tf",
+    "text": "Python字典中的“值”不允许重复（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 51,
+    "type": "tf",
+    "text": "Python集合中的元素可以是元组（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 52,
+    "type": "tf",
+    "text": "现实世界获取的数据大多是不完整、不一致的脏数据，无法直接进行数据挖掘或数据 挖掘结果不尽如人意（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "ai",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 53,
+    "type": "tf",
+    "text": "数据清理是指发现并改正数据当中可识别的问题和错误（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "ai",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 54,
+    "type": "tf",
+    "text": "互联网数据采集也称为网络抓取或网络数据爬取，主要是通过数据爬虫和网页解析来 实现（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "python",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 55,
+    "type": "tf",
+    "text": "数据清洗流程为识别错误实例—明确错误类型—纠正发现错误—干净数据回流 （ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "ai",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 56,
+    "type": "tf",
+    "text": "人工智能发展的第三次浪潮中，深度学习已经成为推动进步的主力军（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "ai",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 57,
+    "type": "tf",
+    "text": "人工智能的图像识别能力本质是将语言转为图像的能力（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "vision",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 58,
+    "type": "tf",
+    "text": "连接到不同但互连的计算机通信网络的主计算机中的成对进程之间依靠 TCP 提供可靠 的通信服务（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "network",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 59,
+    "type": "tf",
+    "text": "网络协议为计算机网络中进行数据交换而建立的规则、标准或约定的集合（ ）。",
+    "options": [],
+    "answer": "√",
+    "category": "network",
+    "explanation": "该表述正确。"
+  },
+  {
+    "id": 60,
+    "type": "tf",
+    "text": "Python 2.x和Python 3.x中input()函数的返回值都是字符串（ ）。",
+    "options": [],
+    "answer": "×",
+    "category": "python",
+    "explanation": "该表述错误。"
+  },
+  {
+    "id": 61,
+    "type": "single",
+    "text": "利用物质本身的某种客观性质制作的传感器称之为（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "物性型"
+      },
+      {
+        "label": "B",
+        "text": "结构型"
+      },
+      {
+        "label": "C",
+        "text": "一次仪表"
+      },
+      {
+        "label": "D",
+        "text": "二次仪表"
+      }
+    ],
+    "answer": "A",
+    "category": "sensor",
+    "explanation": "正确答案是 A. 物性型。"
+  },
+  {
+    "id": 62,
+    "type": "single",
+    "text": "应用电容式传感器测量微米级的距离，应该采用改变（ ）的方式。",
+    "options": [
+      {
+        "label": "A",
+        "text": "极间物质介电系数"
+      },
+      {
+        "label": "B",
+        "text": "极板面积"
+      },
+      {
+        "label": "C",
+        "text": "极板距离"
+      },
+      {
+        "label": "D",
+        "text": "电压"
+      }
+    ],
+    "answer": "C",
+    "category": "sensor",
+    "explanation": "正确答案是 C. 极板距离。"
+  },
+  {
+    "id": 63,
+    "type": "single",
+    "text": "压电式传感器，即应用半导体压电效应可以测量（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "电压"
+      },
+      {
+        "label": "B",
+        "text": "亮度"
+      },
+      {
+        "label": "C",
+        "text": "力和力矩"
+      },
+      {
+        "label": "D",
+        "text": "距离"
+      }
+    ],
+    "answer": "C",
+    "category": "sensor",
+    "explanation": "正确答案是 C. 力和力矩。"
+  },
+  {
+    "id": 64,
+    "type": "single",
+    "text": "传感器所能辨别的被测量的最小变化量，或者所能辨别的不同被测量的个数，被称之 为传感器的（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "精度"
+      },
+      {
+        "label": "B",
+        "text": "重复性"
+      },
+      {
+        "label": "C",
+        "text": "分辨率"
+      },
+      {
+        "label": "D",
+        "text": "灵敏度"
+      }
+    ],
+    "answer": "C",
+    "category": "vision",
+    "explanation": "正确答案是 C. 分辨率。"
+  },
+  {
+    "id": 65,
+    "type": "single",
+    "text": "增量式光轴编码器一般应用（ ）套光电元件，从而可以实现计数、测速、鉴向和定 位。",
+    "options": [
+      {
+        "label": "A",
+        "text": "一"
+      },
+      {
+        "label": "B",
+        "text": "二"
+      },
+      {
+        "label": "C",
+        "text": "三"
+      },
+      {
+        "label": "D",
+        "text": "四"
+      }
+    ],
+    "answer": "C",
+    "category": "sensor",
+    "explanation": "正确答案是 C. 三。"
+  },
+  {
+    "id": 66,
+    "type": "single",
+    "text": "测速发电机的输出信号为（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "模拟量"
+      },
+      {
+        "label": "B",
+        "text": "数字量"
+      },
+      {
+        "label": "C",
+        "text": "开关量"
+      },
+      {
+        "label": "D",
+        "text": "脉冲量"
+      }
+    ],
+    "answer": "A",
+    "category": "sensor",
+    "explanation": "正确答案是 A. 模拟量。"
+  },
+  {
+    "id": 67,
+    "type": "single",
+    "text": "用于检测物体接触面之间相对运动大小和方向的传感器是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "接近觉传感器"
+      },
+      {
+        "label": "B",
+        "text": "接触觉传感器"
+      },
+      {
+        "label": "C",
+        "text": "滑动觉传感器"
+      },
+      {
+        "label": "D",
+        "text": "压觉传感器"
+      }
+    ],
+    "answer": "A",
+    "category": "sensor",
+    "explanation": "正确答案是 A. 接近觉传感器。"
+  },
+  {
+    "id": 68,
+    "type": "single",
+    "text": "操作机手持粉笔在黑板上写字，在（ ）方向只有力的约束而无速度约束",
+    "options": [
+      {
+        "label": "A",
+        "text": "X轴"
+      },
+      {
+        "label": "B",
+        "text": "Y轴"
+      },
+      {
+        "label": "C",
+        "text": "Z轴"
+      },
+      {
+        "label": "D",
+        "text": "R轴"
+      }
+    ],
+    "answer": "C",
+    "category": "robotics",
+    "explanation": "正确答案是 C. Z轴。"
+  },
+  {
+    "id": 69,
+    "type": "single",
+    "text": "init启动进程需要读取（ ）配置文件。",
+    "options": [
+      {
+        "label": "A",
+        "text": "/etc/inittab"
+      },
+      {
+        "label": "B",
+        "text": "/sbin/init"
+      },
+      {
+        "label": "C",
+        "text": "/etc/sysvinit"
+      },
+      {
+        "label": "D",
+        "text": "/bin/sh"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. /etc/inittab。"
+  },
+  {
+    "id": 70,
+    "type": "single",
+    "text": "在/etc目录下，设置Linux环境中特性的重要文件是（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "env.conf"
+      },
+      {
+        "label": "B",
+        "text": "bashrc"
+      },
+      {
+        "label": "C",
+        "text": "profile"
+      },
+      {
+        "label": "D",
+        "text": ".inputrc"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. profile。"
+  },
+  {
+    "id": 71,
+    "type": "single",
+    "text": "一般来讲,下列语言不常直接用于人工智能开发的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "Python"
+      },
+      {
+        "label": "B",
+        "text": "Go"
+      },
+      {
+        "label": "C",
+        "text": "R"
+      },
+      {
+        "label": "D",
+        "text": "汇编语言"
+      }
+    ],
+    "answer": "D",
+    "category": "ai",
+    "explanation": "正确答案是 D. 汇编语言。"
+  },
+  {
+    "id": 72,
+    "type": "single",
+    "text": "MIT 教授 Tomaso Poggio 明确指出，过去 15 年人工智能取得的成功，主要是因为 （ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "计算机视觉"
+      },
+      {
+        "label": "B",
+        "text": "语音识别"
+      },
+      {
+        "label": "C",
+        "text": "博弈论"
+      },
+      {
+        "label": "D",
+        "text": "机器学习"
+      }
+    ],
+    "answer": "D",
+    "category": "vision",
+    "explanation": "正确答案是 D. 机器学习。"
+  },
+  {
+    "id": 73,
+    "type": "single",
+    "text": "（ ）是指能够自己找出问题、思考问题、解决问题的人工智能。",
+    "options": [
+      {
+        "label": "A",
+        "text": "超人工智能"
+      },
+      {
+        "label": "B",
+        "text": "强人工智能"
+      },
+      {
+        "label": "C",
+        "text": "弱人工智能"
+      },
+      {
+        "label": "D",
+        "text": "人工智能"
+      }
+    ],
+    "answer": "B",
+    "category": "ai",
+    "explanation": "正确答案是 B. 强人工智能。"
+  },
+  {
+    "id": 74,
+    "type": "single",
+    "text": "50年前，人工智能之父们说服了每一个人：“（ ）是智能的钥匙。”",
+    "options": [
+      {
+        "label": "A",
+        "text": "算法"
+      },
+      {
+        "label": "B",
+        "text": "逻辑"
+      },
+      {
+        "label": "C",
+        "text": "经验"
+      },
+      {
+        "label": "D",
+        "text": "学习"
+      }
+    ],
+    "answer": "B",
+    "category": "ai",
+    "explanation": "正确答案是 B. 逻辑。"
+  },
+  {
+    "id": 75,
+    "type": "single",
+    "text": "关于专用人工智能与通用人工智能，下列表述不当的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "人工智能的近期进展主要集中在专用智能领域"
+      },
+      {
+        "label": "B",
+        "text": "专用人工智能形成了人工智能领域的单点突破，在局部智能水平的单项测试中可以超越人类智能"
+      },
+      {
+        "label": "C",
+        "text": "通用人工智能可处理视觉、听觉、判断、推理、学习、思考、规划、设计等各类问题"
+      },
+      {
+        "label": "D",
+        "text": "真正意义上完备的人工智能系统应该是一个专用的智能系统"
+      }
+    ],
+    "answer": "D",
+    "category": "vision",
+    "explanation": "正确答案是 D. 真正意义上完备的人工智能系统应该是一个专用的智能系统。"
+  },
+  {
+    "id": 76,
+    "type": "single",
+    "text": "（ ）是一种基于树结构进行决策的算法。",
+    "options": [
+      {
+        "label": "A",
+        "text": "轨迹跟踪"
+      },
+      {
+        "label": "B",
+        "text": "决策树"
+      },
+      {
+        "label": "C",
+        "text": "数据挖掘"
+      },
+      {
+        "label": "D",
+        "text": "K近邻算法"
+      }
+    ],
+    "answer": "B",
+    "category": "ai",
+    "explanation": "正确答案是 B. 决策树。"
+  },
+  {
+    "id": 77,
+    "type": "single",
+    "text": "近几年，全球人工智能产业发展突飞猛进，人工智能脸部识别率的准确度已经达到 （ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "99.7%"
+      },
+      {
+        "label": "B",
+        "text": "99.8%"
+      },
+      {
+        "label": "C",
+        "text": "99.9%"
+      },
+      {
+        "label": "D",
+        "text": "100%"
+      }
+    ],
+    "answer": "A",
+    "category": "ai",
+    "explanation": "正确答案是 A. 99.7%。"
+  },
+  {
+    "id": 78,
+    "type": "single",
+    "text": "对人工智能理解正确的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "人工智能就是机器学习"
+      },
+      {
+        "label": "B",
+        "text": "机器学习只是人工智能中的一个方向"
+      },
+      {
+        "label": "C",
+        "text": "人工智能就是机器人"
+      },
+      {
+        "label": "D",
+        "text": "人工智能就是深度学习"
+      }
+    ],
+    "answer": "B",
+    "category": "ai",
+    "explanation": "正确答案是 B. 机器学习只是人工智能中的一个方向。"
+  },
+  {
+    "id": 79,
+    "type": "single",
+    "text": "人工智能与计算机学科的关系是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "计算机学科的主要驱动力是人工智能研究"
+      },
+      {
+        "label": "B",
+        "text": "计算机是人工智能研究的一个领域"
+      },
+      {
+        "label": "C",
+        "text": "人工智能是计算机学科的一个分支"
+      },
+      {
+        "label": "D",
+        "text": "人工智能与计算机学科没有联系"
+      }
+    ],
+    "answer": "D",
+    "category": "ai",
+    "explanation": "正确答案是 D. 人工智能与计算机学科没有联系。"
+  },
+  {
+    "id": 80,
+    "type": "single",
+    "text": "（ ）是现在新出现的人工智能的研究方向。",
+    "options": [
+      {
+        "label": "A",
+        "text": "深度学习"
+      },
+      {
+        "label": "B",
+        "text": "人工神经元网络"
+      },
+      {
+        "label": "C",
+        "text": "贝叶斯网络"
+      },
+      {
+        "label": "D",
+        "text": "类脑人工智能"
+      }
+    ],
+    "answer": "D",
+    "category": "ai",
+    "explanation": "正确答案是 D. 类脑人工智能。"
+  },
+  {
+    "id": 81,
+    "type": "single",
+    "text": "深度学习中的“深度”是指（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "计算机理解的深度"
+      },
+      {
+        "label": "B",
+        "text": "中间神经元网络的层次很多"
+      },
+      {
+        "label": "C",
+        "text": "计算机的求解更加精准"
+      },
+      {
+        "label": "D",
+        "text": "计算机对问题的处理更加灵活"
+      }
+    ],
+    "answer": "B",
+    "category": "ai",
+    "explanation": "正确答案是 B. 中间神经元网络的层次很多。"
+  },
+  {
+    "id": 82,
+    "type": "single",
+    "text": "人工神经元网络与深度学习的关系是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "深度学习是人工神经元网络的前身"
+      },
+      {
+        "label": "B",
+        "text": "深度学习是人工神经元网络的一个分支"
+      },
+      {
+        "label": "C",
+        "text": "深度学习是人工神经元网络的一个发展"
+      },
+      {
+        "label": "D",
+        "text": "深度学习与人工神经元网络无关"
+      }
+    ],
+    "answer": "C",
+    "category": "ai",
+    "explanation": "正确答案是 C. 深度学习是人工神经元网络的一个发展。"
+  },
+  {
+    "id": 83,
+    "type": "single",
+    "text": "Linux是由（ ）国家开发的。",
+    "options": [
+      {
+        "label": "A",
+        "text": "美国"
+      },
+      {
+        "label": "B",
+        "text": "法国"
+      },
+      {
+        "label": "C",
+        "text": "意大利"
+      },
+      {
+        "label": "D",
+        "text": "中国"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. 美国。"
+  },
+  {
+    "id": 84,
+    "type": "single",
+    "text": "Linux诞生于（ ）年。",
+    "options": [
+      {
+        "label": "A",
+        "text": "1992"
+      },
+      {
+        "label": "B",
+        "text": "1993"
+      },
+      {
+        "label": "C",
+        "text": "1991"
+      },
+      {
+        "label": "D",
+        "text": "1990"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. 1991。"
+  },
+  {
+    "id": 85,
+    "type": "single",
+    "text": "操作系统（operation system，简称OS）是管理计算机（ ）资源的计算机程序。",
+    "options": [
+      {
+        "label": "A",
+        "text": "软件与硬件"
+      },
+      {
+        "label": "B",
+        "text": "ROM和RAM"
+      },
+      {
+        "label": "C",
+        "text": "信息处理和程序运行"
+      },
+      {
+        "label": "D",
+        "text": "逻辑结构、运行效率"
+      }
+    ],
+    "answer": "A",
+    "category": "python",
+    "explanation": "正确答案是 A. 软件与硬件。"
+  },
+  {
+    "id": 86,
+    "type": "single",
+    "text": "（ ）是系统的心脏，是运行程序和管理像磁盘和打印机等硬件设备的核心程序，它 提供了一个在裸设备与应用程序间的抽象层。",
+    "options": [
+      {
+        "label": "A",
+        "text": "CPU"
+      },
+      {
+        "label": "B",
+        "text": "RAM"
+      },
+      {
+        "label": "C",
+        "text": "程序"
+      },
+      {
+        "label": "D",
+        "text": "内核"
+      }
+    ],
+    "answer": "D",
+    "category": "python",
+    "explanation": "正确答案是 D. 内核。"
+  },
+  {
+    "id": 87,
+    "type": "single",
+    "text": "在创建分区时，一定要创建（ ）两个分区。",
+    "options": [
+      {
+        "label": "A",
+        "text": "NTFS/SWAP"
+      },
+      {
+        "label": "B",
+        "text": "SWAP/根分区"
+      },
+      {
+        "label": "C",
+        "text": "FAT/NTFS"
+      },
+      {
+        "label": "D",
+        "text": "FAT/SWAT"
+      }
+    ],
+    "answer": "B",
+    "category": "linux",
+    "explanation": "正确答案是 B. SWAP/根分区。"
+  },
+  {
+    "id": 88,
+    "type": "single",
+    "text": "在登录Linux时，一个具有唯一进程ID号的shell将被调用，这个ID是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "NID"
+      },
+      {
+        "label": "B",
+        "text": "UID"
+      },
+      {
+        "label": "C",
+        "text": "PID"
+      },
+      {
+        "label": "D",
+        "text": "CID"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. PID。"
+  },
+  {
+    "id": 89,
+    "type": "single",
+    "text": "存放用户密码的目录是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "/var"
+      },
+      {
+        "label": "B",
+        "text": "/boot"
+      },
+      {
+        "label": "C",
+        "text": "/etc"
+      },
+      {
+        "label": "D",
+        "text": "/dev"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. /etc。"
+  },
+  {
+    "id": 90,
+    "type": "single",
+    "text": "列出一个目录下所有文件使用到的命令是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "pwd"
+      },
+      {
+        "label": "B",
+        "text": "su"
+      },
+      {
+        "label": "C",
+        "text": "tar"
+      },
+      {
+        "label": "D",
+        "text": "Ls"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. Ls。"
+  },
+  {
+    "id": 91,
+    "type": "single",
+    "text": "哪个命令可以将普通用户转换成超级用户（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "su"
+      },
+      {
+        "label": "B",
+        "text": "tar"
+      },
+      {
+        "label": "C",
+        "text": "passwd"
+      },
+      {
+        "label": "D",
+        "text": "sudo"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. su。"
+  },
+  {
+    "id": 92,
+    "type": "single",
+    "text": "利用物质本身的某种客观性质制作的传感器称之为（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "物性型"
+      },
+      {
+        "label": "B",
+        "text": "结构型"
+      },
+      {
+        "label": "C",
+        "text": "一次仪表"
+      },
+      {
+        "label": "D",
+        "text": "二次仪表"
+      }
+    ],
+    "answer": "A",
+    "category": "sensor",
+    "explanation": "正确答案是 A. 物性型。"
+  },
+  {
+    "id": 93,
+    "type": "single",
+    "text": "应用电容式传感器测量微米级的距离，应该采用改变（ ）的方式。",
+    "options": [
+      {
+        "label": "A",
+        "text": "极间物质介电系数"
+      },
+      {
+        "label": "B",
+        "text": "极板面积"
+      },
+      {
+        "label": "C",
+        "text": "极板距离"
+      },
+      {
+        "label": "D",
+        "text": "电压"
+      }
+    ],
+    "answer": "C",
+    "category": "sensor",
+    "explanation": "正确答案是 C. 极板距离。"
+  },
+  {
+    "id": 94,
+    "type": "single",
+    "text": "压电式传感器，即应用半导体压电效应可以测量（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "电压"
+      },
+      {
+        "label": "B",
+        "text": "亮度"
+      },
+      {
+        "label": "C",
+        "text": "力和力矩"
+      },
+      {
+        "label": "D",
+        "text": "距离"
+      }
+    ],
+    "answer": "C",
+    "category": "sensor",
+    "explanation": "正确答案是 C. 力和力矩。"
+  },
+  {
+    "id": 95,
+    "type": "single",
+    "text": "传感器所能辨别的被测量的最小变化量，或者所能辨别的不同被测量的个数，被称之 为传感器的（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "精度"
+      },
+      {
+        "label": "B",
+        "text": "重复性"
+      },
+      {
+        "label": "C",
+        "text": "分辨率"
+      },
+      {
+        "label": "D",
+        "text": "灵敏度"
+      }
+    ],
+    "answer": "C",
+    "category": "vision",
+    "explanation": "正确答案是 C. 分辨率。"
+  },
+  {
+    "id": 96,
+    "type": "single",
+    "text": "增量式光轴编码器一般应用（ ）套光电元件，从而可以实现计数、测速、鉴向和定 位。",
+    "options": [
+      {
+        "label": "A",
+        "text": "一"
+      },
+      {
+        "label": "B",
+        "text": "二"
+      },
+      {
+        "label": "C",
+        "text": "三"
+      },
+      {
+        "label": "D",
+        "text": "四"
+      }
+    ],
+    "answer": "C",
+    "category": "sensor",
+    "explanation": "正确答案是 C. 三。"
+  },
+  {
+    "id": 97,
+    "type": "single",
+    "text": "测速发电机的输出信号为（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "模拟量"
+      },
+      {
+        "label": "B",
+        "text": "数字量"
+      },
+      {
+        "label": "C",
+        "text": "开关量"
+      },
+      {
+        "label": "D",
+        "text": "脉冲量"
+      }
+    ],
+    "answer": "A",
+    "category": "sensor",
+    "explanation": "正确答案是 A. 模拟量。"
+  },
+  {
+    "id": 98,
+    "type": "single",
+    "text": "用于检测物体接触面之间相对运动大小和方向的传感器是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "接近觉传感器"
+      },
+      {
+        "label": "B",
+        "text": "接触觉传感器"
+      },
+      {
+        "label": "C",
+        "text": "滑动觉传感器"
+      },
+      {
+        "label": "D",
+        "text": "压觉传感器"
+      }
+    ],
+    "answer": "A",
+    "category": "sensor",
+    "explanation": "正确答案是 A. 接近觉传感器。"
+  },
+  {
+    "id": 99,
+    "type": "single",
+    "text": "操作机手持粉笔在黑板上写字，在（ ）方向只有力的约束而无速度约束",
+    "options": [
+      {
+        "label": "A",
+        "text": "X轴"
+      },
+      {
+        "label": "B",
+        "text": "Y轴"
+      },
+      {
+        "label": "C",
+        "text": "Z轴"
+      },
+      {
+        "label": "D",
+        "text": "R轴"
+      }
+    ],
+    "answer": "C",
+    "category": "robotics",
+    "explanation": "正确答案是 C. Z轴。"
+  },
+  {
+    "id": 100,
+    "type": "single",
+    "text": "init启动进程需要读取（ ）配置文件。",
+    "options": [
+      {
+        "label": "A",
+        "text": "/etc/inittab"
+      },
+      {
+        "label": "B",
+        "text": "/sbin/init"
+      },
+      {
+        "label": "C",
+        "text": "/etc/sysvinit"
+      },
+      {
+        "label": "D",
+        "text": "/bin/sh"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. /etc/inittab。"
+  },
+  {
+    "id": 101,
+    "type": "single",
+    "text": "在/etc目录下，设置Linux环境中特性的重要文件是（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "env.conf"
+      },
+      {
+        "label": "B",
+        "text": "bashrc"
+      },
+      {
+        "label": "C",
+        "text": "profile"
+      },
+      {
+        "label": "D",
+        "text": ".inputrc"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. profile。"
+  },
+  {
+    "id": 102,
+    "type": "single",
+    "text": "一般来讲,下列语言不常直接用于人工智能开发的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "Python"
+      },
+      {
+        "label": "B",
+        "text": "Go"
+      },
+      {
+        "label": "C",
+        "text": "R"
+      },
+      {
+        "label": "D",
+        "text": "汇编语言"
+      }
+    ],
+    "answer": "D",
+    "category": "ai",
+    "explanation": "正确答案是 D. 汇编语言。"
+  },
+  {
+    "id": 103,
+    "type": "single",
+    "text": "MIT 教授 Tomaso Poggio 明确指出，过去 15 年人工智能取得的成功，主要是因为 （ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "计算机视觉"
+      },
+      {
+        "label": "B",
+        "text": "语音识别"
+      },
+      {
+        "label": "C",
+        "text": "博弈论"
+      },
+      {
+        "label": "D",
+        "text": "机器学习"
+      }
+    ],
+    "answer": "D",
+    "category": "vision",
+    "explanation": "正确答案是 D. 机器学习。"
+  },
+  {
+    "id": 104,
+    "type": "single",
+    "text": "（ ）是指能够自己找出问题、思考问题、解决问题的人工智能。",
+    "options": [
+      {
+        "label": "A",
+        "text": "超人工智能"
+      },
+      {
+        "label": "B",
+        "text": "强人工智能"
+      },
+      {
+        "label": "C",
+        "text": "弱人工智能"
+      },
+      {
+        "label": "D",
+        "text": "人工智能"
+      }
+    ],
+    "answer": "B",
+    "category": "ai",
+    "explanation": "正确答案是 B. 强人工智能。"
+  },
+  {
+    "id": 105,
+    "type": "single",
+    "text": "50年前，人工智能之父们说服了每一个人：“（ ）是智能的钥匙。”",
+    "options": [
+      {
+        "label": "A",
+        "text": "算法"
+      },
+      {
+        "label": "B",
+        "text": "逻辑"
+      },
+      {
+        "label": "C",
+        "text": "经验"
+      },
+      {
+        "label": "D",
+        "text": "学习"
+      }
+    ],
+    "answer": "B",
+    "category": "ai",
+    "explanation": "正确答案是 B. 逻辑。"
+  },
+  {
+    "id": 106,
+    "type": "single",
+    "text": "关于专用人工智能与通用人工智能，下列表述不当的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "人工智能的近期进展主要集中在专用智能领域"
+      },
+      {
+        "label": "B",
+        "text": "专用人工智能形成了人工智能领域的单点突破，在局部智能水平的单项测试中可以超越人类智能"
+      },
+      {
+        "label": "C",
+        "text": "通用人工智能可处理视觉、听觉、判断、推理、学习、思考、规划、设计等各类问题"
+      },
+      {
+        "label": "D",
+        "text": "真正意义上完备的人工智能系统应该是一个专用的智能系统"
+      }
+    ],
+    "answer": "D",
+    "category": "vision",
+    "explanation": "正确答案是 D. 真正意义上完备的人工智能系统应该是一个专用的智能系统。"
+  },
+  {
+    "id": 107,
+    "type": "single",
+    "text": "（ ）是一种基于树结构进行决策的算法。",
+    "options": [
+      {
+        "label": "A",
+        "text": "轨迹跟踪"
+      },
+      {
+        "label": "B",
+        "text": "决策树"
+      },
+      {
+        "label": "C",
+        "text": "数据挖掘"
+      },
+      {
+        "label": "D",
+        "text": "K近邻算法"
+      }
+    ],
+    "answer": "B",
+    "category": "ai",
+    "explanation": "正确答案是 B. 决策树。"
+  },
+  {
+    "id": 108,
+    "type": "single",
+    "text": "近几年，全球人工智能产业发展突飞猛进，人工智能脸部识别率的准确度已经达到 （ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "99.7%"
+      },
+      {
+        "label": "B",
+        "text": "99.8%"
+      },
+      {
+        "label": "C",
+        "text": "99.9%"
+      },
+      {
+        "label": "D",
+        "text": "100%"
+      }
+    ],
+    "answer": "A",
+    "category": "ai",
+    "explanation": "正确答案是 A. 99.7%。"
+  },
+  {
+    "id": 109,
+    "type": "single",
+    "text": "对人工智能理解正确的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "人工智能就是机器学习"
+      },
+      {
+        "label": "B",
+        "text": "机器学习只是人工智能中的一个方向"
+      },
+      {
+        "label": "C",
+        "text": "人工智能就是机器人"
+      },
+      {
+        "label": "D",
+        "text": "人工智能就是深度学习"
+      }
+    ],
+    "answer": "B",
+    "category": "ai",
+    "explanation": "正确答案是 B. 机器学习只是人工智能中的一个方向。"
+  },
+  {
+    "id": 110,
+    "type": "single",
+    "text": "人工智能与计算机学科的关系是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "计算机学科的主要驱动力是人工智能研究"
+      },
+      {
+        "label": "B",
+        "text": "计算机是人工智能研究的一个领域"
+      },
+      {
+        "label": "C",
+        "text": "人工智能是计算机学科的一个分支"
+      },
+      {
+        "label": "D",
+        "text": "人工智能与计算机学科没有联系"
+      }
+    ],
+    "answer": "D",
+    "category": "ai",
+    "explanation": "正确答案是 D. 人工智能与计算机学科没有联系。"
+  },
+  {
+    "id": 111,
+    "type": "single",
+    "text": "（ ）是现在新出现的人工智能的研究方向。",
+    "options": [
+      {
+        "label": "A",
+        "text": "深度学习"
+      },
+      {
+        "label": "B",
+        "text": "人工神经元网络"
+      },
+      {
+        "label": "C",
+        "text": "贝叶斯网络"
+      },
+      {
+        "label": "D",
+        "text": "类脑人工智能"
+      }
+    ],
+    "answer": "D",
+    "category": "ai",
+    "explanation": "正确答案是 D. 类脑人工智能。"
+  },
+  {
+    "id": 112,
+    "type": "single",
+    "text": "深度学习中的“深度”是指（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "计算机理解的深度"
+      },
+      {
+        "label": "B",
+        "text": "中间神经元网络的层次很多"
+      },
+      {
+        "label": "C",
+        "text": "计算机的求解更加精准"
+      },
+      {
+        "label": "D",
+        "text": "计算机对问题的处理更加灵活"
+      }
+    ],
+    "answer": "B",
+    "category": "ai",
+    "explanation": "正确答案是 B. 中间神经元网络的层次很多。"
+  },
+  {
+    "id": 113,
+    "type": "single",
+    "text": "人工神经元网络与深度学习的关系是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "深度学习是人工神经元网络的前身"
+      },
+      {
+        "label": "B",
+        "text": "深度学习是人工神经元网络的一个分支"
+      },
+      {
+        "label": "C",
+        "text": "深度学习是人工神经元网络的一个发展"
+      },
+      {
+        "label": "D",
+        "text": "深度学习与人工神经元网络无关"
+      }
+    ],
+    "answer": "C",
+    "category": "ai",
+    "explanation": "正确答案是 C. 深度学习是人工神经元网络的一个发展。"
+  },
+  {
+    "id": 114,
+    "type": "single",
+    "text": "Linux是由（ ）国家开发的。",
+    "options": [
+      {
+        "label": "A",
+        "text": "美国"
+      },
+      {
+        "label": "B",
+        "text": "法国"
+      },
+      {
+        "label": "C",
+        "text": "意大利"
+      },
+      {
+        "label": "D",
+        "text": "中国"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. 美国。"
+  },
+  {
+    "id": 115,
+    "type": "single",
+    "text": "Linux诞生于（ ）年。",
+    "options": [
+      {
+        "label": "A",
+        "text": "1992"
+      },
+      {
+        "label": "B",
+        "text": "1993"
+      },
+      {
+        "label": "C",
+        "text": "1991"
+      },
+      {
+        "label": "D",
+        "text": "1990"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. 1991。"
+  },
+  {
+    "id": 116,
+    "type": "single",
+    "text": "操作系统（operation system，简称OS）是管理计算机（ ）资源的计算机程序。",
+    "options": [
+      {
+        "label": "A",
+        "text": "软件与硬件"
+      },
+      {
+        "label": "B",
+        "text": "ROM和RAM"
+      },
+      {
+        "label": "C",
+        "text": "信息处理和程序运行"
+      },
+      {
+        "label": "D",
+        "text": "逻辑结构、运行效率"
+      }
+    ],
+    "answer": "A",
+    "category": "python",
+    "explanation": "正确答案是 A. 软件与硬件。"
+  },
+  {
+    "id": 117,
+    "type": "single",
+    "text": "（ ）是系统的心脏，是运行程序和管理像磁盘和打印机等硬件设备的核心程序，它 提供了一个在裸设备与应用程序间的抽象层。",
+    "options": [
+      {
+        "label": "A",
+        "text": "CPU"
+      },
+      {
+        "label": "B",
+        "text": "RAM"
+      },
+      {
+        "label": "C",
+        "text": "程序"
+      },
+      {
+        "label": "D",
+        "text": "内核"
+      }
+    ],
+    "answer": "D",
+    "category": "python",
+    "explanation": "正确答案是 D. 内核。"
+  },
+  {
+    "id": 118,
+    "type": "single",
+    "text": "在创建分区时，一定要创建（ ）两个分区。",
+    "options": [
+      {
+        "label": "A",
+        "text": "NTFS/SWAP"
+      },
+      {
+        "label": "B",
+        "text": "SWAP/根分区"
+      },
+      {
+        "label": "C",
+        "text": "FAT/NTFS"
+      },
+      {
+        "label": "D",
+        "text": "FAT/SWAT"
+      }
+    ],
+    "answer": "B",
+    "category": "linux",
+    "explanation": "正确答案是 B. SWAP/根分区。"
+  },
+  {
+    "id": 119,
+    "type": "single",
+    "text": "在登录Linux时，一个具有唯一进程ID号的shell将被调用，这个ID是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "NID"
+      },
+      {
+        "label": "B",
+        "text": "UID"
+      },
+      {
+        "label": "C",
+        "text": "PID"
+      },
+      {
+        "label": "D",
+        "text": "CID"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. PID。"
+  },
+  {
+    "id": 120,
+    "type": "single",
+    "text": "存放用户密码的目录是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "/var"
+      },
+      {
+        "label": "B",
+        "text": "/boot"
+      },
+      {
+        "label": "C",
+        "text": "/etc"
+      },
+      {
+        "label": "D",
+        "text": "/dev"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. /etc。"
+  },
+  {
+    "id": 121,
+    "type": "single",
+    "text": "列出一个目录下所有文件使用到的命令是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "pwd"
+      },
+      {
+        "label": "B",
+        "text": "su"
+      },
+      {
+        "label": "C",
+        "text": "tar"
+      },
+      {
+        "label": "D",
+        "text": "Ls"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. Ls。"
+  },
+  {
+    "id": 122,
+    "type": "single",
+    "text": "哪个命令可以将普通用户转换成超级用户（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "su"
+      },
+      {
+        "label": "B",
+        "text": "tar"
+      },
+      {
+        "label": "C",
+        "text": "passwd"
+      },
+      {
+        "label": "D",
+        "text": "sudo"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. su。"
+  },
+  {
+    "id": 123,
+    "type": "single",
+    "text": "在Ubuntu新建一个终端的快捷键是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ctrl+f"
+      },
+      {
+        "label": "B",
+        "text": "Ctrl+d"
+      },
+      {
+        "label": "C",
+        "text": "Ctrl+shift+t"
+      },
+      {
+        "label": "D",
+        "text": "Ctrl+alt+t"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. Ctrl+alt+t。"
+  },
+  {
+    "id": 124,
+    "type": "single",
+    "text": "当一个进程正在进行，按下（ ）键能终止此进程。",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ctrl+D"
+      },
+      {
+        "label": "B",
+        "text": "Ctrl+C"
+      },
+      {
+        "label": "C",
+        "text": "Ctrl+F"
+      },
+      {
+        "label": "D",
+        "text": "Ctrl+B"
+      }
+    ],
+    "answer": "B",
+    "category": "python",
+    "explanation": "正确答案是 B. Ctrl+C。"
+  },
+  {
+    "id": 125,
+    "type": "single",
+    "text": "在Ubuntu系统中，一般用（ ）来查看网络接口状态。",
+    "options": [
+      {
+        "label": "A",
+        "text": "ping"
+      },
+      {
+        "label": "B",
+        "text": "winipcfg"
+      },
+      {
+        "label": "C",
+        "text": "Ifconfig"
+      },
+      {
+        "label": "D",
+        "text": "ipconfig"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. ipconfig。"
+  },
+  {
+    "id": 126,
+    "type": "single",
+    "text": "Linux的默认分区为（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "FAT"
+      },
+      {
+        "label": "B",
+        "text": "EXT3"
+      },
+      {
+        "label": "C",
+        "text": "FAT32"
+      },
+      {
+        "label": "D",
+        "text": "NTFS"
+      }
+    ],
+    "answer": "B",
+    "category": "linux",
+    "explanation": "正确答案是 B. EXT3。"
+  },
+  {
+    "id": 127,
+    "type": "single",
+    "text": "在ROS的工作空间中，哪个目录用于存储功能包源码文件（ ）",
+    "options": [
+      {
+        "label": "A",
+        "text": "src"
+      },
+      {
+        "label": "B",
+        "text": "build"
+      },
+      {
+        "label": "C",
+        "text": "devel"
+      },
+      {
+        "label": "D",
+        "text": "install"
+      }
+    ],
+    "answer": "A",
+    "category": "ros",
+    "explanation": "正确答案是 A. src。"
+  },
+  {
+    "id": 128,
+    "type": "single",
+    "text": "如果你要克隆一个ROS的软件包，下列哪个路径是合理的存放位置（ ）",
+    "options": [
+      {
+        "label": "A",
+        "text": "~/catkin_ws/"
+      },
+      {
+        "label": "B",
+        "text": "~/catkin_ws/devel"
+      },
+      {
+        "label": "C",
+        "text": "~/catkin_ws/build"
+      },
+      {
+        "label": "D",
+        "text": "~/my_ws/src"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. ~/my_ws/src。"
+  },
+  {
+    "id": 129,
+    "type": "single",
+    "text": "目前ROS主流的编译系统是（ ）",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ament"
+      },
+      {
+        "label": "B",
+        "text": "CMake"
+      },
+      {
+        "label": "C",
+        "text": "Catkin"
+      },
+      {
+        "label": "D",
+        "text": "rosbuild"
+      }
+    ],
+    "answer": "C",
+    "category": "ros",
+    "explanation": "正确答案是 C. Catkin。"
+  },
+  {
+    "id": 130,
+    "type": "single",
+    "text": "默认情况下，catkin_make 生成的 ROS 可执行文件放在哪个路径（ ）",
+    "options": [
+      {
+        "label": "A",
+        "text": "catkin_ws/src"
+      },
+      {
+        "label": "B",
+        "text": "catkin_ws/"
+      },
+      {
+        "label": "C",
+        "text": "catkin_ws/devel"
+      },
+      {
+        "label": "D",
+        "text": "catkin_ws/build"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. catkin_ws/devel。"
+  },
+  {
+    "id": 131,
+    "type": "single",
+    "text": "Vi中不保存强制退出的命令是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ctrl+C"
+      },
+      {
+        "label": "B",
+        "text": ":wq"
+      },
+      {
+        "label": "C",
+        "text": ":wq!"
+      },
+      {
+        "label": "D",
+        "text": ":q!"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. :q!。"
+  },
+  {
+    "id": 132,
+    "type": "single",
+    "text": "Ubuntu系统中，如何快速返回上一级目录（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "cd"
+      },
+      {
+        "label": "B",
+        "text": "cd /"
+      },
+      {
+        "label": "C",
+        "text": "cd ."
+      },
+      {
+        "label": "D",
+        "text": "cd .."
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. cd ..。"
+  },
+  {
+    "id": 133,
+    "type": "single",
+    "text": "linux系统中包含了域名与IP地址的映射关系的文件是哪个（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "/etc/hosts"
+      },
+      {
+        "label": "B",
+        "text": "/etc/group"
+      },
+      {
+        "label": "C",
+        "text": "/etc/passwd"
+      },
+      {
+        "label": "D",
+        "text": "/etc/shadow"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. /etc/hosts。"
+  },
+  {
+    "id": 134,
+    "type": "single",
+    "text": "在Linux系统中，用来存放系统需要的配置文件目录是（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "/home"
+      },
+      {
+        "label": "B",
+        "text": "/boot"
+      },
+      {
+        "label": "C",
+        "text": "/etc"
+      },
+      {
+        "label": "D",
+        "text": "/dev"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. /etc。"
+  },
+  {
+    "id": 135,
+    "type": "single",
+    "text": "Linux有几个运行级别（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "5"
+      },
+      {
+        "label": "B",
+        "text": "6"
+      },
+      {
+        "label": "C",
+        "text": "7"
+      },
+      {
+        "label": "D",
+        "text": "8"
+      }
+    ],
+    "answer": "B",
+    "category": "linux",
+    "explanation": "正确答案是 B. 6。"
+  },
+  {
+    "id": 136,
+    "type": "single",
+    "text": "Linux运行级别init 5有什么作用（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "关机"
+      },
+      {
+        "label": "B",
+        "text": "重启"
+      },
+      {
+        "label": "C",
+        "text": "图形化"
+      },
+      {
+        "label": "D",
+        "text": "单用户模式"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. 图形化。"
+  },
+  {
+    "id": 137,
+    "type": "single",
+    "text": "Linux运行级别init 0有什么作用（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "关机"
+      },
+      {
+        "label": "B",
+        "text": "重启"
+      },
+      {
+        "label": "C",
+        "text": "图形化"
+      },
+      {
+        "label": "D",
+        "text": "单用户模式"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. 关机。"
+  },
+  {
+    "id": 138,
+    "type": "single",
+    "text": "下列关于I Python的说法，错误的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "IPython集成了交互式Python的很多优点"
+      },
+      {
+        "label": "B",
+        "text": "IPython的性能远远优于标准的Python的shell"
+      },
+      {
+        "label": "C",
+        "text": "IPython支持变量自动补全，自动收缩"
+      },
+      {
+        "label": "D",
+        "text": "与标准的Python相比，IPython缺少内置的功能和函数"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. 与标准的Python相比，IPython缺少内置的功能和函数。"
+  },
+  {
+    "id": 139,
+    "type": "single",
+    "text": "下列选项中，(D)的布尔值不是Flase。",
+    "options": [
+      {
+        "label": "A",
+        "text": "None"
+      },
+      {
+        "label": "B",
+        "text": "0"
+      },
+      {
+        "label": "C",
+        "text": "（）"
+      },
+      {
+        "label": "D",
+        "text": "1"
+      }
+    ],
+    "answer": "D",
+    "category": "python",
+    "explanation": "正确答案是 D. 1。"
+  },
+  {
+    "id": 140,
+    "type": "single",
+    "text": "假设a=9，b=2，那么下列运算中，错误的是（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "a+b的值是11"
+      },
+      {
+        "label": "B",
+        "text": "a//b的值是4"
+      },
+      {
+        "label": "C",
+        "text": "a%b的值是1"
+      },
+      {
+        "label": "D",
+        "text": "a**b的值是18"
+      }
+    ],
+    "answer": "D",
+    "category": "python",
+    "explanation": "正确答案是 D. a**b的值是18。"
+  },
+  {
+    "id": 141,
+    "type": "single",
+    "text": "如何查看/etc所占的磁盘空间（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "ls /etc"
+      },
+      {
+        "label": "B",
+        "text": "tar /etc"
+      },
+      {
+        "label": "C",
+        "text": "du -sh /etc"
+      },
+      {
+        "label": "D",
+        "text": "cat /etc"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. du -sh /etc。"
+  },
+  {
+    "id": 142,
+    "type": "single",
+    "text": "下列符号中，表示Python中单行注释的是（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "#"
+      },
+      {
+        "label": "B",
+        "text": "//"
+      },
+      {
+        "label": "C",
+        "text": "<!-- -->"
+      },
+      {
+        "label": "D",
+        "text": "\"“\""
+      }
+    ],
+    "answer": "A",
+    "category": "python",
+    "explanation": "正确答案是 A. #。"
+  },
+  {
+    "id": 143,
+    "type": "single",
+    "text": "如何给文件/test设置权限为777（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "chmod 777 test"
+      },
+      {
+        "label": "B",
+        "text": "chomd 777 test"
+      },
+      {
+        "label": "C",
+        "text": "chmod test 777"
+      },
+      {
+        "label": "D",
+        "text": "chomd test 777"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. chmod 777 test。"
+  },
+  {
+    "id": 144,
+    "type": "single",
+    "text": "七层网络模型有哪几层（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "应用层、表示层、会话层、传输层、网间层、数据链路层、物理层"
+      },
+      {
+        "label": "B",
+        "text": "应用层、表示层、会话层、传输层、网络接口、数据链路层、物理层"
+      },
+      {
+        "label": "C",
+        "text": "应用层、表示层、会话层、传输层、网络层、数据链路层、物理层"
+      },
+      {
+        "label": "D",
+        "text": "应用层、表示层、会话层、传输层、网间层、网络接口、物理层"
+      }
+    ],
+    "answer": "C",
+    "category": "network",
+    "explanation": "正确答案是 C. 应用层、表示层、会话层、传输层、网络层、数据链路层、物理层。"
+  },
+  {
+    "id": 145,
+    "type": "single",
+    "text": "四层网络模型有哪几层（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "应用层、表示层、会话层、传输层"
+      },
+      {
+        "label": "B",
+        "text": "应用层、传输层、网络层、物理层"
+      },
+      {
+        "label": "C",
+        "text": "应用层、传输层、网络层、网络接口"
+      },
+      {
+        "label": "D",
+        "text": "应用层、传输层、网间层、网络接口"
+      }
+    ],
+    "answer": "D",
+    "category": "network",
+    "explanation": "正确答案是 D. 应用层、传输层、网间层、网络接口。"
+  },
+  {
+    "id": 146,
+    "type": "single",
+    "text": "设置/test/test.txt 属主有读写执行权限，属组，有读写，其他账户无权限使用如 下命令（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "chmod 777 /test/test.txt"
+      },
+      {
+        "label": "B",
+        "text": "chmod 670 /test/test.txt"
+      },
+      {
+        "label": "C",
+        "text": "chmod 706 /test/test.txt"
+      },
+      {
+        "label": "D",
+        "text": "chmod 760 /test/test.txt"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. chmod 760 /test/test.txt。"
+  },
+  {
+    "id": 147,
+    "type": "single",
+    "text": "如何删除/test下所有C开头的文件（ ）?",
+    "options": [
+      {
+        "label": "A",
+        "text": "rm -rf /test/C*"
+      },
+      {
+        "label": "B",
+        "text": "rm -rf /test/*C"
+      },
+      {
+        "label": "C",
+        "text": "rm -rf /test/*"
+      },
+      {
+        "label": "D",
+        "text": "rm -rf /test/C"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. rm -rf /test/C*。"
+  },
+  {
+    "id": 148,
+    "type": "single",
+    "text": "修改/tmp/test.conf的属主为user1，属组为user2可以使用以下（ ）命令。",
+    "options": [
+      {
+        "label": "A",
+        "text": "chown user1:user2 /tmp/test.conf"
+      },
+      {
+        "label": "B",
+        "text": "chwod user1:user2 /tmp/test.conf"
+      },
+      {
+        "label": "C",
+        "text": "chmod user1:user2 /tmp/test.conf"
+      },
+      {
+        "label": "D",
+        "text": "chomd user1:user2 /tmp/test.conf"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. chown user1:user2 /tmp/test.conf。"
+  },
+  {
+    "id": 149,
+    "type": "single",
+    "text": "如何查看/etc/passwd的头3行 （ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "tar -3 /etc/passwd"
+      },
+      {
+        "label": "B",
+        "text": "tail -3 /etc/passwd"
+      },
+      {
+        "label": "C",
+        "text": "head -3 /etc/passwd"
+      },
+      {
+        "label": "D",
+        "text": "vim -3 /etc/passwd"
+      }
+    ],
+    "answer": "C",
+    "category": "linux",
+    "explanation": "正确答案是 C. head -3 /etc/passwd。"
+  },
+  {
+    "id": 150,
+    "type": "single",
+    "text": "如何查看/etc/passwd的尾3行 （ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "tar -3 /etc/passwd"
+      },
+      {
+        "label": "B",
+        "text": "tail -3 /etc/passwd"
+      },
+      {
+        "label": "C",
+        "text": "head -3 /etc/passwd"
+      },
+      {
+        "label": "D",
+        "text": "vim -3 /etc/passwd"
+      }
+    ],
+    "answer": "B",
+    "category": "linux",
+    "explanation": "正确答案是 B. tail -3 /etc/passwd。"
+  },
+  {
+    "id": 151,
+    "type": "single",
+    "text": "如何创建user1组（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "add user1"
+      },
+      {
+        "label": "B",
+        "text": "passwd user1"
+      },
+      {
+        "label": "C",
+        "text": "useradd user1"
+      },
+      {
+        "label": "D",
+        "text": "groupadd user1"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. groupadd user1。"
+  },
+  {
+    "id": 152,
+    "type": "single",
+    "text": "Linux系统最快返回当前账户的宿主目录可以使用（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "cd .."
+      },
+      {
+        "label": "B",
+        "text": "cd /"
+      },
+      {
+        "label": "C",
+        "text": "cd ."
+      },
+      {
+        "label": "D",
+        "text": "cd"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. cd。"
+  },
+  {
+    "id": 153,
+    "type": "single",
+    "text": "Linux系统应用程序一般安装在哪个目录下（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "/etc"
+      },
+      {
+        "label": "B",
+        "text": "/usr"
+      },
+      {
+        "label": "C",
+        "text": "/home"
+      },
+      {
+        "label": "D",
+        "text": "/dev"
+      }
+    ],
+    "answer": "B",
+    "category": "linux",
+    "explanation": "正确答案是 B. /usr。"
+  },
+  {
+    "id": 154,
+    "type": "single",
+    "text": "Linux系统日志一般存放在哪个目录下（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "/etc"
+      },
+      {
+        "label": "B",
+        "text": "/home"
+      },
+      {
+        "label": "C",
+        "text": "/dev"
+      },
+      {
+        "label": "D",
+        "text": "/var/log"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. /var/log。"
+  },
+  {
+    "id": 155,
+    "type": "single",
+    "text": "创建多级目录命令是（ ）?",
+    "options": [
+      {
+        "label": "A",
+        "text": "mkdir -p"
+      },
+      {
+        "label": "B",
+        "text": "mkdir -v"
+      },
+      {
+        "label": "C",
+        "text": "mkdir -m"
+      },
+      {
+        "label": "D",
+        "text": "mkdir -z"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. mkdir -p。"
+  },
+  {
+    "id": 156,
+    "type": "single",
+    "text": "有一些文件root用户也无法直接修改，可使用说明命令查看其权限（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "ls -lh"
+      },
+      {
+        "label": "B",
+        "text": "file"
+      },
+      {
+        "label": "C",
+        "text": "start"
+      },
+      {
+        "label": "D",
+        "text": "lsattr"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. lsattr。"
+  },
+  {
+    "id": 157,
+    "type": "single",
+    "text": "如果一个文件的权限是 -rwsr--r--，对该文件执行 chmod g+s 后，其权限位应显示 为（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "-rwsr-sr--"
+      },
+      {
+        "label": "B",
+        "text": "-rwsr--r-s"
+      },
+      {
+        "label": "C",
+        "text": "-rwsr--r--"
+      },
+      {
+        "label": "D",
+        "text": "-rwsr-xr--"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. -rwsr-sr--。"
+  },
+  {
+    "id": 158,
+    "type": "single",
+    "text": "使用find命令查找文件时，以下哪个选项代表套接字文件（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "d"
+      },
+      {
+        "label": "B",
+        "text": "l"
+      },
+      {
+        "label": "C",
+        "text": "p"
+      },
+      {
+        "label": "D",
+        "text": "s"
+      }
+    ],
+    "answer": "D",
+    "category": "linux",
+    "explanation": "正确答案是 D. s。"
+  },
+  {
+    "id": 159,
+    "type": "single",
+    "text": "使用tar命令对一个目录只打包，不压缩，应该使用如下哪条命令（ ）?",
+    "options": [
+      {
+        "label": "A",
+        "text": "tar -cvf"
+      },
+      {
+        "label": "B",
+        "text": "tar -zcvf"
+      },
+      {
+        "label": "C",
+        "text": "tar -jvf"
+      },
+      {
+        "label": "D",
+        "text": "tar -jcvf"
+      }
+    ],
+    "answer": "A",
+    "category": "linux",
+    "explanation": "正确答案是 A. tar -cvf。"
+  },
+  {
+    "id": 160,
+    "type": "single",
+    "text": "下列算法中属于局部处理的是( )。",
+    "options": [
+      {
+        "label": "A",
+        "text": "灰度线性变换"
+      },
+      {
+        "label": "B",
+        "text": "二值化"
+      },
+      {
+        "label": "C",
+        "text": "傅立叶变换"
+      },
+      {
+        "label": "D",
+        "text": "中值滤波"
+      }
+    ],
+    "answer": "A",
+    "category": "vision",
+    "explanation": "正确答案是 A. 灰度线性变换。"
+  },
+  {
+    "id": 161,
+    "type": "single",
+    "text": "下列算法中属于图象平滑处理的是( )。",
+    "options": [
+      {
+        "label": "A",
+        "text": "梯度锐化"
+      },
+      {
+        "label": "B",
+        "text": "直方图均衡"
+      },
+      {
+        "label": "C",
+        "text": "中值滤波"
+      },
+      {
+        "label": "D",
+        "text": "Laplacian增强"
+      }
+    ],
+    "answer": "C",
+    "category": "vision",
+    "explanation": "正确答案是 C. 中值滤波。"
+  },
+  {
+    "id": 162,
+    "type": "single",
+    "text": "通常我们常说的四层负载和七层负载对应OSI模型分别是（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "传输层,表示层"
+      },
+      {
+        "label": "B",
+        "text": "网络层,应用层"
+      },
+      {
+        "label": "C",
+        "text": "传输层,应用层"
+      },
+      {
+        "label": "D",
+        "text": "网络层,表示层"
+      }
+    ],
+    "answer": "C",
+    "category": "network",
+    "explanation": "正确答案是 C. 传输层,应用层。"
+  },
+  {
+    "id": 163,
+    "type": "single",
+    "text": "下列关于Python 2.x和Python 3.x的说法，正确的是。",
+    "options": [
+      {
+        "label": "A",
+        "text": "Python 3.x使用print语句输出数据"
+      },
+      {
+        "label": "B",
+        "text": "Python 3.x默认使用的编码是UTF-8"
+      },
+      {
+        "label": "C",
+        "text": "Python 2.x和Python 3.x使用//进行除法运算的结果不一致"
+      },
+      {
+        "label": "D",
+        "text": "Python 3.x版本的异常可以直接被抛出"
+      }
+    ],
+    "answer": "B",
+    "category": "python",
+    "explanation": "正确答案是 B. Python 3.x默认使用的编码是UTF-8。"
+  },
+  {
+    "id": 164,
+    "type": "single",
+    "text": "下列选项中，不属于Python语言特点的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "简单易学"
+      },
+      {
+        "label": "B",
+        "text": "开源"
+      },
+      {
+        "label": "C",
+        "text": "面对过程"
+      },
+      {
+        "label": "D",
+        "text": "可移植性"
+      }
+    ],
+    "answer": "C",
+    "category": "python",
+    "explanation": "正确答案是 C. 面对过程。"
+  },
+  {
+    "id": 165,
+    "type": "single",
+    "text": "不属于色彩三原色的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "青"
+      },
+      {
+        "label": "B",
+        "text": "紫"
+      },
+      {
+        "label": "C",
+        "text": "橙"
+      },
+      {
+        "label": "D",
+        "text": "黄"
+      }
+    ],
+    "answer": "C",
+    "category": "vision",
+    "explanation": "正确答案是 C. 橙。"
+  },
+  {
+    "id": 166,
+    "type": "single",
+    "text": "考虑某个具体问题时，你可能只有少量数据来解决这个问题。不过幸运的是你有一个 类似问题已经预先训练好的神经网络。可以用下面哪种方法来利用这个预先训练好的网络 （ ）?",
+    "options": [
+      {
+        "label": "A",
+        "text": "把除了最后一层外所有的层都冻结，重新训练最后一层"
+      },
+      {
+        "label": "B",
+        "text": "对新数据重新训练整个模型"
+      },
+      {
+        "label": "C",
+        "text": "只对最后几层进行调参(fine tune)"
+      },
+      {
+        "label": "D",
+        "text": "对每一层模型进行评估，选择其中的少数来用"
+      }
+    ],
+    "answer": "C",
+    "category": "ai",
+    "explanation": "正确答案是 C. 只对最后几层进行调参(fine tune)。"
+  },
+  {
+    "id": 167,
+    "type": "single",
+    "text": "当数据过大以至于无法在RAM中同时处理时，哪种梯度下降方法更加有效（ ）?",
+    "options": [
+      {
+        "label": "A",
+        "text": "随机梯度下降法"
+      },
+      {
+        "label": "B",
+        "text": "不知道"
+      },
+      {
+        "label": "C",
+        "text": "整批梯度下降法"
+      },
+      {
+        "label": "D",
+        "text": "都不是"
+      }
+    ],
+    "answer": "A",
+    "category": "ai",
+    "explanation": "正确答案是 A. 随机梯度下降法。"
+  },
+  {
+    "id": 168,
+    "type": "single",
+    "text": "将二进制数10010101,转换成十进制数，正确的选项为（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "139"
+      },
+      {
+        "label": "B",
+        "text": "141"
+      },
+      {
+        "label": "C",
+        "text": "149"
+      },
+      {
+        "label": "D",
+        "text": "151"
+      }
+    ],
+    "answer": "C",
+    "category": "python",
+    "explanation": "正确答案是 C. 149。"
+  },
+  {
+    "id": 169,
+    "type": "single",
+    "text": "下列对于字符编码的发展历史节点，正确的是（ ）？",
+    "options": [
+      {
+        "label": "A",
+        "text": "ASCII--->GBK--->UTF-8--->Unicode"
+      },
+      {
+        "label": "B",
+        "text": "ASCII--->Unicode--->GBK--->UTF-8"
+      },
+      {
+        "label": "C",
+        "text": "ASCII--->GBK--->Unicode--->UTF-8"
+      },
+      {
+        "label": "D",
+        "text": "ASCII--->Unicode--->UTF-8--->GBK"
+      }
+    ],
+    "answer": "C",
+    "category": "python",
+    "explanation": "正确答案是 C. ASCII--->GBK--->Unicode--->UTF-8。"
+  },
+  {
+    "id": 170,
+    "type": "single",
+    "text": "机器视觉算法针对工业应用的特点错误的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "对智能要求高"
+      },
+      {
+        "label": "B",
+        "text": "需要高效率、高可靠性和高重复性"
+      },
+      {
+        "label": "C",
+        "text": "对被检工件有先验知识"
+      },
+      {
+        "label": "D",
+        "text": "可控的照明条件"
+      }
+    ],
+    "answer": "A",
+    "category": "vision",
+    "explanation": "正确答案是 A. 对智能要求高。"
+  },
+  {
+    "id": 171,
+    "type": "single",
+    "text": "人工智能的本质是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "取代人类智能"
+      },
+      {
+        "label": "B",
+        "text": "电脑万能"
+      },
+      {
+        "label": "C",
+        "text": "人类智慧的倒退"
+      },
+      {
+        "label": "D",
+        "text": "对人类智能的模拟"
+      }
+    ],
+    "answer": "D",
+    "category": "ai",
+    "explanation": "正确答案是 D. 对人类智能的模拟。"
+  },
+  {
+    "id": 172,
+    "type": "single",
+    "text": "专家系统是一个复杂的智能软件，它处理的对象是用符号表示的知识，处理的过程是 （ ）的过程。",
+    "options": [
+      {
+        "label": "A",
+        "text": "思考"
+      },
+      {
+        "label": "B",
+        "text": "回溯"
+      },
+      {
+        "label": "C",
+        "text": "推理"
+      },
+      {
+        "label": "D",
+        "text": "递归"
+      }
+    ],
+    "answer": "C",
+    "category": "ai",
+    "explanation": "正确答案是 C. 推理。"
+  },
+  {
+    "id": 173,
+    "type": "single",
+    "text": "图像预处理目的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "图像增强"
+      },
+      {
+        "label": "B",
+        "text": "噪音去除"
+      },
+      {
+        "label": "C",
+        "text": "边缘检测"
+      },
+      {
+        "label": "D",
+        "text": "图像单纯化"
+      }
+    ],
+    "answer": "C",
+    "category": "vision",
+    "explanation": "正确答案是 C. 边缘检测。"
+  },
+  {
+    "id": 174,
+    "type": "single",
+    "text": "视觉系统标定意义错误的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "将实际坐标变换为像素坐标"
+      },
+      {
+        "label": "B",
+        "text": "获得像素所代表的真实世界的长度单位"
+      },
+      {
+        "label": "C",
+        "text": "补偿图像畸变"
+      },
+      {
+        "label": "D",
+        "text": "校验相机与实物面的几何关系"
+      }
+    ],
+    "answer": "A",
+    "category": "vision",
+    "explanation": "正确答案是 A. 将实际坐标变换为像素坐标。"
+  },
+  {
+    "id": 175,
+    "type": "single",
+    "text": "纹理特征提取与分析方法错误的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "直方图分析法"
+      },
+      {
+        "label": "B",
+        "text": "Laws纹理能量测量法"
+      },
+      {
+        "label": "C",
+        "text": "边缘检测法"
+      },
+      {
+        "label": "D",
+        "text": "灰度共生矩阵分析法"
+      }
+    ],
+    "answer": "C",
+    "category": "vision",
+    "explanation": "正确答案是 C. 边缘检测法。"
+  },
+  {
+    "id": 176,
+    "type": "single",
+    "text": "机器视觉系统一般工作过程不包括（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "图像采集"
+      },
+      {
+        "label": "B",
+        "text": "图像处理"
+      },
+      {
+        "label": "C",
+        "text": "特征提取"
+      },
+      {
+        "label": "D",
+        "text": "成本控制"
+      }
+    ],
+    "answer": "D",
+    "category": "vision",
+    "explanation": "正确答案是 D. 成本控制。"
+  },
+  {
+    "id": 177,
+    "type": "single",
+    "text": "相机的主要特性参数错误的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "分辨率：衡量相机对物象中明暗细节的分辨能力"
+      },
+      {
+        "label": "B",
+        "text": "最大帧率：相机采集传输图像的速率"
+      },
+      {
+        "label": "C",
+        "text": "像素深度：每一个像素数据的位数"
+      },
+      {
+        "label": "D",
+        "text": "固定图像噪声：随像素点的空间坐标改变的噪声"
+      }
+    ],
+    "answer": "D",
+    "category": "vision",
+    "explanation": "正确答案是 D. 固定图像噪声：随像素点的空间坐标改变的噪声。"
+  },
+  {
+    "id": 178,
+    "type": "single",
+    "text": "CCD相机和CMOS相机的区别错误的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "设计：CCD是单一感光器，CMOS是感光器连接放大器"
+      },
+      {
+        "label": "B",
+        "text": "灵敏度：同样面积下，CMOS灵敏度高；CCD由于感光开口小，灵敏度低"
+      },
+      {
+        "label": "C",
+        "text": "成本：CCD线路品质影响程度高，成本高；CMOS由整合集成，成本低"
+      },
+      {
+        "label": "D",
+        "text": "耗比：CCD需外加电压，功耗高；CMOS直接放大，功耗低"
+      }
+    ],
+    "answer": "B",
+    "category": "vision",
+    "explanation": "正确答案是 B. 灵敏度：同样面积下，CMOS灵敏度高；CCD由于感光开口小，灵敏度低。"
+  },
+  {
+    "id": 179,
+    "type": "single",
+    "text": "机器视觉系统的核心是图像采集和处理，选择机器视觉光源时应该考虑的主要特性不 包括（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "亮度"
+      },
+      {
+        "label": "B",
+        "text": "光源均匀性"
+      },
+      {
+        "label": "C",
+        "text": "光线的随机性"
+      },
+      {
+        "label": "D",
+        "text": "光谱特征"
+      }
+    ],
+    "answer": "C",
+    "category": "vision",
+    "explanation": "正确答案是 C. 光线的随机性。"
+  },
+  {
+    "id": 180,
+    "type": "single",
+    "text": "光源的作用，就是获得对比鲜明的图像，具体不包括（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "将感兴趣部分和其他部分的灰度值差异加大"
+      },
+      {
+        "label": "B",
+        "text": "尽量消隐不感兴趣部分"
+      },
+      {
+        "label": "C",
+        "text": "降低信噪比，利于图像处理"
+      },
+      {
+        "label": "D",
+        "text": "减少因材质、照射角度对成像的影响"
+      }
+    ],
+    "answer": "C",
+    "category": "vision",
+    "explanation": "正确答案是 C. 降低信噪比，利于图像处理。"
+  },
+  {
+    "id": 181,
+    "type": "single",
+    "text": "边缘检测算法不正确的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "梯度算子"
+      },
+      {
+        "label": "B",
+        "text": "方向算子"
+      },
+      {
+        "label": "C",
+        "text": "中值滤波"
+      },
+      {
+        "label": "D",
+        "text": "拉普拉斯算子"
+      }
+    ],
+    "answer": "B",
+    "category": "vision",
+    "explanation": "正确答案是 B. 方向算子。"
+  },
+  {
+    "id": 182,
+    "type": "single",
+    "text": "下列不属于深度相机原理的是（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "结构光"
+      },
+      {
+        "label": "B",
+        "text": "光飞行时间法（TOF）"
+      },
+      {
+        "label": "C",
+        "text": "红外测距"
+      },
+      {
+        "label": "D",
+        "text": "双目立体视觉"
+      }
+    ],
+    "answer": "C",
+    "category": "vision",
+    "explanation": "正确答案是 C. 红外测距。"
+  },
+  {
+    "id": 183,
+    "type": "single",
+    "text": "大数据技术是指在成本可承受的条件下，通过非常快速的采集、发现和分析，从大量 化、多类别的数据中（ ），是IT 领域新一代的技术与架构。",
+    "options": [
+      {
+        "label": "A",
+        "text": "提取信息"
+      },
+      {
+        "label": "B",
+        "text": "提取数据"
+      },
+      {
+        "label": "C",
+        "text": "提取价值"
+      },
+      {
+        "label": "D",
+        "text": "提取资料"
+      }
+    ],
+    "answer": "C",
+    "category": "ai",
+    "explanation": "正确答案是 C. 提取价值。"
+  },
+  {
+    "id": 184,
+    "type": "single",
+    "text": "（ ）是具有高期望值、高影响力、高成长性的新兴技术。",
+    "options": [
+      {
+        "label": "A",
+        "text": "“互联网+”"
+      },
+      {
+        "label": "B",
+        "text": "云计算"
+      },
+      {
+        "label": "C",
+        "text": "大数据"
+      },
+      {
+        "label": "D",
+        "text": "机器学习"
+      }
+    ],
+    "answer": "C",
+    "category": "ai",
+    "explanation": "正确答案是 C. 大数据。"
+  },
+  {
+    "id": 185,
+    "type": "single",
+    "text": "“互联网+”核心是（ ）的净化与扩展。",
+    "options": [
+      {
+        "label": "A",
+        "text": "物联网"
+      },
+      {
+        "label": "B",
+        "text": "互联网"
+      },
+      {
+        "label": "C",
+        "text": "大数据"
+      },
+      {
+        "label": "D",
+        "text": "云计算"
+      }
+    ],
+    "answer": "B",
+    "category": "ai",
+    "explanation": "正确答案是 B. 互联网。"
+  },
+  {
+    "id": 186,
+    "type": "single",
+    "text": "（ ）是互联网大脑的中枢神经系统。",
+    "options": [
+      {
+        "label": "A",
+        "text": "云计算"
+      },
+      {
+        "label": "B",
+        "text": "大数据"
+      },
+      {
+        "label": "C",
+        "text": "数据"
+      },
+      {
+        "label": "D",
+        "text": "物联网"
+      }
+    ],
+    "answer": "A",
+    "category": "ai",
+    "explanation": "正确答案是 A. 云计算。"
+  },
+  {
+    "id": 187,
+    "type": "single",
+    "text": "代码的设计原则不包括（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "惟一性，系统性，通用性"
+      },
+      {
+        "label": "B",
+        "text": "预留足够位置以利于扩充"
+      },
+      {
+        "label": "C",
+        "text": "避免误解，不易出错"
+      },
+      {
+        "label": "D",
+        "text": "顺序编码"
+      }
+    ],
+    "answer": "D",
+    "category": "ai",
+    "explanation": "正确答案是 D. 顺序编码。"
+  },
+  {
+    "id": 188,
+    "type": "single",
+    "text": "运动正问题是实现如下变换（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "从关节空间到操作空间的变换"
+      },
+      {
+        "label": "B",
+        "text": "从操作空间到迪卡尔空间的变换"
+      },
+      {
+        "label": "C",
+        "text": "从迪卡尔空间到关节空间的变换"
+      },
+      {
+        "label": "D",
+        "text": "从操作空间到关节空间的变换"
+      }
+    ],
+    "answer": "A",
+    "category": "robotics",
+    "explanation": "正确答案是 A. 从关节空间到操作空间的变换。"
+  },
+  {
+    "id": 189,
+    "type": "single",
+    "text": "运动逆问题是实现如下变换（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "从关节空间到操作空间的变换"
+      },
+      {
+        "label": "B",
+        "text": "从操作空间到迪卡尔空间的变换"
+      },
+      {
+        "label": "C",
+        "text": "从迪卡尔空间到关节空间的变换"
+      },
+      {
+        "label": "D",
+        "text": "从操作空间到任务空间的变换"
+      }
+    ],
+    "answer": "A",
+    "category": "robotics",
+    "explanation": "正确答案是 A. 从关节空间到操作空间的变换。"
+  },
+  {
+    "id": 190,
+    "type": "single",
+    "text": "机器人终端效应器（手）的力量来自（ ）。",
+    "options": [
+      {
+        "label": "A",
+        "text": "机器人的全部关节"
+      },
+      {
+        "label": "B",
+        "text": "机器人手部的关节"
+      },
+      {
+        "label": "C",
+        "text": "决定机器人手部位置的各关节"
+      },
+      {
+        "label": "D",
+        "text": "决定机器人手部位姿的各个关节"
+      }
+    ],
+    "answer": "A",
+    "category": "robotics",
+    "explanation": "正确答案是 A. 机器人的全部关节。"
+  },
+  {
+    "id": 191,
+    "type": "multi",
+    "text": "在Python中数字类型共包括以下哪几种类型（ ）?",
+    "options": [
+      {
+        "label": "A",
+        "text": "int"
+      },
+      {
+        "label": "B",
+        "text": "float"
+      },
+      {
+        "label": "C",
+        "text": "complex"
+      },
+      {
+        "label": "D",
+        "text": "bool"
+      }
+    ],
+    "answer": "ABC",
+    "category": "python",
+    "explanation": "正确答案是 ABC，即：A. int；B. float；C. complex。"
+  },
+  {
+    "id": 192,
+    "type": "multi",
+    "text": "常用的步进电动机有哪些？( )",
+    "options": [
+      {
+        "label": "A",
+        "text": "永磁式步进电动机"
+      },
+      {
+        "label": "B",
+        "text": "半永磁式步进电动机"
+      },
+      {
+        "label": "C",
+        "text": "反应式步进电动机"
+      },
+      {
+        "label": "D",
+        "text": "永磁感应式步进电动机"
+      }
+    ],
+    "answer": "ACD",
+    "category": "sensor",
+    "explanation": "正确答案是 ACD，即：A. 永磁式步进电动机；C. 反应式步进电动机；D. 永磁感应式步进电动机。"
+  },
+  {
+    "id": 193,
+    "type": "multi",
+    "text": "关于永磁式步进电动机，以下说法正确的是？（ ）",
+    "options": [
+      {
+        "label": "A",
+        "text": "其缺点是步距大，启动频率低"
+      },
+      {
+        "label": "B",
+        "text": "其优点是控制功率小，在断电情况下有定位转矩"
+      },
+      {
+        "label": "C",
+        "text": "其优点是步距大，启动频率低"
+      },
+      {
+        "label": "D",
+        "text": "步进电动机可以制成多相"
+      }
+    ],
+    "answer": "ABD",
+    "category": "sensor",
+    "explanation": "正确答案是 ABD，即：A. 其缺点是步距大，启动频率低；B. 其优点是控制功率小，在断电情况下有定位转矩；D. 步进电动机可以制成多相。"
+  },
+  {
+    "id": 194,
+    "type": "multi",
+    "text": "属于履带式移动机器人履带结构组成部分的是（ ）",
+    "options": [
+      {
+        "label": "A",
+        "text": "支承轮"
+      },
+      {
+        "label": "B",
+        "text": "托链轮或托带板"
+      },
+      {
+        "label": "C",
+        "text": "驱动轮"
+      },
+      {
+        "label": "D",
+        "text": "导向轮"
+      }
+    ],
+    "answer": "ABCD",
+    "category": "sensor",
+    "explanation": "正确答案是 ABCD，即：A. 支承轮；B. 托链轮或托带板；C. 驱动轮；D. 导向轮。"
+  },
+  {
+    "id": 195,
+    "type": "multi",
+    "text": "足式移动机器人，足式移动结构的特点有（ ）",
+    "options": [
+      {
+        "label": "A",
+        "text": "对崎岖道路具有很好的适应能力"
+      },
+      {
+        "label": "B",
+        "text": "具有主动隔振能力"
+      },
+      {
+        "label": "C",
+        "text": "在不平整地面和松软地面上的运动速度较高"
+      },
+      {
+        "label": "D",
+        "text": "能耗较少"
+      }
+    ],
+    "answer": "ABCD",
+    "category": "sensor",
+    "explanation": "正确答案是 ABCD，即：A. 对崎岖道路具有很好的适应能力；B. 具有主动隔振能力；C. 在不平整地面和松软地面上的运动速度较高；D. 能耗较少。"
+  },
+  {
+    "id": 196,
+    "type": "multi",
+    "text": "光电编码器的主要组成有（ ）",
+    "options": [
+      {
+        "label": "A",
+        "text": "光源"
+      },
+      {
+        "label": "B",
+        "text": "转轴"
+      },
+      {
+        "label": "C",
+        "text": "光码盘"
+      },
+      {
+        "label": "D",
+        "text": "光敏元件"
+      }
+    ],
+    "answer": "ACD",
+    "category": "vision",
+    "explanation": "正确答案是 ACD，即：A. 光源；C. 光码盘；D. 光敏元件。"
+  },
+  {
+    "id": 197,
+    "type": "multi",
+    "text": "属于内部传感器的有（ ）",
+    "options": [
+      {
+        "label": "A",
+        "text": "编码器"
+      },
+      {
+        "label": "B",
+        "text": "陀螺仪"
+      },
+      {
+        "label": "C",
+        "text": "超声波测距传感器"
+      },
+      {
+        "label": "D",
+        "text": "图像传感器"
+      }
+    ],
+    "answer": "AB",
+    "category": "vision",
+    "explanation": "正确答案是 AB，即：A. 编码器；B. 陀螺仪。"
+  },
+  {
+    "id": 198,
+    "type": "multi",
+    "text": "Linux是一个基于POSIX和Unix的（ ）的操作系统。",
+    "options": [
+      {
+        "label": "A",
+        "text": "多用户"
+      },
+      {
+        "label": "B",
+        "text": "多协成"
+      },
+      {
+        "label": "C",
+        "text": "多任务"
+      },
+      {
+        "label": "D",
+        "text": "多CPU"
+      },
+      {
+        "label": "E",
+        "text": "多线程"
+      },
+      {
+        "label": "F",
+        "text": "多进程"
+      }
+    ],
+    "answer": "ACDE",
+    "category": "linux",
+    "explanation": "正确答案是 ACDE，即：A. 多用户；C. 多任务；D. 多CPU；E. 多线程。"
+  },
+  {
+    "id": 199,
+    "type": "multi",
+    "text": "Python 崇尚优美、清晰、是一个优秀并广泛使用的语言，得到行内众多领域的认 可，下列属于Python主要应用领域的是（ ）?",
+    "options": [
+      {
+        "label": "A",
+        "text": "系统运维"
+      },
+      {
+        "label": "B",
+        "text": "科学计算、人工智能"
+      },
+      {
+        "label": "C",
+        "text": "云计算"
+      },
+      {
+        "label": "D",
+        "text": "金融量化"
+      }
+    ],
+    "answer": "ABCD",
+    "category": "ai",
+    "explanation": "正确答案是 ABCD，即：A. 系统运维；B. 科学计算、人工智能；C. 云计算；D. 金融量化。"
+  },
+  {
+    "id": 200,
+    "type": "multi",
+    "text": "下列实例变量 a 值为字符串\"hello\",b 变量值为\"mooc\",下列选项属于正确字符串运 算的是（ ）?",
+    "options": [
+      {
+        "label": "A",
+        "text": "a + b"
+      },
+      {
+        "label": "B",
+        "text": "a * b"
+      },
+      {
+        "label": "C",
+        "text": "‘h’ in a"
+      },
+      {
+        "label": "D",
+        "text": "print(\"Learn python in %s\"%('mooc'))"
+      }
+    ],
+    "answer": "ABCD",
+    "category": "python",
+    "explanation": "正确答案是 ABCD，即：A. a + b；B. a * b；C. ‘h’ in a；D. print(\"Learn python in %s\"%('mooc'))。"
+  }
+]

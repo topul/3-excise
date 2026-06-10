@@ -5,7 +5,21 @@
       "Bash(mkdir -p _backup)",
       "Bash(mv \"人工智能训练师高级理论考试.html\" _backup/)",
       "Bash(ls -la .uploads)",
-      "Bash(mv .uploads _backup/)"
+      "Bash(mv .uploads _backup/)",
+      "Bash(npm install *)",
+      "Bash(mv /tmp/_3excise_backup/_backup/人工智能训练师高级理论考试.html /tmp/_3excise_backup/)",
+      "Read(//tmp/**)",
+      "Bash(npx shadcn@latest init -d)",
+      "Bash(npx shadcn@latest add card badge progress tabs separator scroll-area dialog -y)",
+      "Bash(npx shadcn@latest add card badge progress separator scroll-area -y)",
+      "Bash(npx shadcn@latest add tabs dialog -y)",
+      "Bash(npx shadcn@4.10.0 add tabs dialog -y)",
+      "Bash(node scripts/extract-questions.mjs)",
+      "Read(//c/Users/qiaoc/AppData/Local/Temp/**)",
+      "Read(//c/tmp/**)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(pkill -f \"next dev\")"
     ]
   }
 }
