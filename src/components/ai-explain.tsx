@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { useStudyStore } from "@/lib/store";
 import { streamAiExplanation } from "@/lib/ai";
 import type { Question } from "@/lib/types";
@@ -154,9 +156,13 @@ export function AiExplain({ question }: { question: Question }) {
                 </button>
               </div>
             ) : text ? (
-              <div className="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap">
-                {text}
-                {streaming && <span className="inline-block w-2 h-4 align-middle bg-violet-500 ml-0.5 animate-pulse" />}
+              <div className="text-sm text-slate-700 leading-relaxed markdown-body">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {text}
+                </ReactMarkdown>
+                {streaming && (
+                  <span className="inline-block w-2 h-4 align-middle bg-violet-500 ml-0.5 animate-pulse" />
+                )}
               </div>
             ) : (
               <div className="text-sm text-slate-400 italic">
