@@ -43,6 +43,10 @@ export default function Dashboard() {
       attempted: catAttempted,
       correct: catCorrect,
       wrong: catWrong,
+      progress:
+        catQuestions.length > 0
+          ? Math.round((catAttempted / catQuestions.length) * 100)
+          : 0,
       rate: catAttempted > 0 ? Math.round((catCorrect / catAttempted) * 100) : 0,
     };
   });
@@ -149,12 +153,17 @@ export default function Dashboard() {
                   <span>
                     已练 {cat.attempted}/{cat.total}
                   </span>
-                  <span>{cat.rate}%</span>
+                  <span>进度 {cat.progress}%</span>
                 </div>
                 <Progress
                   value={(cat.attempted / cat.total) * 100}
                   className="h-2"
                 />
+                {cat.attempted > 0 && (
+                  <p className="mt-2 text-xs text-slate-400">
+                    正确率 {cat.rate}%
+                  </p>
+                )}
               </CardContent>
             </Card>
           </Link>

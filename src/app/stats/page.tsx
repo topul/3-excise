@@ -34,8 +34,9 @@ export default function StatsPage() {
     const wrong = catStats.filter(
       (s) => s.wrongs > 0 && !s.markedUnderstood
     ).length;
+    const progress = catQ.length > 0 ? Math.round((attempted / catQ.length) * 100) : 0;
     const rate = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
-    return { ...cat, total: catQ.length, attempted, correct, wrong, rate };
+    return { ...cat, total: catQ.length, attempted, correct, wrong, progress, rate };
   });
 
   const weakCategories = [...categoryStats]
@@ -120,10 +121,13 @@ export default function StatsPage() {
                       {cat.name}
                     </span>
                     <span className="text-sm text-slate-500">
-                      {cat.attempted}/{cat.total} 题 · {cat.rate}%
+                      {cat.attempted}/{cat.total} 题 · 进度 {cat.progress}%
                     </span>
                   </div>
-                  <Progress value={cat.rate} className="h-2" />
+                  <Progress value={cat.progress} className="h-2" />
+                  {cat.attempted > 0 && (
+                    <p className="mt-2 text-xs text-slate-400">正确率 {cat.rate}%</p>
+                  )}
                 </div>
                 {cat.wrong > 0 && (
                   <span className="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-medium shrink-0">

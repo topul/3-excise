@@ -39,6 +39,8 @@ interface SessionState {
   examMode: ExamMode;
   practiceMode: PracticeMode;
   category: string | null;
+  shuffleOptions?: boolean;
+  optionOrders?: Record<number, number[]>;
   orderedIds: number[];
   currentIdx: number;
   answers: Record<number, string>;
@@ -78,6 +80,7 @@ interface StudyStore {
     examMode?: ExamMode;
     practiceMode?: PracticeMode;
     category?: string | null;
+    shuffleOptions?: boolean;
   }) => void;
   selectAnswer: (questionId: number, answer: string) => void;
   submitMulti: (questionId: number) => void;
@@ -156,6 +159,28 @@ function buildQuestionOrder(
   }
 }
 
+function buildOptionOrders(
+  orderedIds: number[],
+  shuffleOptions: boolean
+): Record<number, number[]> {
+  if (!shuffleOptions) return {};
+
+  const optionOrders: Record<number, number[]> = {};
+
+  for (const id of orderedIds) {
+    const question = questions.find((q) => q.id === id);
+    if (!question || question.type === "tf" || question.options.length === 0) {
+      continue;
+    }
+
+    optionOrders[id] = shuffle(
+      question.options.map((_, index) => index)
+    );
+  }
+
+  return optionOrders;
+}
+
 export const useStudyStore = create<StudyStore>()(
   persist(
     (set, get) => ({
@@ -177,6 +202,8 @@ export const useStudyStore = create<StudyStore>()(
         const examMode = config.examMode || "sequential";
         const practiceMode = config.practiceMode || "sequential";
         const category = config.category || null;
+        const shuffleOptions =
+          config.mode === "practice" ? Boolean(config.shuffleOptions) : false;
 
         const orderedIds = buildQuestionOrder(
           config.mode,
@@ -185,6 +212,7 @@ export const useStudyStore = create<StudyStore>()(
           category,
           get().stats
         );
+        const optionOrders = buildOptionOrders(orderedIds, shuffleOptions);
 
         set({
           session: {
@@ -192,6 +220,8 @@ export const useStudyStore = create<StudyStore>()(
             examMode,
             practiceMode,
             category,
+            shuffleOptions,
+            optionOrders,
             orderedIds,
             currentIdx: 0,
             answers: {},

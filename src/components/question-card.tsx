@@ -36,6 +36,11 @@ export function QuestionCard({ question }: { question: Question }) {
   const isCorrect = answered && userAnswer === question.answer;
   const stat = getStat(question.id);
   const cat = categoryMap[question.category];
+  const optionOrder = session.optionOrders?.[question.id];
+  const orderedOptions =
+    optionOrder && optionOrder.length === question.options.length
+      ? optionOrder.map((index) => question.options[index])
+      : question.options;
 
   return (
     <Card className="shadow-sm">
@@ -83,6 +88,7 @@ export function QuestionCard({ question }: { question: Question }) {
         ) : (
           <ChoiceOptions
             question={question}
+            options={orderedOptions}
             userAnswer={userAnswer}
             answered={answered}
             onSelect={(ans) => selectAnswer(question.id, ans)}
@@ -209,18 +215,20 @@ function TrueFalseOptions({
 
 function ChoiceOptions({
   question,
+  options,
   userAnswer,
   answered,
   onSelect,
 }: {
   question: Question;
+  options: Question["options"];
   userAnswer: string;
   answered: boolean;
   onSelect: (ans: string) => void;
 }) {
   return (
     <div className="space-y-3">
-      {question.options.map((opt) => {
+      {options.map((opt) => {
         const isSelected = userAnswer.includes(opt.label);
         const isCorrectAnswer = question.answer.includes(opt.label);
         const showCorrect = answered && isCorrectAnswer;

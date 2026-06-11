@@ -31,8 +31,13 @@ function PracticePage() {
     return (
       <PracticeSetup
         defaultCategory={categoryParam}
-        onStart={(mode, category) =>
-          startSession({ mode: "practice", practiceMode: mode as PracticeMode, category })
+        onStart={(mode, category, shuffleOptions) =>
+          startSession({
+            mode: "practice",
+            practiceMode: mode as PracticeMode,
+            category,
+            shuffleOptions,
+          })
         }
       />
     );
@@ -41,6 +46,7 @@ function PracticePage() {
   const currentQuestion = questions.find(
     (q) => q.id === session.orderedIds[session.currentIdx]
   );
+  const answeredCount = Object.keys(session.answered).length;
 
   if (!currentQuestion) return null;
 
@@ -53,7 +59,7 @@ function PracticePage() {
             {session.category
               ? categoryMap[session.category]?.name
               : "全部知识域"}{" "}
-            · 第 {session.currentIdx + 1}/{session.orderedIds.length} 题
+            · 已答 {answeredCount}/{session.orderedIds.length} 题
           </p>
         </div>
         <div className="flex gap-2 shrink-0">
@@ -77,7 +83,7 @@ function PracticePage() {
         <div
           className="h-full bg-blue-500 rounded-full transition-all duration-300"
           style={{
-            width: `${((session.currentIdx + 1) / session.orderedIds.length) * 100}%`,
+            width: `${(answeredCount / session.orderedIds.length) * 100}%`,
           }}
         />
       </div>
@@ -193,12 +199,17 @@ function PracticeSetup({
   onStart,
 }: {
   defaultCategory: string | null;
-  onStart: (mode: string, category: string | null) => void;
+  onStart: (
+    mode: string,
+    category: string | null,
+    shuffleOptions: boolean
+  ) => void;
 }) {
   const stats = useStudyStore((s) => s.stats);
   const wrongCount = Object.values(stats).filter(
     (s) => s.wrongs > 0 && !s.markedUnderstood
   ).length;
+  const [shuffleOptions, setShuffleOptions] = useState(false);
 
   const modes = [
     {
@@ -234,7 +245,7 @@ function PracticeSetup({
           <button
             key={mode.id}
             disabled={mode.disabled}
-            onClick={() => onStart(mode.id, defaultCategory)}
+            onClick={() => onStart(mode.id, defaultCategory, shuffleOptions)}
             className={cn(
               "p-5 rounded-xl border text-left transition-all",
               mode.disabled
@@ -248,6 +259,21 @@ function PracticeSetup({
         ))}
       </div>
 
+      <label className="mt-5 flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3">
+        <input
+          type="checkbox"
+          checked={shuffleOptions}
+          onChange={(e) => setShuffleOptions(e.target.checked)}
+          className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+        />
+        <div>
+          <p className="text-sm font-medium text-slate-800">打乱选项顺序</p>
+          <p className="text-xs text-slate-500">
+            仅打乱单选/多选题选项，同一场刷题内顺序保持不变
+          </p>
+        </div>
+      </label>
+
       {!defaultCategory && (
         <>
           <h2 className="text-lg font-semibold text-slate-800 mt-10 mb-4">
@@ -257,7 +283,7 @@ function PracticeSetup({
             {Object.values(categoryMap).map((cat) => (
               <button
                 key={cat.id}
-                onClick={() => onStart("sequential", cat.id)}
+                onClick={() => onStart("sequential", cat.id, shuffleOptions)}
                 className="p-4 rounded-xl border border-slate-200 bg-white hover:border-blue-300 hover:shadow-md transition-all text-left"
               >
                 <span className="text-xl">{cat.icon}</span>
