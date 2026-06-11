@@ -1,9 +1,11 @@
 "use client";
 
 import { useStudyStore, questions } from "@/lib/store";
-import { categories, categoryMap } from "@/data/categories";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { categories } from "@/data/categories";
+import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+
+const WEAK_RATE_THRESHOLD = 80;
 
 export default function StatsPage() {
   const stats = useStudyStore((s) => s.stats);
@@ -40,7 +42,10 @@ export default function StatsPage() {
   });
 
   const weakCategories = [...categoryStats]
-    .filter((c) => c.attempted > 0)
+    .filter(
+      (c) =>
+        c.attempted > 0 && (c.rate < WEAK_RATE_THRESHOLD || c.wrong > 0)
+    )
     .sort((a, b) => a.rate - b.rate)
     .slice(0, 3);
 
@@ -147,7 +152,7 @@ export default function StatsPage() {
             薄弱知识点
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            {weakCategories.map((cat, i) => (
+            {weakCategories.map((cat) => (
               <Card key={cat.id} className="border-amber-200 bg-amber-50/50">
                 <CardContent className="pt-5">
                   <div className="flex items-center gap-2 mb-2">
@@ -160,7 +165,9 @@ export default function StatsPage() {
                     {cat.rate}%
                   </p>
                   <p className="text-xs text-amber-600 mt-1">
-                    正确率偏低，建议重点复习
+                    {cat.rate < WEAK_RATE_THRESHOLD
+                      ? "正确率偏低，建议重点复习"
+                      : "仍有错题未理解，建议回顾"}
                   </p>
                 </CardContent>
               </Card>
