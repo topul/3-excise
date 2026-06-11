@@ -67,6 +67,23 @@ function getDisplayAnswer(
     .join("");
 }
 
+function buildDisplayedQuestion(
+  question: Question,
+  displayOptions: DisplayOption[],
+  displayAnswer: string
+): Question {
+  if (question.type === "tf") return question;
+
+  return {
+    ...question,
+    options: displayOptions.map((opt) => ({
+      label: opt.displayLabel,
+      text: opt.text,
+    })),
+    answer: displayAnswer,
+  };
+}
+
 export function QuestionCard({ question }: { question: Question }) {
   const session = useStudyStore((s) => s.session);
   const selectAnswer = useStudyStore((s) => s.selectAnswer);
@@ -85,6 +102,15 @@ export function QuestionCard({ question }: { question: Question }) {
   const optionOrder = session.optionOrders?.[question.id];
   const displayOptions = buildDisplayOptions(question, optionOrder);
   const displayAnswer = getDisplayAnswer(question.answer, displayOptions);
+  const displayedQuestion = buildDisplayedQuestion(
+    question,
+    displayOptions,
+    displayAnswer
+  );
+  const aiCacheKey =
+    optionOrder && optionOrder.length > 0
+      ? `${question.id}:${optionOrder.join(",")}`
+      : question.id;
 
   return (
     <Card className="shadow-sm">
@@ -183,7 +209,13 @@ export function QuestionCard({ question }: { question: Question }) {
         )}
 
         {/* AI explanation (only after answered) */}
-        {answered && <AiExplain key={question.id} question={question} />}
+        {answered && (
+          <AiExplain
+            key={aiCacheKey}
+            question={displayedQuestion}
+            cacheKey={aiCacheKey}
+          />
+        )}
 
         {/* Navigation */}
         <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-100">

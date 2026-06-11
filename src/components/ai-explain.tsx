@@ -52,13 +52,19 @@ function normalizeExplanation(
   return value;
 }
 
-export function AiExplain({ question }: { question: Question }) {
+export function AiExplain({
+  question,
+  cacheKey = question.id,
+}: {
+  question: Question;
+  cacheKey?: string | number;
+}) {
   const aiConfig = useStudyStore((s) => s.aiConfig);
   const aiExplanations = useStudyStore((s) => s.aiExplanations);
   const setAiExplanation = useStudyStore((s) => s.setAiExplanation);
   const clearAiExplanation = useStudyStore((s) => s.clearAiExplanation);
 
-  const cached = normalizeExplanation(aiExplanations[question.id]);
+  const cached = normalizeExplanation(aiExplanations[cacheKey]);
   const [expanded, setExpanded] = useState(false);
   const [reasoningExpanded, setReasoningExpanded] = useState(false);
   const [streaming, setStreaming] = useState(false);
@@ -98,7 +104,7 @@ export function AiExplain({ question }: { question: Question }) {
         },
         ac.signal
       );
-      setAiExplanation(question.id, {
+      setAiExplanation(cacheKey, {
         reasoning: aiConfig.deepThinkingEnabled ? reasoningAcc : "",
         answer: answerAcc,
       });
@@ -118,7 +124,7 @@ export function AiExplain({ question }: { question: Question }) {
   };
 
   const regenerate = () => {
-    clearAiExplanation(question.id);
+    clearAiExplanation(cacheKey);
     run();
   };
 

@@ -69,7 +69,7 @@ interface StudyStore {
   aiConfig: AiConfig;
 
   // AI explanations cache (persisted): questionId -> explanation blocks
-  aiExplanations: Record<number, string | AiExplanation>;
+  aiExplanations: Record<string | number, string | AiExplanation>;
 
   // Current session (transient, also persisted for resume)
   session: SessionState | null;
@@ -95,7 +95,7 @@ interface StudyStore {
   resetProgress: () => void;
   setAiConfig: (config: Partial<AiConfig>) => void;
   setAiExplanation: (
-    questionId: number,
+    questionId: string | number,
     text:
       | string
       | {
@@ -103,7 +103,7 @@ interface StudyStore {
           answer: string;
         }
   ) => void;
-  clearAiExplanation: (questionId: number) => void;
+  clearAiExplanation: (questionId: string | number) => void;
 }
 
 function buildQuestionOrder(
