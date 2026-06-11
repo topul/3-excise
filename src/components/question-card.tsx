@@ -84,9 +84,13 @@ function getDisplayExplanation(
     displayOptions.map((opt) => [opt.originalLabel, opt.displayLabel])
   );
 
-  return explanation.replace(/\b([A-Z])(?=[.、，,；;\s]|$)/g, (label) => {
+  const remapped = explanation.replace(/\b([A-Z])(?=[.、，,；;\s]|$)/g, (label) => {
     return labelMap[label] ?? label;
   });
+
+  return remapped
+    .replace(/^正确答案是\s*[A-Z]+(?:，即：|[.。]\s*)?/u, "")
+    .trim();
 }
 
 function buildDisplayedQuestion(
