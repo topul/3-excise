@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { AiExplain } from "@/components/ai-explain";
 import { cn } from "@/lib/utils";
-import type { Question, QuestionStat } from "@/lib/types";
+import type { Question, QuestionOption, QuestionStat } from "@/lib/types";
 
 const typeLabels = {
   tf: "判断题",
@@ -32,6 +32,41 @@ const emptyStat: QuestionStat = {
   bookmarked: false,
 };
 
+interface DisplayOption extends QuestionOption {
+  originalLabel: string;
+  displayLabel: string;
+}
+
+function buildDisplayOptions(
+  question: Question,
+  optionOrder: number[] | undefined
+): DisplayOption[] {
+  const orderedOptions =
+    optionOrder && optionOrder.length === question.options.length
+      ? optionOrder.map((index) => question.options[index])
+      : question.options;
+
+  return orderedOptions.map((option, index) => ({
+    ...option,
+    originalLabel: option.label,
+    displayLabel: question.options[index]?.label ?? option.label,
+  }));
+}
+
+function getDisplayAnswer(
+  answer: string,
+  displayOptions: DisplayOption[]
+): string {
+  return answer
+    .split("")
+    .map((label) => {
+      const option = displayOptions.find((opt) => opt.originalLabel === label);
+      return option?.displayLabel ?? label;
+    })
+    .sort()
+    .join("");
+}
+
 export function QuestionCard({ question }: { question: Question }) {
   const session = useStudyStore((s) => s.session);
   const selectAnswer = useStudyStore((s) => s.selectAnswer);
@@ -48,10 +83,8 @@ export function QuestionCard({ question }: { question: Question }) {
   const isCorrect = answered && userAnswer === question.answer;
   const cat = categoryMap[question.category];
   const optionOrder = session.optionOrders?.[question.id];
-  const orderedOptions =
-    optionOrder && optionOrder.length === question.options.length
-      ? optionOrder.map((index) => question.options[index])
-      : question.options;
+  const displayOptions = buildDisplayOptions(question, optionOrder);
+  const displayAnswer = getDisplayAnswer(question.answer, displayOptions);
 
   return (
     <Card className="shadow-sm">
@@ -99,7 +132,7 @@ export function QuestionCard({ question }: { question: Question }) {
         ) : (
           <ChoiceOptions
             question={question}
-            options={orderedOptions}
+            options={displayOptions}
             userAnswer={userAnswer}
             answered={answered}
             onSelect={(ans) => selectAnswer(question.id, ans)}
@@ -140,7 +173,7 @@ export function QuestionCard({ question }: { question: Question }) {
             {!isCorrect && (
               <p className="text-sm text-red-700 mb-1">
                 正确答案：
-                <span className="font-bold">{question.answer}</span>
+                <span className="font-bold">{displayAnswer}</span>
               </p>
             )}
             <p className="text-sm text-slate-600 mt-2">
@@ -232,7 +265,7 @@ function ChoiceOptions({
   onSelect,
 }: {
   question: Question;
-  options: Question["options"];
+  options: DisplayOption[];
   userAnswer: string;
   answered: boolean;
   onSelect: (ans: string) => void;
@@ -240,15 +273,15 @@ function ChoiceOptions({
   return (
     <div className="space-y-3">
       {options.map((opt) => {
-        const isSelected = userAnswer.includes(opt.label);
-        const isCorrectAnswer = question.answer.includes(opt.label);
+        const isSelected = userAnswer.includes(opt.originalLabel);
+        const isCorrectAnswer = question.answer.includes(opt.originalLabel);
         const showCorrect = answered && isCorrectAnswer;
         const showWrong = answered && isSelected && !isCorrectAnswer;
 
         return (
           <button
-            key={opt.label}
-            onClick={() => !answered && onSelect(opt.label)}
+            key={opt.originalLabel}
+            onClick={() => !answered && onSelect(opt.originalLabel)}
             disabled={answered}
             className={cn(
               "w-full flex items-start gap-3 p-4 rounded-xl border-2 text-left transition-all",
@@ -269,7 +302,7 @@ function ChoiceOptions({
                 answered && !showCorrect && !showWrong && "bg-slate-100 text-slate-400"
               )}
             >
-              {question.type === "multi" ? (isSelected ? "✓" : "") : opt.label}
+              {opt.displayLabel}
             </span>
             <span
               className={cn(

@@ -47,6 +47,7 @@ function supportsReasoningControls(model: string): boolean {
   return (
     name.includes("deepseek-reasoner") ||
     name.includes("qwen3") ||
+    name.includes("qwen") ||
     name.includes("qwq")
   );
 }
@@ -72,6 +73,9 @@ function buildRequestBody(question: Question, config: AiClientConfig) {
 
   if (supportsReasoningControls(config.model)) {
     body.enable_thinking = deepThinkingEnabled;
+    body.chat_template_kwargs = {
+      enable_thinking: deepThinkingEnabled,
+    };
   }
 
   return body;
