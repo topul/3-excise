@@ -47,6 +47,19 @@ function PracticePage() {
     (q) => q.id === session.orderedIds[session.currentIdx]
   );
   const answeredCount = Object.keys(session.answered).length;
+  const wrongCount = session.orderedIds.filter((id) => {
+    const q = questions.find((item) => item.id === id);
+    return session.answered[id] && q && session.answers[id] !== q.answer;
+  }).length;
+  const correctCount = answeredCount - wrongCount;
+  const encouragement =
+    answeredCount === 0
+      ? "先稳住节奏，一题一题来。"
+      : wrongCount === 0
+      ? "目前还没有错题，状态很好，继续保持。"
+      : wrongCount <= Math.max(1, Math.floor(answeredCount * 0.25))
+      ? "错题不多，把原因看明白就很赚。"
+      : "错题正在暴露薄弱点，复盘完会进步很快。";
 
   if (!currentQuestion) return null;
 
@@ -59,7 +72,8 @@ function PracticePage() {
             {session.category
               ? categoryMap[session.category]?.name
               : "全部知识域"}{" "}
-            · 已答 {answeredCount}/{session.orderedIds.length} 题
+            · 已答 {answeredCount}/{session.orderedIds.length} 题 · 错{" "}
+            {wrongCount} 题
           </p>
         </div>
         <div className="flex gap-2 shrink-0">
@@ -87,6 +101,29 @@ function PracticePage() {
           }}
         />
       </div>
+
+      <div className="mb-4 md:mb-6 grid grid-cols-3 gap-2 md:gap-3">
+        <div className="rounded-lg border border-slate-200 bg-white px-3 py-2">
+          <p className="text-[11px] text-slate-500">已答</p>
+          <p className="text-base font-semibold text-slate-800">
+            {answeredCount}
+          </p>
+        </div>
+        <div className="rounded-lg border border-green-200 bg-green-50 px-3 py-2">
+          <p className="text-[11px] text-green-600">答对</p>
+          <p className="text-base font-semibold text-green-700">
+            {correctCount}
+          </p>
+        </div>
+        <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2">
+          <p className="text-[11px] text-red-600">错题</p>
+          <p className="text-base font-semibold text-red-700">{wrongCount}</p>
+        </div>
+      </div>
+
+      <p className="mb-4 md:mb-6 rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-700">
+        {encouragement}
+      </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6">
         {/* Question card */}

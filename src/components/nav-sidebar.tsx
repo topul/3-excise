@@ -9,6 +9,7 @@ const navItems = [
   { href: "/practice", label: "刷题", icon: "✏️" },
   { href: "/exam", label: "考试", icon: "📝" },
   { href: "/review", label: "错题", icon: "📕" },
+  { href: "/bookmarks", label: "收藏", icon: "⭐" },
   { href: "/stats", label: "统计", icon: "📈" },
   { href: "/settings", label: "设置", icon: "⚙️" },
 ];
