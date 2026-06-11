@@ -80,14 +80,13 @@ function getDisplayExplanation(
   explanation: string,
   displayOptions: DisplayOption[]
 ): string {
-  return displayOptions.reduce((text, opt) => {
-    if (opt.originalLabel === opt.displayLabel) return text;
+  const labelMap = Object.fromEntries(
+    displayOptions.map((opt) => [opt.originalLabel, opt.displayLabel])
+  );
 
-    return text.replace(
-      new RegExp(`\\b${opt.originalLabel}(?=[.、，,；;\\s]|$)`, "g"),
-      opt.displayLabel
-    );
-  }, explanation);
+  return explanation.replace(/\b([A-Z])(?=[.、，,；;\s]|$)/g, (label) => {
+    return labelMap[label] ?? label;
+  });
 }
 
 function buildDisplayedQuestion(
