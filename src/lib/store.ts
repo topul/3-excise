@@ -52,6 +52,7 @@ interface AiConfig {
   baseUrl: string;
   apiKey: string;
   model: string;
+  deepThinkingEnabled: boolean;
 }
 
 interface AiExplanation {
@@ -191,6 +192,7 @@ export const useStudyStore = create<StudyStore>()(
         baseUrl: "",
         apiKey: "",
         model: "",
+        deepThinkingEnabled: false,
       },
       aiExplanations: {},
 

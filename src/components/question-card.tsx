@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { AiExplain } from "@/components/ai-explain";
 import { cn } from "@/lib/utils";
-import type { Question } from "@/lib/types";
+import type { Question, QuestionStat } from "@/lib/types";
 
 const typeLabels = {
   tf: "判断题",
@@ -20,6 +20,18 @@ const typeColors = {
   multi: "bg-purple-100 text-purple-700",
 };
 
+const emptyStat: QuestionStat = {
+  attempts: 0,
+  corrects: 0,
+  wrongs: 0,
+  streakCorrect: 0,
+  lastResult: "",
+  lastWrongAt: 0,
+  lastSeenAt: 0,
+  markedUnderstood: false,
+  bookmarked: false,
+};
+
 export function QuestionCard({ question }: { question: Question }) {
   const session = useStudyStore((s) => s.session);
   const selectAnswer = useStudyStore((s) => s.selectAnswer);
@@ -27,14 +39,13 @@ export function QuestionCard({ question }: { question: Question }) {
   const goNext = useStudyStore((s) => s.goNext);
   const goPrev = useStudyStore((s) => s.goPrev);
   const toggleBookmark = useStudyStore((s) => s.toggleBookmark);
-  const getStat = useStudyStore((s) => s.getStat);
+  const stat = useStudyStore((s) => s.stats[question.id] || emptyStat);
 
   if (!session) return null;
 
   const answered = session.answered[question.id];
   const userAnswer = session.answers[question.id] || "";
   const isCorrect = answered && userAnswer === question.answer;
-  const stat = getStat(question.id);
   const cat = categoryMap[question.category];
   const optionOrder = session.optionOrders?.[question.id];
   const orderedOptions =

@@ -82,7 +82,7 @@ export function AiExplain({ question }: { question: Question }) {
   const run = async () => {
     if (!isConfigured) return;
     setExpanded(true);
-    setReasoningExpanded(true);
+    setReasoningExpanded(Boolean(aiConfig.deepThinkingEnabled));
     setStreaming(true);
     setError("");
     setReasoning("");
@@ -96,7 +96,7 @@ export function AiExplain({ question }: { question: Question }) {
         question,
         aiConfig,
         ({ reasoningDelta, contentDelta }) => {
-          if (reasoningDelta) {
+          if (aiConfig.deepThinkingEnabled && reasoningDelta) {
             reasoningAcc += reasoningDelta;
             setReasoning(reasoningAcc);
           }
@@ -108,7 +108,7 @@ export function AiExplain({ question }: { question: Question }) {
         ac.signal
       );
       setAiExplanation(question.id, {
-        reasoning: reasoningAcc,
+        reasoning: aiConfig.deepThinkingEnabled ? reasoningAcc : "",
         answer: answerAcc,
       });
       setReasoningExpanded(false);

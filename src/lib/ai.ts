@@ -4,6 +4,7 @@ export interface AiClientConfig {
   baseUrl: string;
   apiKey: string;
   model: string;
+  deepThinkingEnabled?: boolean;
 }
 
 export interface AiStreamChunk {
@@ -41,6 +42,41 @@ function buildPrompt(question: Question): string {
 回答用中文，简洁清晰，markdown 格式。`;
 }
 
+function supportsReasoningControls(model: string): boolean {
+  const name = model.toLowerCase();
+  return (
+    name.includes("deepseek-reasoner") ||
+    name.includes("qwen3") ||
+    name.includes("qwq")
+  );
+}
+
+function buildRequestBody(question: Question, config: AiClientConfig) {
+  const deepThinkingEnabled = Boolean(config.deepThinkingEnabled);
+  const body: Record<string, unknown> = {
+    model: config.model,
+    stream: true,
+    messages: [
+      {
+        role: "system",
+        content: deepThinkingEnabled
+          ? "你是一位耐心专业的人工智能训练师高级理论考试辅导老师，擅长把题目讲透。用户已开启深度思考，可以先进行必要的推理再给出答案。"
+          : "你是一位耐心专业的人工智能训练师高级理论考试辅导老师，擅长把题目讲透。不要输出深度思考、推理过程或 reasoning 内容，只给出面向学习者的简洁解析。",
+      },
+      {
+        role: "user",
+        content: buildPrompt(question),
+      },
+    ],
+  };
+
+  if (supportsReasoningControls(config.model)) {
+    body.enable_thinking = deepThinkingEnabled;
+  }
+
+  return body;
+}
+
 export async function streamAiExplanation(
   question: Question,
   config: AiClientConfig,
@@ -60,21 +96,7 @@ export async function streamAiExplanation(
       "Content-Type": "application/json",
       Authorization: `Bearer ${config.apiKey}`,
     },
-    body: JSON.stringify({
-      model: config.model,
-      stream: true,
-      messages: [
-        {
-          role: "system",
-          content:
-            "你是一位耐心专业的人工智能训练师高级理论考试辅导老师，擅长把题目讲透。",
-        },
-        {
-          role: "user",
-          content: buildPrompt(question),
-        },
-      ],
-    }),
+    body: JSON.stringify(buildRequestBody(question, config)),
     signal,
   });
 

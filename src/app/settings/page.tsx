@@ -34,6 +34,9 @@ export default function SettingsPage() {
   const [baseUrl, setBaseUrl] = useState(aiConfig.baseUrl);
   const [apiKey, setApiKey] = useState(aiConfig.apiKey);
   const [model, setModel] = useState(aiConfig.model);
+  const [deepThinkingEnabled, setDeepThinkingEnabled] = useState(
+    Boolean(aiConfig.deepThinkingEnabled)
+  );
   const [showKey, setShowKey] = useState(false);
   const [savedTip, setSavedTip] = useState(false);
   const [testStatus, setTestStatus] = useState<
@@ -46,6 +49,7 @@ export default function SettingsPage() {
       baseUrl: baseUrl.trim(),
       apiKey: apiKey.trim(),
       model: model.trim(),
+      deepThinkingEnabled,
     });
     setSavedTip(true);
     setTimeout(() => setSavedTip(false), 2000);
@@ -176,6 +180,21 @@ export default function SettingsPage() {
               className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
             />
           </div>
+
+          <label className="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+            <input
+              type="checkbox"
+              checked={deepThinkingEnabled}
+              onChange={(e) => setDeepThinkingEnabled(e.target.checked)}
+              className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+            />
+            <div>
+              <p className="text-sm font-medium text-slate-800">开启深度思考</p>
+              <p className="text-xs text-slate-500">
+                默认关闭。仅在模型支持时请求 reasoning / thinking 输出，可能增加耗时和费用。
+              </p>
+            </div>
+          </label>
 
           <div className="flex flex-wrap gap-3 pt-2">
             <button
