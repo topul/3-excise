@@ -183,7 +183,7 @@ export function QuestionCard({ question }: { question: Question }) {
         )}
 
         {/* AI explanation (only after answered) */}
-        {answered && <AiExplain question={question} />}
+        {answered && <AiExplain key={question.id} question={question} />}
 
         {/* Navigation */}
         <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-100">

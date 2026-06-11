@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -66,15 +66,6 @@ export function AiExplain({ question }: { question: Question }) {
   const [text, setText] = useState(cached.answer);
   const [error, setError] = useState("");
   const abortRef = useRef<AbortController | null>(null);
-
-  useEffect(() => {
-    const next = normalizeExplanation(aiExplanations[question.id]);
-    setReasoning(next.reasoning);
-    setText(next.answer);
-    setError("");
-    setExpanded(Boolean(next.reasoning || next.answer));
-    setReasoningExpanded(false);
-  }, [question.id, aiExplanations]);
 
   const isConfigured =
     aiConfig.baseUrl && aiConfig.apiKey && aiConfig.model;
