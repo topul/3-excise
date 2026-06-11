@@ -67,6 +67,29 @@ function getDisplayAnswer(
     .join("");
 }
 
+function getDisplayAnswerDetails(displayAnswer: string, displayOptions: DisplayOption[]) {
+  return displayAnswer
+    .split("")
+    .map((label) => {
+      const option = displayOptions.find((opt) => opt.displayLabel === label);
+      return option ? `${label}. ${option.text}` : label;
+    });
+}
+
+function getDisplayExplanation(
+  explanation: string,
+  displayOptions: DisplayOption[]
+): string {
+  return displayOptions.reduce((text, opt) => {
+    if (opt.originalLabel === opt.displayLabel) return text;
+
+    return text.replace(
+      new RegExp(`\\b${opt.originalLabel}(?=[.、，,；;\\s]|$)`, "g"),
+      opt.displayLabel
+    );
+  }, explanation);
+}
+
 function buildDisplayedQuestion(
   question: Question,
   displayOptions: DisplayOption[],
@@ -102,6 +125,14 @@ export function QuestionCard({ question }: { question: Question }) {
   const optionOrder = session.optionOrders?.[question.id];
   const displayOptions = buildDisplayOptions(question, optionOrder);
   const displayAnswer = getDisplayAnswer(question.answer, displayOptions);
+  const displayAnswerDetails = getDisplayAnswerDetails(
+    displayAnswer,
+    displayOptions
+  );
+  const displayExplanation = getDisplayExplanation(
+    question.explanation,
+    displayOptions
+  );
   const displayedQuestion = buildDisplayedQuestion(
     question,
     displayOptions,
@@ -196,14 +227,24 @@ export function QuestionCard({ question }: { question: Question }) {
                 {isCorrect ? "回答正确！" : "回答错误"}
               </span>
             </div>
-            {!isCorrect && (
-              <p className="text-sm text-red-700 mb-1">
-                正确答案：
-                <span className="font-bold">{displayAnswer}</span>
-              </p>
-            )}
+            <div
+              className={cn(
+                "text-sm mb-2",
+                isCorrect ? "text-green-700" : "text-red-700"
+              )}
+            >
+              正确答案：
+              <span className="font-bold">{displayAnswer}</span>
+              {displayAnswerDetails.length > 0 && (
+                <div className="mt-1 space-y-0.5">
+                  {displayAnswerDetails.map((detail) => (
+                    <div key={detail}>{detail}</div>
+                  ))}
+                </div>
+              )}
+            </div>
             <p className="text-sm text-slate-600 mt-2">
-              {question.explanation}
+              {displayExplanation}
             </p>
           </div>
         )}
