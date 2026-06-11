@@ -76,23 +76,6 @@ function getDisplayAnswerDetails(displayAnswer: string, displayOptions: DisplayO
     });
 }
 
-function getDisplayExplanation(
-  explanation: string,
-  displayOptions: DisplayOption[]
-): string {
-  const labelMap = Object.fromEntries(
-    displayOptions.map((opt) => [opt.originalLabel, opt.displayLabel])
-  );
-
-  const remapped = explanation.replace(/\b([A-Z])(?=[.、，,；;\s]|$)/g, (label) => {
-    return labelMap[label] ?? label;
-  });
-
-  return remapped
-    .replace(/^正确答案是\s*[A-Z]+(?:，即：|[.。]\s*)?/u, "")
-    .trim();
-}
-
 function buildDisplayedQuestion(
   question: Question,
   displayOptions: DisplayOption[],
@@ -130,10 +113,6 @@ export function QuestionCard({ question }: { question: Question }) {
   const displayAnswer = getDisplayAnswer(question.answer, displayOptions);
   const displayAnswerDetails = getDisplayAnswerDetails(
     displayAnswer,
-    displayOptions
-  );
-  const displayExplanation = getDisplayExplanation(
-    question.explanation,
     displayOptions
   );
   const displayedQuestion = buildDisplayedQuestion(
@@ -246,9 +225,6 @@ export function QuestionCard({ question }: { question: Question }) {
                 </div>
               )}
             </div>
-            <p className="text-sm text-slate-600 mt-2">
-              {displayExplanation}
-            </p>
           </div>
         )}
 
