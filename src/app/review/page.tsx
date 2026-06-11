@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useStudyStore, questions } from "@/lib/store";
 import { categories, categoryMap } from "@/data/categories";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AiExplain } from "@/components/ai-explain";
 import { cn } from "@/lib/utils";
 
 export default function ReviewPage() {
+  const router = useRouter();
   const stats = useStudyStore((s) => s.stats);
   const markUnderstood = useStudyStore((s) => s.markUnderstood);
   const startSession = useStudyStore((s) => s.startSession);
@@ -55,9 +57,10 @@ export default function ReviewPage() {
         </div>
         {totalWrong > 0 && (
           <button
-            onClick={() =>
-              startSession({ mode: "practice", practiceMode: "wrong-redo" })
-            }
+            onClick={() => {
+              startSession({ mode: "practice", practiceMode: "wrong-redo" });
+              router.push("/practice");
+            }}
             className="shrink-0 px-3 md:px-5 py-2 md:py-2.5 bg-red-600 text-white rounded-lg font-medium text-sm hover:bg-red-700 transition"
           >
             错题重练
