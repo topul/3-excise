@@ -261,22 +261,24 @@ export function QuestionCard({
                   : "回答错误"}
               </span>
             </div>
-            <div
-              className={cn(
-                "text-sm mb-2",
-                isCorrect ? "text-green-700" : "text-red-700"
-              )}
-            >
-              正确答案：
-              <span className="font-bold">{displayAnswer}</span>
-              {displayAnswerDetails.length > 0 && (
-                <div className="mt-1 space-y-0.5">
-                  {displayAnswerDetails.map((detail) => (
-                    <div key={detail}>{detail}</div>
-                  ))}
-                </div>
-              )}
-            </div>
+            {(!isBattle || !isCorrect) && (
+              <div
+                className={cn(
+                  "text-sm mb-2",
+                  isCorrect ? "text-green-700" : "text-red-700"
+                )}
+              >
+                正确答案：
+                <span className="font-bold">{displayAnswer}</span>
+                {!isBattle && displayAnswerDetails.length > 0 && (
+                  <div className="mt-1 space-y-0.5">
+                    {displayAnswerDetails.map((detail) => (
+                      <div key={detail}>{detail}</div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )}
 
