@@ -20,6 +20,12 @@ const typeColors = {
   multi: "bg-purple-100 text-purple-700",
 };
 
+const battleTypeColors = {
+  tf: "border-cyan-300/40 bg-cyan-300/12 text-cyan-100",
+  single: "border-amber-300/40 bg-amber-300/12 text-amber-100",
+  multi: "border-red-300/40 bg-red-300/12 text-red-100",
+};
+
 const emptyStat: QuestionStat = {
   attempts: 0,
   corrects: 0,
@@ -144,11 +150,20 @@ export function QuestionCard({
       <CardContent className="p-4 md:p-6">
         {/* Meta row */}
         <div className="flex items-center gap-2 mb-3 md:mb-4 flex-wrap">
-          <Badge variant="secondary" className={typeColors[question.type]}>
+          <Badge
+            variant="secondary"
+            className={isBattle ? battleTypeColors[question.type] : typeColors[question.type]}
+          >
             {typeLabels[question.type]}
           </Badge>
           {cat && (
-            <Badge variant="outline" className="text-xs">
+            <Badge
+              variant="outline"
+              className={cn(
+                "text-xs",
+                isBattle && "border-white/15 bg-white/5 text-slate-200"
+              )}
+            >
               {cat.icon} {cat.name}
             </Badge>
           )}
@@ -191,6 +206,7 @@ export function QuestionCard({
             userAnswer={userAnswer}
             answered={answered}
             onSelect={(ans) => selectAnswer(question.id, ans)}
+            variant={variant}
           />
         ) : (
           <ChoiceOptions
@@ -199,6 +215,7 @@ export function QuestionCard({
             userAnswer={userAnswer}
             answered={answered}
             onSelect={(ans) => selectAnswer(question.id, ans)}
+            variant={variant}
           />
         )}
 
@@ -206,9 +223,14 @@ export function QuestionCard({
         {question.type === "multi" && !answered && userAnswer.length > 0 && (
           <button
             onClick={() => submitMulti(question.id)}
-            className="mt-4 px-5 py-2.5 bg-blue-600 text-white rounded-lg font-medium text-sm hover:bg-blue-700 transition"
+            className={cn(
+              "mt-4 px-5 py-2.5 text-white font-medium text-sm transition",
+              isBattle
+                ? "battle-cursor rounded-none border border-amber-300 bg-amber-500/20 uppercase tracking-[0.18em] text-amber-100 shadow-[0_0_24px_rgba(251,191,36,0.24)] hover:bg-amber-400/30"
+                : "rounded-lg bg-blue-600 hover:bg-blue-700"
+            )}
           >
-            提交答案
+            {isBattle ? "锁定攻击" : "提交答案"}
           </button>
         )}
 
@@ -272,7 +294,12 @@ export function QuestionCard({
           <button
             onClick={goPrev}
             disabled={session.currentIdx === 0}
-            className="px-4 py-2 text-sm font-medium text-slate-600 border border-slate-200 rounded-lg hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition"
+            className={cn(
+              "px-4 py-2 text-sm font-medium border transition disabled:opacity-40 disabled:cursor-not-allowed",
+              isBattle
+                ? "battle-cursor rounded-none border-white/15 bg-white/5 text-slate-200 hover:bg-white/10"
+                : "rounded-lg border-slate-200 text-slate-600 hover:bg-slate-50"
+            )}
           >
             上一题
           </button>
@@ -282,7 +309,12 @@ export function QuestionCard({
           <button
             onClick={goNext}
             disabled={session.currentIdx === session.orderedIds.length - 1}
-            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition"
+            className={cn(
+              "px-4 py-2 text-sm font-medium text-white transition disabled:opacity-40 disabled:cursor-not-allowed",
+              isBattle
+                ? "battle-cursor rounded-none border border-cyan-300/50 bg-cyan-400/20 text-cyan-50 hover:bg-cyan-300/30"
+                : "rounded-lg bg-blue-600 hover:bg-blue-700"
+            )}
           >
             下一题
           </button>
@@ -297,12 +329,15 @@ function TrueFalseOptions({
   userAnswer,
   answered,
   onSelect,
+  variant = "default",
 }: {
   question: Question;
   userAnswer: string;
   answered: boolean;
   onSelect: (ans: string) => void;
+  variant?: "default" | "battle";
 }) {
+  const isBattle = variant === "battle";
   const options = [
     { value: "√", label: "正确", icon: "✓" },
     { value: "×", label: "错误", icon: "✗" },
@@ -323,11 +358,31 @@ function TrueFalseOptions({
             disabled={answered}
             className={cn(
               "p-4 md:p-5 rounded-xl border-2 text-center transition-all font-semibold",
-              !answered && !isSelected && "border-slate-200 bg-white text-slate-700 hover:border-blue-300",
-              !answered && isSelected && "border-blue-500 bg-blue-50 text-blue-700",
-              showCorrect && "border-green-500 bg-green-50 text-green-700",
-              showWrong && "border-red-500 bg-red-50 text-red-700",
-              answered && !showCorrect && !showWrong && "border-slate-200 bg-slate-50 text-slate-500 opacity-60"
+              isBattle && "battle-option battle-cursor rounded-none uppercase tracking-[0.16em]",
+              !answered &&
+                !isSelected &&
+                (isBattle
+                  ? "border-cyan-300/20 bg-slate-900/90 text-cyan-100 hover:border-cyan-200 hover:bg-cyan-300/12"
+                  : "border-slate-200 bg-white text-slate-700 hover:border-blue-300"),
+              !answered &&
+                isSelected &&
+                (isBattle
+                  ? "border-amber-300 bg-amber-400/18 text-amber-100 shadow-[0_0_28px_rgba(251,191,36,0.25)]"
+                  : "border-blue-500 bg-blue-50 text-blue-700"),
+              showCorrect &&
+                (isBattle
+                  ? "battle-hit border-lime-300 bg-lime-400/18 text-lime-100"
+                  : "border-green-500 bg-green-50 text-green-700"),
+              showWrong &&
+                (isBattle
+                  ? "battle-damage border-red-300 bg-red-500/18 text-red-100"
+                  : "border-red-500 bg-red-50 text-red-700"),
+              answered &&
+                !showCorrect &&
+                !showWrong &&
+                (isBattle
+                  ? "border-white/10 bg-slate-900/50 text-slate-400 opacity-60"
+                  : "border-slate-200 bg-slate-50 text-slate-500 opacity-60")
             )}
           >
             <span className="text-xl md:text-2xl block mb-1">{opt.icon}</span>
@@ -345,13 +400,16 @@ function ChoiceOptions({
   userAnswer,
   answered,
   onSelect,
+  variant = "default",
 }: {
   question: Question;
   options: DisplayOption[];
   userAnswer: string;
   answered: boolean;
   onSelect: (ans: string) => void;
+  variant?: "default" | "battle";
 }) {
+  const isBattle = variant === "battle";
   return (
     <div className="space-y-3">
       {options.map((opt) => {
@@ -367,21 +425,49 @@ function ChoiceOptions({
             disabled={answered}
             className={cn(
               "w-full flex items-start gap-3 p-4 rounded-xl border-2 text-left transition-all",
-              !answered && !isSelected && "border-slate-200 hover:border-blue-300 bg-white",
-              !answered && isSelected && "border-blue-500 bg-blue-50",
-              showCorrect && "border-green-500 bg-green-50",
-              showWrong && "border-red-500 bg-red-50",
-              answered && !showCorrect && !showWrong && "border-slate-200 bg-slate-50 opacity-60"
+              isBattle && "battle-option battle-cursor rounded-none",
+              !answered &&
+                !isSelected &&
+                (isBattle
+                  ? "border-cyan-300/20 bg-slate-900/90 hover:border-cyan-200 hover:bg-cyan-300/12"
+                  : "border-slate-200 bg-white hover:border-blue-300"),
+              !answered &&
+                isSelected &&
+                (isBattle
+                  ? "border-amber-300 bg-amber-400/18 shadow-[0_0_28px_rgba(251,191,36,0.25)]"
+                  : "border-blue-500 bg-blue-50"),
+              showCorrect &&
+                (isBattle
+                  ? "battle-hit border-lime-300 bg-lime-400/18"
+                  : "border-green-500 bg-green-50"),
+              showWrong &&
+                (isBattle
+                  ? "battle-damage border-red-300 bg-red-500/18"
+                  : "border-red-500 bg-red-50"),
+              answered &&
+                !showCorrect &&
+                !showWrong &&
+                (isBattle
+                  ? "border-white/10 bg-slate-900/50 opacity-60"
+                  : "border-slate-200 bg-slate-50 opacity-60")
             )}
           >
             <span
               className={cn(
                 "w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0",
-                !answered && !isSelected && "bg-slate-100 text-slate-500",
-                !answered && isSelected && "bg-blue-500 text-white",
-                showCorrect && "bg-green-500 text-white",
-                showWrong && "bg-red-500 text-white",
-                answered && !showCorrect && !showWrong && "bg-slate-100 text-slate-400"
+                isBattle && "rounded-none ring-1 ring-white/20",
+                !answered &&
+                  !isSelected &&
+                  (isBattle ? "bg-cyan-300/10 text-cyan-100" : "bg-slate-100 text-slate-500"),
+                !answered &&
+                  isSelected &&
+                  (isBattle ? "bg-amber-300 text-slate-950" : "bg-blue-500 text-white"),
+                showCorrect && (isBattle ? "bg-lime-300 text-slate-950" : "bg-green-500 text-white"),
+                showWrong && (isBattle ? "bg-red-300 text-slate-950" : "bg-red-500 text-white"),
+                answered &&
+                  !showCorrect &&
+                  !showWrong &&
+                  (isBattle ? "bg-white/10 text-slate-400" : "bg-slate-100 text-slate-400")
               )}
             >
               {opt.displayLabel}
@@ -389,9 +475,10 @@ function ChoiceOptions({
             <span
               className={cn(
                 "text-sm leading-relaxed pt-1",
-                showCorrect && "text-green-700 font-medium",
-                showWrong && "text-red-700",
-                !answered && "text-slate-700"
+                showCorrect && (isBattle ? "text-lime-100 font-medium" : "text-green-700 font-medium"),
+                showWrong && (isBattle ? "text-red-100" : "text-red-700"),
+                !answered && (isBattle ? "text-slate-100" : "text-slate-700"),
+                answered && !showCorrect && !showWrong && isBattle && "text-slate-400"
               )}
             >
               {opt.text}

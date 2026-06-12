@@ -5,13 +5,10 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/", label: "首页", icon: "📊" },
-  { href: "/practice", label: "刷题", icon: "✏️" },
-  { href: "/exam", label: "考试", icon: "📝" },
-  { href: "/review", label: "错题", icon: "📕" },
-  { href: "/bookmarks", label: "收藏", icon: "⭐" },
-  { href: "/stats", label: "统计", icon: "📈" },
-  { href: "/settings", label: "设置", icon: "⚙️" },
+  { href: "/", label: "仪表盘", icon: "📊", desc: "进度总览" },
+  { href: "/practice", label: "训练", icon: "⚔️", desc: "刷题与挑战" },
+  { href: "/exam", label: "考试", icon: "📝", desc: "模拟测验" },
+  { href: "/review", label: "复盘", icon: "📕", desc: "错题重练" },
 ];
 
 export function NavSidebar() {
@@ -20,12 +17,12 @@ export function NavSidebar() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-64 border-r border-slate-200 bg-white flex-col shrink-0">
-        <div className="p-6 border-b border-slate-200">
-          <h1 className="text-lg font-bold text-slate-800">AI训练师</h1>
-          <p className="text-xs text-slate-500 mt-1">高级理论考试学习系统</p>
+      <aside className="hidden md:flex w-56 border-r border-slate-200 bg-white flex-col shrink-0">
+        <div className="p-5 border-b border-slate-200">
+          <h1 className="text-lg font-black text-slate-900">AI训练师</h1>
+          <p className="text-xs text-slate-500 mt-1">高级理论 · 200题</p>
         </div>
-        <nav className="flex-1 p-4 space-y-1">
+        <nav className="flex-1 p-3 space-y-2">
           {navItems.map((item) => {
             const isActive =
               item.href === "/"
@@ -36,20 +33,53 @@ export function NavSidebar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors",
+                  "flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-colors",
                   isActive
-                    ? "bg-blue-50 text-blue-700"
+                    ? "bg-slate-900 text-white shadow-sm"
                     : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                 )}
               >
                 <span className="text-lg">{item.icon}</span>
-                {item.label}
+                <span>
+                  <span className="block">{item.label}</span>
+                  <span
+                    className={cn(
+                      "block text-[11px] font-normal",
+                      isActive ? "text-slate-300" : "text-slate-400"
+                    )}
+                  >
+                    {item.desc}
+                  </span>
+                </span>
               </Link>
             );
           })}
         </nav>
-        <div className="p-4 border-t border-slate-200">
-          <p className="text-xs text-slate-400 text-center">200题 / 8大知识域</p>
+        <div className="space-y-2 border-t border-slate-200 p-3">
+          <Link
+            href="/bookmarks"
+            className={cn(
+              "flex items-center justify-between rounded-lg px-3 py-2 text-xs font-medium transition-colors",
+              pathname.startsWith("/bookmarks")
+                ? "bg-amber-50 text-amber-700"
+                : "text-slate-500 hover:bg-slate-100 hover:text-slate-800"
+            )}
+          >
+            <span>⭐ 收藏题</span>
+            <span>辅助</span>
+          </Link>
+          <Link
+            href="/settings"
+            className={cn(
+              "flex items-center justify-between rounded-lg px-3 py-2 text-xs font-medium transition-colors",
+              pathname.startsWith("/settings")
+                ? "bg-slate-100 text-slate-900"
+                : "text-slate-500 hover:bg-slate-100 hover:text-slate-800"
+            )}
+          >
+            <span>⚙️ 设置</span>
+            <span>配置</span>
+          </Link>
         </div>
       </aside>
 

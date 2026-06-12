@@ -491,56 +491,71 @@ function BattlePractice({
     : "本轮题目已完成，但最终分数未达到 60 分。";
 
   return (
-    <div className="relative min-h-[calc(100vh-1rem)] overflow-hidden bg-[radial-gradient(circle_at_top_left,#7f1d1d_0,#111827_36%,#020617_78%)] px-3 py-4 text-white md:px-6 md:py-6">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(251,191,36,0.16),transparent_28%,rgba(239,68,68,0.12)_67%,transparent)]" />
-      <div className="pointer-events-none absolute -right-20 top-20 h-60 w-60 rounded-full bg-red-500/20 blur-3xl" />
-      <div className="relative mx-auto max-w-6xl">
+    <div className="battle-stage relative min-h-[calc(100vh-1rem)] overflow-hidden bg-[#070912] px-3 py-4 text-white md:px-6 md:py-6">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(248,113,113,0.34),transparent_34%),radial-gradient(circle_at_10%_20%,rgba(34,211,238,0.18),transparent_24%),linear-gradient(135deg,#111827_0%,#450a0a_46%,#020617_100%)]" />
+      <div className="battle-scanline pointer-events-none absolute inset-0 opacity-35" />
+      <div className="pointer-events-none absolute left-1/2 top-8 h-48 w-48 -translate-x-1/2 rounded-full border border-red-300/15 bg-red-500/10 blur-2xl md:h-72 md:w-72" />
+      <div className="relative mx-auto max-w-7xl">
         <div className="mb-4 flex items-center justify-between gap-2">
           <div className="min-w-0">
             <p className="text-[11px] uppercase tracking-[0.35em] text-amber-200/80">
               Boss Challenge
             </p>
             <h1 className="truncate text-lg font-black text-white md:text-2xl">
-              守住 60 分，击退知识 Boss
+              60 分防线：知识 Boss 战
             </h1>
           </div>
           <div className="flex gap-2">
             <button
               onClick={() => setNavOpen(true)}
-              className="rounded-full border border-amber-200/30 bg-white/10 px-3 py-1.5 text-sm text-amber-50 backdrop-blur lg:hidden"
+              className="battle-cursor rounded-none border border-amber-200/30 bg-white/10 px-3 py-1.5 text-sm text-amber-50 backdrop-blur lg:hidden"
             >
-              题卡
+              雷达
             </button>
             <button
               onClick={clearSession}
-              className="rounded-full border border-white/15 bg-white/8 px-3 py-1.5 text-sm text-slate-200 backdrop-blur hover:bg-white/15"
+              className="battle-cursor rounded-none border border-white/15 bg-white/8 px-3 py-1.5 text-sm text-slate-200 backdrop-blur hover:bg-white/15"
             >
               退出
             </button>
           </div>
         </div>
 
-        <div className="mb-4 grid gap-3 md:grid-cols-2">
-          <BattleBar
-            label="玩家分数"
+        <div className="mb-5 grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-stretch">
+          <CombatantPanel
+            side="player"
+            title="PLAYER"
+            name="考生"
             value={scorePercent}
-            valueText={`${scorePercent}`}
+            valueText={`${scorePercent} 分`}
             marker={PASS_SCORE}
             gradient={scoreColor}
             helper={
               answeredCount < BATTLE_GRACE_QUESTIONS
-                ? `前 ${BATTLE_GRACE_QUESTIONS} 题为稳定期，暂不判失败`
+                ? `稳定期 ${answeredCount}/${BATTLE_GRACE_QUESTIONS}`
                 : danger
-                ? `危险：低于 60 分 ${session.battleLowScoreStreak || 0}/${BATTLE_FAIL_STREAK}`
-                : "安全：保持在及格线以上"
+                ? `危险 ${session.battleLowScoreStreak || 0}/${BATTLE_FAIL_STREAK}`
+                : "及格线稳定"
             }
           />
-          <BattleBar
-            label="Boss 剩余血量"
+          <div className="flex items-center justify-center">
+            <div className="relative flex h-20 w-20 items-center justify-center border border-amber-200/35 bg-black/35 text-center shadow-[0_0_34px_rgba(251,191,36,0.18)] md:h-full md:min-h-36 md:w-28">
+              <div className="absolute inset-2 border border-red-300/20" />
+              <div>
+                <p className="text-[10px] tracking-[0.35em] text-amber-200">ROUND</p>
+                <p className="text-2xl font-black text-white">{answeredCount + 1}</p>
+                <p className="text-[10px] text-slate-400">/ {total}</p>
+              </div>
+            </div>
+          </div>
+          <CombatantPanel
+            side="boss"
+            title="BOSS"
+            name="知识核心"
             value={bossHp}
             valueText={`${bossHp}%`}
             gradient="from-red-500 to-orange-400"
-            helper={`已推进 ${answeredCount}/${total} 题，答对 ${correctCount}，错 ${wrongCount}`}
+            helper={`推进 ${answeredCount}/${total} · 命中 ${correctCount} · 偏移 ${wrongCount}`}
           />
         </div>
 
@@ -550,14 +565,29 @@ function BattlePractice({
           <BattleMiniStat label="错题" value={String(wrongCount)} />
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_280px]">
-          <div className={cn(resultVisible && "pointer-events-none opacity-70")}>
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_300px]">
+          <div
+            className={cn(
+              "relative border border-cyan-300/20 bg-black/35 p-2 shadow-[0_0_45px_rgba(8,47,73,0.45)] md:p-3",
+              resultVisible && "pointer-events-none opacity-70"
+            )}
+          >
+            <div className="pointer-events-none absolute left-0 top-0 h-8 w-8 border-l-2 border-t-2 border-cyan-200/60" />
+            <div className="pointer-events-none absolute right-0 top-0 h-8 w-8 border-r-2 border-t-2 border-cyan-200/60" />
+            <div className="pointer-events-none absolute bottom-0 left-0 h-8 w-8 border-b-2 border-l-2 border-cyan-200/60" />
+            <div className="pointer-events-none absolute bottom-0 right-0 h-8 w-8 border-b-2 border-r-2 border-cyan-200/60" />
+            <div className="mb-2 flex items-center justify-between border border-white/10 bg-white/5 px-3 py-2 text-[11px] uppercase tracking-[0.24em] text-cyan-100">
+              <span>Attack Console</span>
+              <span>{currentQuestion.type === "multi" ? "Multi Lock" : "Quick Strike"}</span>
+            </div>
             <QuestionCard question={currentQuestion} variant="battle" />
           </div>
 
-          <Card className="hidden h-fit border-white/10 bg-white/10 text-white backdrop-blur lg:block">
+          <Card className="hidden h-fit rounded-none border-cyan-300/20 bg-black/35 text-white shadow-[0_0_32px_rgba(34,211,238,0.12)] backdrop-blur lg:block">
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm">战斗路线</CardTitle>
+              <CardTitle className="text-sm uppercase tracking-[0.2em] text-cyan-100">
+                Radar Map
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <NavGrid session={session} goTo={goTo} />
@@ -571,14 +601,14 @@ function BattlePractice({
             onClick={() => setNavOpen(false)}
           >
             <div
-              className="absolute bottom-0 left-0 right-0 max-h-[70vh] overflow-y-auto rounded-t-2xl border border-white/10 bg-slate-950 p-4 text-white"
+              className="absolute bottom-0 left-0 right-0 max-h-[70vh] overflow-y-auto rounded-t-2xl border border-cyan-300/20 bg-slate-950 p-4 text-white"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="mb-3 flex items-center justify-between">
-                <h3 className="font-semibold">战斗路线</h3>
+                <h3 className="font-semibold">雷达地图</h3>
                 <button
                   onClick={() => setNavOpen(false)}
-                  className="px-2 text-xl text-slate-400"
+                  className="battle-cursor px-2 text-xl text-slate-400"
                 >
                   x
                 </button>
@@ -631,15 +661,21 @@ function BattlePractice({
   );
 }
 
-function BattleBar({
+function CombatantPanel({
+  side,
   label,
+  title,
+  name,
   value,
   valueText,
   gradient,
   helper,
   marker,
 }: {
-  label: string;
+  side: "player" | "boss";
+  label?: string;
+  title: string;
+  name: string;
   value: number;
   valueText: string;
   gradient: string;
@@ -647,12 +683,50 @@ function BattleBar({
   marker?: number;
 }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/10 p-3 shadow-lg shadow-black/20 backdrop-blur">
-      <div className="mb-2 flex items-center justify-between text-sm">
-        <span className="font-semibold text-slate-100">{label}</span>
-        <span className="font-black tabular-nums text-white">{valueText}</span>
+    <div
+      className={cn(
+        "relative overflow-hidden border bg-black/35 p-4 shadow-lg backdrop-blur",
+        side === "player"
+          ? "border-cyan-300/25 shadow-cyan-950/30"
+          : "border-red-300/25 shadow-red-950/30"
+      )}
+    >
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+      <div className="mb-4 flex items-start justify-between gap-3">
+        <div>
+          <p
+            className={cn(
+              "text-[10px] uppercase tracking-[0.35em]",
+              side === "player" ? "text-cyan-200" : "text-red-200"
+            )}
+          >
+            {title}
+          </p>
+          <h2 className="mt-1 text-xl font-black text-white md:text-3xl">
+            {name}
+          </h2>
+          {label && <p className="text-xs text-slate-400">{label}</p>}
+        </div>
+        <div
+          className={cn(
+            "flex h-16 w-16 items-center justify-center border text-3xl shadow-inner md:h-20 md:w-20",
+            side === "player"
+              ? "border-cyan-300/30 bg-cyan-300/10"
+              : "border-red-300/30 bg-red-500/10"
+          )}
+        >
+          {side === "player" ? "◆" : "◈"}
+        </div>
       </div>
-      <div className="relative h-4 overflow-hidden rounded-full bg-black/35 ring-1 ring-white/10">
+      <div className="mb-2 flex items-end justify-between">
+        <span className="text-xs uppercase tracking-[0.2em] text-slate-400">
+          {side === "player" ? "Score Shield" : "HP Core"}
+        </span>
+        <span className="text-2xl font-black tabular-nums text-white">
+          {valueText}
+        </span>
+      </div>
+      <div className="relative h-5 overflow-hidden bg-black/50 ring-1 ring-white/10">
         {typeof marker === "number" && (
           <span
             className="absolute top-0 z-10 h-full w-0.5 bg-white/80"
@@ -664,7 +738,7 @@ function BattleBar({
           style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
         />
       </div>
-      <div className="mt-2 flex items-center justify-between gap-3 text-[11px] text-slate-300">
+      <div className="mt-3 flex items-center justify-between gap-3 text-[11px] text-slate-300">
         <span>{helper}</span>
         {typeof marker === "number" && (
           <span className="shrink-0 text-amber-200">及格线 {marker}</span>
