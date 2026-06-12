@@ -323,11 +323,11 @@ function TrueFalseOptions({
             disabled={answered}
             className={cn(
               "p-4 md:p-5 rounded-xl border-2 text-center transition-all font-semibold",
-              !answered && !isSelected && "border-slate-200 hover:border-blue-300 bg-white",
-              !answered && isSelected && "border-blue-500 bg-blue-50",
+              !answered && !isSelected && "border-slate-200 bg-white text-slate-700 hover:border-blue-300",
+              !answered && isSelected && "border-blue-500 bg-blue-50 text-blue-700",
               showCorrect && "border-green-500 bg-green-50 text-green-700",
               showWrong && "border-red-500 bg-red-50 text-red-700",
-              answered && !showCorrect && !showWrong && "border-slate-200 bg-slate-50 opacity-60"
+              answered && !showCorrect && !showWrong && "border-slate-200 bg-slate-50 text-slate-500 opacity-60"
             )}
           >
             <span className="text-xl md:text-2xl block mb-1">{opt.icon}</span>

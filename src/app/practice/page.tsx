@@ -281,24 +281,28 @@ function PracticeSetup({
     (s) => s.wrongs > 0 && !s.markedUnderstood
   ).length;
   const [shuffleOptions, setShuffleOptions] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
 
-  const modes = [
+  const primaryModes = [
     {
       id: "battle",
       label: "Boss 挑战",
       desc: "守住 60 分及格线，完成整轮挑战",
     },
-    {
-      id: "sequential",
-      label: "顺序刷题",
-      desc: "从头到尾按顺序刷",
-    },
-    { id: "random", label: "随机刷题", desc: "随机打乱顺序" },
+    { id: "random", label: "随机刷题", desc: "随机抽题，适合快速开始" },
     {
       id: "wrong-redo",
       label: "错题重练",
       desc: `只练历史错题 (${wrongCount}题)`,
       disabled: wrongCount === 0,
+    },
+  ];
+
+  const moreModes = [
+    {
+      id: "sequential",
+      label: "顺序刷题",
+      desc: "从头到尾按顺序刷",
     },
     {
       id: "memory",
@@ -316,22 +320,14 @@ function PracticeSetup({
           : "全部知识域"}
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {modes.map((mode) => (
-          <button
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+        {primaryModes.map((mode) => (
+          <PracticeModeButton
             key={mode.id}
-            disabled={mode.disabled}
-            onClick={() => onStart(mode.id, defaultCategory, shuffleOptions)}
-            className={cn(
-              "p-5 rounded-xl border text-left transition-all",
-              mode.disabled
-                ? "opacity-50 cursor-not-allowed bg-slate-50 border-slate-200"
-                : "bg-white border-slate-200 hover:border-blue-300 hover:shadow-md cursor-pointer"
-            )}
-          >
-            <div className="font-semibold text-slate-800">{mode.label}</div>
-            <div className="text-sm text-slate-500 mt-1">{mode.desc}</div>
-          </button>
+            mode={mode}
+            onStart={() => onStart(mode.id, defaultCategory, shuffleOptions)}
+            featured={mode.id === "battle"}
+          />
         ))}
       </div>
 
@@ -350,28 +346,96 @@ function PracticeSetup({
         </div>
       </label>
 
-      {!defaultCategory && (
-        <>
-          <h2 className="text-lg font-semibold text-slate-800 mt-10 mb-4">
-            按知识域刷题
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {Object.values(categoryMap).map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => onStart("sequential", cat.id, shuffleOptions)}
-                className="p-4 rounded-xl border border-slate-200 bg-white hover:border-blue-300 hover:shadow-md transition-all text-left"
-              >
-                <span className="text-xl">{cat.icon}</span>
-                <div className="text-sm font-medium text-slate-700 mt-2">
-                  {cat.name}
-                </div>
-              </button>
-            ))}
+      <button
+        onClick={() => setMoreOpen((open) => !open)}
+        className="mt-4 flex w-full items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-left text-sm font-semibold text-slate-700"
+      >
+        <span>更多训练方式</span>
+        <span className="text-slate-400">{moreOpen ? "收起" : "展开"}</span>
+      </button>
+
+      {moreOpen && (
+        <div className="mt-4 space-y-6 rounded-2xl border border-slate-200 bg-white p-4">
+          <div>
+            <h2 className="mb-3 text-sm font-semibold text-slate-700">
+              训练模式
+            </h2>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              {moreModes.map((mode) => (
+                <PracticeModeButton
+                  key={mode.id}
+                  mode={mode}
+                  onStart={() =>
+                    onStart(mode.id, defaultCategory, shuffleOptions)
+                  }
+                />
+              ))}
+            </div>
           </div>
-        </>
+
+          {!defaultCategory && (
+            <div>
+              <h2 className="mb-3 text-sm font-semibold text-slate-700">
+                按知识域刷题
+              </h2>
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+                {Object.values(categoryMap).map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() =>
+                      onStart("sequential", cat.id, shuffleOptions)
+                    }
+                    className="rounded-xl border border-slate-200 bg-white p-4 text-left transition-all hover:border-blue-300 hover:shadow-md"
+                  >
+                    <span className="text-xl">{cat.icon}</span>
+                    <div className="mt-2 text-sm font-medium text-slate-700">
+                      {cat.name}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       )}
     </div>
+  );
+}
+
+function PracticeModeButton({
+  mode,
+  onStart,
+  featured = false,
+}: {
+  mode: {
+    id: string;
+    label: string;
+    desc: string;
+    disabled?: boolean;
+  };
+  onStart: () => void;
+  featured?: boolean;
+}) {
+  return (
+    <button
+      disabled={mode.disabled}
+      onClick={onStart}
+      className={cn(
+        "rounded-xl border p-4 text-left transition-all",
+        mode.disabled
+          ? "cursor-not-allowed border-slate-200 bg-slate-50 opacity-50"
+          : featured
+          ? "cursor-pointer border-amber-300 bg-gradient-to-br from-slate-950 to-red-950 text-white shadow-lg shadow-red-950/20 hover:border-amber-200"
+          : "cursor-pointer border-slate-200 bg-white hover:border-blue-300 hover:shadow-md"
+      )}
+    >
+      <div className={cn("font-semibold", featured ? "text-white" : "text-slate-800")}>
+        {mode.label}
+      </div>
+      <div className={cn("mt-1 text-sm", featured ? "text-amber-100/80" : "text-slate-500")}>
+        {mode.desc}
+      </div>
+    </button>
   );
 }
 
