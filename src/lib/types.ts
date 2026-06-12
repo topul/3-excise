@@ -36,6 +36,7 @@ export type PracticeMode =
   | "random"
   | "wrong-redo"
   | "memory"
+  | "battle"
   | "category";
 
 export type ExamMode = "sequential" | "random";

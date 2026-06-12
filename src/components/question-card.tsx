@@ -93,7 +93,13 @@ function buildDisplayedQuestion(
   };
 }
 
-export function QuestionCard({ question }: { question: Question }) {
+export function QuestionCard({
+  question,
+  variant = "default",
+}: {
+  question: Question;
+  variant?: "default" | "battle";
+}) {
   const session = useStudyStore((s) => s.session);
   const selectAnswer = useStudyStore((s) => s.selectAnswer);
   const submitMulti = useStudyStore((s) => s.submitMulti);
@@ -125,8 +131,16 @@ export function QuestionCard({ question }: { question: Question }) {
       ? `${question.id}:${optionOrder.join(",")}`
       : question.id;
 
+  const isBattle = variant === "battle";
+
   return (
-    <Card className="shadow-sm">
+    <Card
+      className={cn(
+        "shadow-sm",
+        isBattle &&
+          "border-amber-300/40 bg-slate-950/82 text-white shadow-2xl shadow-red-950/30 backdrop-blur"
+      )}
+    >
       <CardContent className="p-4 md:p-6">
         {/* Meta row */}
         <div className="flex items-center gap-2 mb-3 md:mb-4 flex-wrap">
@@ -138,7 +152,7 @@ export function QuestionCard({ question }: { question: Question }) {
               {cat.icon} {cat.name}
             </Badge>
           )}
-          <span className="text-xs text-slate-400 ml-auto">
+          <span className={cn("text-xs ml-auto", isBattle ? "text-amber-200/70" : "text-slate-400")}>
             Q{question.id}
           </span>
           <button
@@ -150,13 +164,23 @@ export function QuestionCard({ question }: { question: Question }) {
           </button>
         </div>
         {stat.attempts > 0 && (
-          <div className="text-xs text-slate-400 mb-2 md:mb-3">
+          <div
+            className={cn(
+              "text-xs mb-2 md:mb-3",
+              isBattle ? "text-slate-300" : "text-slate-400"
+            )}
+          >
             练过{stat.attempts}次 · 错{stat.wrongs}次
           </div>
         )}
 
         {/* Question text */}
-        <p className="text-base md:text-lg font-medium text-slate-900 leading-relaxed mb-5 md:mb-6">
+        <p
+          className={cn(
+            "text-base md:text-lg font-medium leading-relaxed mb-5 md:mb-6",
+            isBattle ? "text-slate-50" : "text-slate-900"
+          )}
+        >
           {question.text}
         </p>
 
@@ -206,7 +230,13 @@ export function QuestionCard({ question }: { question: Question }) {
                   isCorrect ? "text-green-700" : "text-red-700"
                 )}
               >
-                {isCorrect ? "回答正确！" : "回答错误"}
+                {isBattle
+                  ? isCorrect
+                    ? "命中 Boss，造成有效伤害"
+                    : "攻击偏移，受到反击"
+                  : isCorrect
+                  ? "回答正确！"
+                  : "回答错误"}
               </span>
             </div>
             <div

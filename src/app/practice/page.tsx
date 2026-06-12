@@ -9,6 +9,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import type { PracticeMode } from "@/lib/types";
 
+const PASS_SCORE = 60;
+const BATTLE_GRACE_QUESTIONS = 10;
+const BATTLE_FAIL_STREAK = 3;
+
 export default function PracticePageWrapper() {
   return (
     <Suspense fallback={<div className="p-8 text-slate-500">加载中...</div>}>
@@ -52,6 +56,16 @@ function PracticePage() {
     return session.answered[id] && q && session.answers[id] !== q.answer;
   }).length;
   const correctCount = answeredCount - wrongCount;
+  const scorePercent =
+    answeredCount === 0 ? 100 : Math.round((correctCount / answeredCount) * 100);
+  const isBattle = session.practiceMode === "battle";
+  const battleLowScoreStreak = session.battleLowScoreStreak || 0;
+  const battleFailed = isBattle && battleLowScoreStreak >= BATTLE_FAIL_STREAK;
+  const battleComplete =
+    isBattle &&
+    answeredCount === session.orderedIds.length &&
+    session.orderedIds.length > 0;
+  const battleWon = battleComplete && scorePercent >= PASS_SCORE;
   const encouragement =
     answeredCount === 0
       ? "先稳住节奏，一题一题来。"
@@ -62,6 +76,26 @@ function PracticePage() {
       : "错题正在暴露薄弱点，复盘完会进步很快。";
 
   if (!currentQuestion) return null;
+
+  if (isBattle) {
+    return (
+      <BattlePractice
+        session={session}
+        currentQuestion={currentQuestion}
+        answeredCount={answeredCount}
+        correctCount={correctCount}
+        wrongCount={wrongCount}
+        scorePercent={scorePercent}
+        battleFailed={battleFailed}
+        battleWon={battleWon}
+        battleComplete={battleComplete}
+        goTo={goTo}
+        clearSession={clearSession}
+        navOpen={navOpen}
+        setNavOpen={setNavOpen}
+      />
+    );
+  }
 
   return (
     <div className="p-4 md:p-6 max-w-6xl mx-auto">
@@ -250,6 +284,11 @@ function PracticeSetup({
 
   const modes = [
     {
+      id: "battle",
+      label: "Boss 挑战",
+      desc: "守住 60 分及格线，完成整轮挑战",
+    },
+    {
       id: "sequential",
       label: "顺序刷题",
       desc: "从头到尾按顺序刷",
@@ -332,6 +371,250 @@ function PracticeSetup({
           </div>
         </>
       )}
+    </div>
+  );
+}
+
+function BattlePractice({
+  session,
+  currentQuestion,
+  answeredCount,
+  correctCount,
+  wrongCount,
+  scorePercent,
+  battleFailed,
+  battleWon,
+  battleComplete,
+  goTo,
+  clearSession,
+  navOpen,
+  setNavOpen,
+}: {
+  session: NonNullable<ReturnType<typeof useStudyStore.getState>["session"]>;
+  currentQuestion: (typeof questions)[number];
+  answeredCount: number;
+  correctCount: number;
+  wrongCount: number;
+  scorePercent: number;
+  battleFailed: boolean;
+  battleWon: boolean;
+  battleComplete: boolean;
+  goTo: (idx: number) => void;
+  clearSession: () => void;
+  navOpen: boolean;
+  setNavOpen: (open: boolean) => void;
+}) {
+  const total = session.orderedIds.length;
+  const bossHp = total === 0 ? 0 : Math.max(0, Math.round(((total - answeredCount) / total) * 100));
+  const scoreColor =
+    scorePercent >= 80
+      ? "from-emerald-300 to-lime-400"
+      : scorePercent >= PASS_SCORE
+      ? "from-amber-300 to-orange-400"
+      : "from-red-500 to-rose-600";
+  const danger =
+    answeredCount >= BATTLE_GRACE_QUESTIONS && scorePercent < PASS_SCORE;
+  const resultVisible = battleFailed || battleWon || battleComplete;
+  const resultTitle = battleWon
+    ? "挑战成功"
+    : battleFailed
+    ? "挑战失败"
+    : "挑战结束";
+  const resultDesc = battleWon
+    ? "最终分数守住了 60 分及格线。"
+    : battleFailed
+    ? "当前正确率连续低于 60 分，Boss 挑战终止。"
+    : "本轮题目已完成，但最终分数未达到 60 分。";
+
+  return (
+    <div className="relative min-h-[calc(100vh-1rem)] overflow-hidden bg-[radial-gradient(circle_at_top_left,#7f1d1d_0,#111827_36%,#020617_78%)] px-3 py-4 text-white md:px-6 md:py-6">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(251,191,36,0.16),transparent_28%,rgba(239,68,68,0.12)_67%,transparent)]" />
+      <div className="pointer-events-none absolute -right-20 top-20 h-60 w-60 rounded-full bg-red-500/20 blur-3xl" />
+      <div className="relative mx-auto max-w-6xl">
+        <div className="mb-4 flex items-center justify-between gap-2">
+          <div className="min-w-0">
+            <p className="text-[11px] uppercase tracking-[0.35em] text-amber-200/80">
+              Boss Challenge
+            </p>
+            <h1 className="truncate text-lg font-black text-white md:text-2xl">
+              守住 60 分，击退知识 Boss
+            </h1>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setNavOpen(true)}
+              className="rounded-full border border-amber-200/30 bg-white/10 px-3 py-1.5 text-sm text-amber-50 backdrop-blur lg:hidden"
+            >
+              题卡
+            </button>
+            <button
+              onClick={clearSession}
+              className="rounded-full border border-white/15 bg-white/8 px-3 py-1.5 text-sm text-slate-200 backdrop-blur hover:bg-white/15"
+            >
+              退出
+            </button>
+          </div>
+        </div>
+
+        <div className="mb-4 grid gap-3 md:grid-cols-2">
+          <BattleBar
+            label="玩家分数"
+            value={scorePercent}
+            valueText={`${scorePercent}`}
+            marker={PASS_SCORE}
+            gradient={scoreColor}
+            helper={
+              answeredCount < BATTLE_GRACE_QUESTIONS
+                ? `前 ${BATTLE_GRACE_QUESTIONS} 题为稳定期，暂不判失败`
+                : danger
+                ? `危险：低于 60 分 ${session.battleLowScoreStreak || 0}/${BATTLE_FAIL_STREAK}`
+                : "安全：保持在及格线以上"
+            }
+          />
+          <BattleBar
+            label="Boss 剩余血量"
+            value={bossHp}
+            valueText={`${bossHp}%`}
+            gradient="from-red-500 to-orange-400"
+            helper={`已推进 ${answeredCount}/${total} 题，答对 ${correctCount}，错 ${wrongCount}`}
+          />
+        </div>
+
+        <div className="mb-4 grid grid-cols-3 gap-2 text-center md:hidden">
+          <BattleMiniStat label="已答" value={`${answeredCount}/${total}`} />
+          <BattleMiniStat label="正确" value={String(correctCount)} />
+          <BattleMiniStat label="错题" value={String(wrongCount)} />
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_280px]">
+          <div className={cn(resultVisible && "pointer-events-none opacity-70")}>
+            <QuestionCard question={currentQuestion} variant="battle" />
+          </div>
+
+          <Card className="hidden h-fit border-white/10 bg-white/10 text-white backdrop-blur lg:block">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm">战斗路线</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <NavGrid session={session} goTo={goTo} />
+            </CardContent>
+          </Card>
+        </div>
+
+        {navOpen && (
+          <div
+            className="fixed inset-0 z-50 bg-black/60 lg:hidden"
+            onClick={() => setNavOpen(false)}
+          >
+            <div
+              className="absolute bottom-0 left-0 right-0 max-h-[70vh] overflow-y-auto rounded-t-2xl border border-white/10 bg-slate-950 p-4 text-white"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <h3 className="font-semibold">战斗路线</h3>
+                <button
+                  onClick={() => setNavOpen(false)}
+                  className="px-2 text-xl text-slate-400"
+                >
+                  x
+                </button>
+              </div>
+              <NavGrid
+                session={session}
+                goTo={(idx) => {
+                  goTo(idx);
+                  setNavOpen(false);
+                }}
+              />
+            </div>
+          </div>
+        )}
+
+        {resultVisible && (
+          <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
+            <div className="w-full max-w-md rounded-3xl border border-amber-200/25 bg-slate-950 p-6 text-center shadow-2xl shadow-red-950/50">
+              <p className="text-[11px] uppercase tracking-[0.35em] text-amber-300">
+                Battle Result
+              </p>
+              <h2 className="mt-3 text-3xl font-black text-white">
+                {resultTitle}
+              </h2>
+              <p className="mt-3 text-sm text-slate-300">{resultDesc}</p>
+              <div className="mt-5 grid grid-cols-3 gap-2">
+                <BattleMiniStat label="分数" value={String(scorePercent)} />
+                <BattleMiniStat label="答对" value={String(correctCount)} />
+                <BattleMiniStat label="错题" value={String(wrongCount)} />
+              </div>
+              <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+                <button
+                  onClick={clearSession}
+                  className="flex-1 rounded-xl bg-amber-400 px-4 py-3 text-sm font-bold text-slate-950 hover:bg-amber-300"
+                >
+                  重新选择挑战
+                </button>
+                <button
+                  onClick={() => setNavOpen(true)}
+                  className="flex-1 rounded-xl border border-white/15 px-4 py-3 text-sm font-bold text-white hover:bg-white/10"
+                >
+                  查看题目
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function BattleBar({
+  label,
+  value,
+  valueText,
+  gradient,
+  helper,
+  marker,
+}: {
+  label: string;
+  value: number;
+  valueText: string;
+  gradient: string;
+  helper: string;
+  marker?: number;
+}) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/10 p-3 shadow-lg shadow-black/20 backdrop-blur">
+      <div className="mb-2 flex items-center justify-between text-sm">
+        <span className="font-semibold text-slate-100">{label}</span>
+        <span className="font-black tabular-nums text-white">{valueText}</span>
+      </div>
+      <div className="relative h-4 overflow-hidden rounded-full bg-black/35 ring-1 ring-white/10">
+        {typeof marker === "number" && (
+          <span
+            className="absolute top-0 z-10 h-full w-0.5 bg-white/80"
+            style={{ left: `${marker}%` }}
+          />
+        )}
+        <div
+          className={cn("h-full rounded-full bg-gradient-to-r transition-all duration-500", gradient)}
+          style={{ width: `${Math.max(0, Math.min(100, value))}%` }}
+        />
+      </div>
+      <div className="mt-2 flex items-center justify-between gap-3 text-[11px] text-slate-300">
+        <span>{helper}</span>
+        {typeof marker === "number" && (
+          <span className="shrink-0 text-amber-200">及格线 {marker}</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function BattleMiniStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl border border-white/10 bg-white/10 px-3 py-2">
+      <p className="text-[11px] text-slate-300">{label}</p>
+      <p className="text-lg font-black text-white">{value}</p>
     </div>
   );
 }

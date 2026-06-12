@@ -41,6 +41,7 @@ interface SessionState {
   category: string | null;
   shuffleOptions?: boolean;
   optionOrders?: Record<number, number[]>;
+  battleLowScoreStreak?: number;
   orderedIds: number[];
   currentIdx: number;
   answers: Record<number, string>;
@@ -182,6 +183,42 @@ function buildOptionOrders(
   return optionOrders;
 }
 
+function getScorePercent(
+  orderedIds: number[],
+  answers: Record<number, string>,
+  answered: Record<number, boolean>
+): number {
+  let total = 0;
+  let correct = 0;
+
+  for (const id of orderedIds) {
+    if (!answered[id]) continue;
+
+    total++;
+    const q = questions.find((item) => item.id === id);
+    if (q && answers[id] === q.answer) correct++;
+  }
+
+  if (total === 0) return 100;
+  return Math.round((correct / total) * 100);
+}
+
+function getNextBattleLowScoreStreak(
+  session: SessionState,
+  answers: Record<number, string>,
+  answered: Record<number, boolean>
+): number {
+  if (session.practiceMode !== "battle") {
+    return session.battleLowScoreStreak || 0;
+  }
+
+  const answeredCount = Object.keys(answered).length;
+  if (answeredCount < 10) return 0;
+
+  const scorePercent = getScorePercent(session.orderedIds, answers, answered);
+  return scorePercent < 60 ? (session.battleLowScoreStreak || 0) + 1 : 0;
+}
+
 export const useStudyStore = create<StudyStore>()(
   persist(
     (set, get) => ({
@@ -224,6 +261,7 @@ export const useStudyStore = create<StudyStore>()(
             category,
             shuffleOptions,
             optionOrders,
+            battleLowScoreStreak: 0,
             orderedIds,
             currentIdx: 0,
             answers: {},
@@ -274,12 +312,20 @@ export const useStudyStore = create<StudyStore>()(
           }
           stats[questionId] = stat;
 
+          const nextAnswers = { ...session.answers, [questionId]: answer };
+          const nextAnswered = { ...session.answered, [questionId]: true };
+
           set({
             stats,
             session: {
               ...session,
-              answers: { ...session.answers, [questionId]: answer },
-              answered: { ...session.answered, [questionId]: true },
+              answers: nextAnswers,
+              answered: nextAnswered,
+              battleLowScoreStreak: getNextBattleLowScoreStreak(
+                session,
+                nextAnswers,
+                nextAnswered
+              ),
             },
           });
         }
@@ -310,11 +356,18 @@ export const useStudyStore = create<StudyStore>()(
         }
         stats[questionId] = stat;
 
+        const nextAnswered = { ...session.answered, [questionId]: true };
+
         set({
           stats,
           session: {
             ...session,
-            answered: { ...session.answered, [questionId]: true },
+            answered: nextAnswered,
+            battleLowScoreStreak: getNextBattleLowScoreStreak(
+              session,
+              session.answers,
+              nextAnswered
+            ),
           },
         });
       },
