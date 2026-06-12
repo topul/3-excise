@@ -295,6 +295,51 @@
   background-size: 100% 6px;
 }
 
+.battle-attack-flash::after,
+.battle-hurt-flash::after,
+.battle-success-flash::after,
+.battle-failure-flash::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.battle-attack-flash::after {
+  animation: battle-attack-screen 520ms ease-out;
+  background:
+    linear-gradient(105deg, transparent 0 42%, rgba(190, 242, 100, 0.5) 48%, rgba(34, 211, 238, 0.38) 52%, transparent 60%),
+    radial-gradient(circle at 72% 22%, rgba(190, 242, 100, 0.36), transparent 24%);
+}
+
+.battle-hurt-flash::after {
+  animation: battle-hurt-screen 520ms ease-out;
+  background:
+    radial-gradient(circle at 26% 20%, rgba(248, 113, 113, 0.36), transparent 24%),
+    linear-gradient(90deg, rgba(239, 68, 68, 0.28), transparent 28%, transparent 72%, rgba(239, 68, 68, 0.28));
+}
+
+.battle-success-flash::after {
+  animation: battle-success-screen 900ms ease-out;
+  background: radial-gradient(circle at 50% 28%, rgba(190, 242, 100, 0.38), transparent 32%);
+}
+
+.battle-failure-flash::after {
+  animation: battle-failure-screen 900ms ease-out;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(239, 68, 68, 0.42), transparent 35%),
+    linear-gradient(180deg, rgba(127, 29, 29, 0.38), transparent);
+}
+
+.battle-result-win {
+  animation: battle-result-win 720ms ease-out;
+}
+
+.battle-result-fail {
+  animation: battle-result-fail 720ms ease-out;
+}
+
 @keyframes battle-hit-pulse {
   0% { box-shadow: 0 0 0 rgba(190, 242, 100, 0); }
   45% { box-shadow: 0 0 34px rgba(190, 242, 100, 0.45); }
@@ -307,4 +352,43 @@
   40% { transform: translateX(4px); }
   60% { transform: translateX(-3px); }
   80% { transform: translateX(3px); }
+}
+
+@keyframes battle-attack-screen {
+  0% { opacity: 0; transform: translateX(-12%) scale(1.02); }
+  28% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(16%) scale(1); }
+}
+
+@keyframes battle-hurt-screen {
+  0%, 100% { opacity: 0; transform: translateX(0); }
+  18% { opacity: 1; transform: translateX(-8px); }
+  34% { transform: translateX(8px); }
+  50% { transform: translateX(-5px); }
+}
+
+@keyframes battle-success-screen {
+  0% { opacity: 0; transform: scale(0.92); }
+  35% { opacity: 1; transform: scale(1.04); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+@keyframes battle-failure-screen {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  20% { opacity: 1; transform: scale(1.02); }
+  36% { opacity: 0.5; transform: scale(0.99); }
+  52% { opacity: 0.9; transform: scale(1.01); }
+}
+
+@keyframes battle-result-win {
+  0% { opacity: 0; transform: translateY(18px) scale(0.92); box-shadow: 0 0 0 rgba(190, 242, 100, 0); }
+  55% { opacity: 1; transform: translateY(0) scale(1.04); box-shadow: 0 0 48px rgba(190, 242, 100, 0.32); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes battle-result-fail {
+  0% { opacity: 0; transform: translateY(18px) scale(0.96) rotate(-1deg); }
+  25% { opacity: 1; transform: translateY(0) scale(1.02) rotate(1deg); }
+  45% { transform: translateY(0) scale(0.99) rotate(-0.6deg); }
+  100% { transform: translateY(0) scale(1) rotate(0); }
 }

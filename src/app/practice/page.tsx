@@ -468,6 +468,7 @@ function BattlePractice({
   navOpen: boolean;
   setNavOpen: (open: boolean) => void;
 }) {
+  const [resultDismissed, setResultDismissed] = useState(false);
   const total = session.orderedIds.length;
   const bossHp = total === 0 ? 0 : Math.max(0, Math.round(((total - answeredCount) / total) * 100));
   const scoreColor =
@@ -479,6 +480,10 @@ function BattlePractice({
   const danger =
     answeredCount >= BATTLE_GRACE_QUESTIONS && scorePercent < PASS_SCORE;
   const resultVisible = battleFailed || battleWon || battleComplete;
+  const overlayVisible = resultVisible && !resultDismissed;
+  const currentAnswered = session.answered[currentQuestion.id];
+  const currentWasCorrect =
+    currentAnswered && session.answers[currentQuestion.id] === currentQuestion.answer;
   const resultTitle = battleWon
     ? "挑战成功"
     : battleFailed
@@ -491,7 +496,15 @@ function BattlePractice({
     : "本轮题目已完成，但最终分数未达到 60 分。";
 
   return (
-    <div className="battle-stage relative min-h-[calc(100vh-1rem)] overflow-hidden bg-[#070912] px-3 py-4 text-white md:px-6 md:py-6">
+    <div
+      className={cn(
+        "battle-stage relative min-h-[calc(100vh-1rem)] overflow-hidden bg-[#070912] px-3 py-4 text-white md:px-6 md:py-6",
+        battleWon && "battle-success-flash",
+        battleFailed && "battle-failure-flash",
+        !resultVisible && currentAnswered && currentWasCorrect && "battle-attack-flash",
+        !resultVisible && currentAnswered && !currentWasCorrect && "battle-hurt-flash"
+      )}
+    >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(248,113,113,0.34),transparent_34%),radial-gradient(circle_at_10%_20%,rgba(34,211,238,0.18),transparent_24%),linear-gradient(135deg,#111827_0%,#450a0a_46%,#020617_100%)]" />
       <div className="battle-scanline pointer-events-none absolute inset-0 opacity-35" />
       <div className="pointer-events-none absolute left-1/2 top-8 h-48 w-48 -translate-x-1/2 rounded-full border border-red-300/15 bg-red-500/10 blur-2xl md:h-72 md:w-72" />
@@ -569,7 +582,7 @@ function BattlePractice({
           <div
             className={cn(
               "relative border border-cyan-300/20 bg-black/35 p-2 shadow-[0_0_45px_rgba(8,47,73,0.45)] md:p-3",
-              resultVisible && "pointer-events-none opacity-70"
+              battleFailed && "pointer-events-none opacity-70"
             )}
           >
             <div className="pointer-events-none absolute left-0 top-0 h-8 w-8 border-l-2 border-t-2 border-cyan-200/60" />
@@ -624,9 +637,16 @@ function BattlePractice({
           </div>
         )}
 
-        {resultVisible && (
+        {overlayVisible && (
           <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-            <div className="w-full max-w-md rounded-3xl border border-amber-200/25 bg-slate-950 p-6 text-center shadow-2xl shadow-red-950/50">
+            <div
+              className={cn(
+                "w-full max-w-md rounded-3xl border bg-slate-950 p-6 text-center shadow-2xl",
+                battleWon
+                  ? "battle-result-win border-lime-200/35 shadow-lime-950/50"
+                  : "battle-result-fail border-red-200/35 shadow-red-950/50"
+              )}
+            >
               <p className="text-[11px] uppercase tracking-[0.35em] text-amber-300">
                 Battle Result
               </p>
@@ -647,7 +667,7 @@ function BattlePractice({
                   重新选择挑战
                 </button>
                 <button
-                  onClick={() => setNavOpen(true)}
+                  onClick={() => setResultDismissed(true)}
                   className="flex-1 rounded-xl border border-white/15 px-4 py-3 text-sm font-bold text-white hover:bg-white/10"
                 >
                   查看题目
